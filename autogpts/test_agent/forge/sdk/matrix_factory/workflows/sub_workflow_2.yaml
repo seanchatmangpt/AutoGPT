@@ -1,0 +1,11 @@
+workflow:
+      - name: "installation"
+        description: "To install the project, follow these steps:"
+        params:
+          clone_command: "git clone https://link-to-project"
+          navigate_command: "cd project-directory"
+      - name: "fetch_items"
+        description: "Endpoint to fetch all items."
+        params:
+          method: "GET"
+          endpoint: "/api/items"

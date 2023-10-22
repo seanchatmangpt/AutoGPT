@@ -1,0 +1,49 @@
+aggregates:
+- aggregate_business_functions:
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda task, project: task is not None and project is not None'
+    definition: Moves a task to a different project.
+    name: MoveTaskToProject
+    parameters:
+    - parameter: task
+      type: Task
+    - parameter: project
+      type: Project
+  entities:
+  - business_functions:
+    - contract:
+        ensure:
+        - condition: 'lambda result: result is not None'
+        require:
+        - condition: 'lambda developer: developer is not None'
+      definition: Assigns a developer to the project.
+      name: AssignDeveloper
+      parameters:
+      - parameter: developer
+        type: Developer
+    definition: A Project entity
+    factories:
+    - name: CreateProject
+      parameters:
+      - parameter: name
+        type: string
+    name: Project
+    repositories:
+    - methods:
+      - name: find_by_name
+        parameters:
+        - parameter: name
+          type: string
+      name: ProjectRepository
+  root_entity: Project
+  value_objects:
+  - definition: A Task value object
+    name: Task
+    properties:
+    - name: title
+      type: string
+    - name: description
+      type: string

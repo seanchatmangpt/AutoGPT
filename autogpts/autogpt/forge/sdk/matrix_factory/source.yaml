@@ -1,0 +1,139 @@
+AdministrationModule:
+  type: Class
+  methods:
+    - dealWithLookAndFeel
+    - dealWithSecurity
+    - drawInformation
+    - auditTrails
+    - interfaceBackToDecisionMakingFacility
+    - setTolerances
+  subDependency:
+    - FederatedSecurityFramework
+    - DecisionMakingFacility
+  inheritance:
+    - Module
+
+OnlineContractSigningFacility:
+  type: Class
+  methods:
+    - uploadContract
+    - markupContract
+    - signContract
+    - reviewPreviousWork
+    - setApprovalLevels
+    - autoAdministerContracts
+    - setMilestones
+  subDependency:
+    - Calendar
+    - Signatory
+    - CarbonCopy
+    - Administrator
+  inheritance:
+    - Module
+
+HeadlessCRM:
+  type: Class
+  methods:
+    - connect
+    - drawData
+    - queryData
+    - storeInformation
+    - predictReactions
+  subDependency:
+    - DatabaseConnectivityModule
+    - Agent
+    - AdministrationModule
+  inheritance:
+    - Module
+
+HeadlessEmailFacility:
+  type: Class
+  methods:
+    - connectEmailServer
+    - drawEmailData
+    - predictEmailReactions
+  inheritance:
+    - HeadlessCRM
+
+ContentCreationFacility:
+  type: Class
+  methods:
+    - createPosts
+    - createEmails
+    - createLandingPages
+  subDependency:
+    - AdministrationModule
+  inheritance:
+    - Module
+
+EventPlanningFacility:
+  type: Class
+  methods:
+    - createEvents
+    - trackEvents
+    - linkToCompetitiveRadar
+  subDependency:
+    - CompetitiveRadarModule
+  inheritance:
+    - Module
+
+SocialMediaFacility:
+  type: Class
+  methods:
+    - connectToSocialMedia
+    - trackDescriptions
+    - predictReactions
+  subDependency:
+    - Twitter
+    - LinkedIn
+    - Instagram
+    - Facebook
+  inheritance:
+    - Module
+
+FinancialSoftwareConnectionFacility:
+  type: Class
+  methods:
+    - ingestData
+    - addGLEntry
+    - addAccountsPayable
+    - addAccountsReceivable
+  subDependency:
+    - ERPSoftware
+    - AdministrationModule
+    - CompetitiveRadarModule
+  inheritance:
+    - Module
+
+CompetitiveRadarFacility:
+  type: Class
+  methods:
+    - enterCompanyName
+    - drillDownAnalysis
+    - displayInformation
+  subDependency:
+    - AdministrationModule
+  inheritance:
+    - Module
+
+WebModule:
+  type: Class
+  methods:
+    - createOrModifyWebProperty
+    - infuseWithCompetitiveUnderstanding
+  subDependency:
+    - HeadlessCRM
+    - HeadlessEmailFacility
+    - CompetitiveRadarModule
+    - FinancialSoftwareConnectionFacility
+  inheritance:
+    - Module
+
+DecisionMakingFacility:
+  type: Class
+  methods:
+    - makeDecisions
+  subDependency:
+    - AdministrationModule
+  inheritance:
+    - Module

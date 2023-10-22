@@ -1,0 +1,25 @@
+---
+id: https://w3id.org/chatmangpt/matrix-factory
+name: matrix-factory
+title: matrix-factory
+description: |-
+  Matrix Factory creates Code Manufacturing Plants
+license: MIT
+see_also:
+  - https://chatmangpt.github.io/matrix-factory
+
+prefixes:
+  matrix_factory: https://w3id.org/chatmangpt/matrix-factory/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: https://example.org/
+default_prefix: matrix_factory
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  

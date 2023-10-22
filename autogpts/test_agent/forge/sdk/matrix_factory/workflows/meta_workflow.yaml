@@ -1,0 +1,35 @@
+workflow:
+      - name: "Create project directory using mkdir"
+        description: "Start by initializing a new project directory to house both the frontend and backend components. This structure ensures a clear separation of concerns and eases navigation. Utilize the 'mkdir' command to create the root directory, followed by subdirectories 'frontend' and 'backend'."
+        params:
+          path: "workflows/sub_workflow_1.yaml"
+
+      - name: "Set up virtual environment and Flask app in backend folder"
+        description: "Using `cookiecutter`, scaffold the Flask application, emphasizing the folder structure, app configurations, and database settings. This lays the foundation for the subsequent steps."
+        params:
+          path: "workflows/sub_workflow_2.yaml"
+
+      - name: "Implement SQLAlchemy models and API endpoints in Flask"
+        description: "With Flask initialized, proceed to define the 'Users' database model using SQLAlchemy, integrating attributes like 'id', 'name', 'email', and 'password'. Subsequently, develop the necessary API endpoints to handle CRUD operations for users. These endpoints will connect the frontend to the backend database."
+        params:
+          path: "workflows/sub_workflow_3.yaml"
+
+      - name: "Incorporate JWT Authentication and Error Handling in Flask"
+        description: "To ensure the security of the application, integrate JWT authentication. This facilitates user registration, login, and protection of certain routes. Additionally, implement error handlers to respond to specific HTTP status codes, such as 400, 404, and 500, providing users with informative feedback."
+        params:
+          path: "workflows/sub_workflow_4.yaml"
+
+      - name: "Create React app using npx create-react-app in frontend folder"
+        description: "Switching focus to the frontend, navigate to the 'frontend' subdirectory and bootstrap a new React application using 'npx create-react-app'. This command initializes a new React project with a standard folder structure, which provides a solid starting point for frontend development."
+        params:
+          path: "workflows/sub_workflow_5.yaml"
+
+      - name: "Design User Interface and Implement Routing in React"
+        description: "Begin frontend development by designing the user interface components based on the provided specifications. This includes views for listing users, displaying user details, and forms for creating or editing users. Integrate 'React-Router' for seamless navigation between these views. Furthermore, decide on the state management solution, either React Context or Redux, and set it up accordingly."
+        params:
+          path: "workflows/sub_workflow_6.yaml"
+
+      - name: "Style the application and write comprehensive documentation"
+        description: "To enhance user experience, implement styling using either 'styled-components' or a CSS framework like Bootstrap. Make sure the design is responsive."
+        params:
+          path: "workflows/sub_workflow_7.yaml"

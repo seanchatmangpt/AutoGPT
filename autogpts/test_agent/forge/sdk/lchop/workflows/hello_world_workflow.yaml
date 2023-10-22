@@ -1,0 +1,17 @@
+workflow:
+  - name: "print_hello"
+    description: "Print hello"
+    params:
+      message: "Hello World!"
+  - name: "load_workflow"
+    description: "Load the first workflow from a file"
+    params:
+      path: "workflows/your_workflow1.yaml"
+  - name: "print_goodbye"
+    description: "Print goodbye"
+    params:
+      message: "Goodbye World!"
+  - name: "load_workflow"
+    description: "Load the second workflow from a file"
+    params:
+      path: "workflows/your_workflow2.yaml"

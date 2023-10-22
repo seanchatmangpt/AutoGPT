@@ -1,0 +1,39 @@
+language_llm: 
+  core_component: 'Processed ["Wrote to hello_world.txt", "Read from hello_world.txt", "Deleted hello_world.txt"]'
+  
+memory_modules:
+  ShortTermWorkingMemory:
+    data: ['Wrote to hello_world.txt', 'Read from hello_world.txt', 'Deleted hello_world.txt']
+  LongTermMemories:
+    Episodic:
+      episodes: ['Met with John', 'Attended PyCon 2023', 'Wrote a research paper on AGI']
+    Semantic:
+      knowledge:
+        'Luciano Ramalho': 'Author of Fluent Python'
+        'Python': 'An interpreted, high-level, general-purpose programming language.'
+        'Domain Driven Design': 'An approach to software design and development.'
+    Procedural:
+      procedures:
+        'file_creation': 'Use the open method with the "w" flag.'
+        'file_reading': 'Use the open method with the "r" flag.'
+        'file_deletion': 'Use the os.remove method.'
+
+action_space:
+  ExternalActions:
+    Grounding:
+      physical_environments: 'Interaction with physical environment simulated. E.g., Robots, IoT devices.'
+      dialogue_with_humans_or_other_agents: 'Simulated dialogue system with humans or other agents.'
+      digital_environments: 'Interaction with software systems, APIs, and other digital tools.'
+  InternalActions:
+    retrieval: 'Use keys to retrieve data from memory stores.'
+    reasoning: 'Process data, derive conclusions or inferences.'
+    learning: 'Ingest new data into memory based on experiences.'
+
+decision_making:
+  planning: 
+    proposal: 'Propose a set of possible actions based on input data.'
+    evaluation: 'Evaluate the feasibility and effectiveness of proposed actions.'
+    selection: 'Select the best action based on evaluation metrics.'
+  execution: 
+    status: 'Executed the plan of reading the file hello_world.txt and processing its content.'
+    result: 'Successfully processed the data and stored the result in memory.'

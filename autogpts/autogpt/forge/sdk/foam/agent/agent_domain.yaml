@@ -1,0 +1,151 @@
+# Entities and Value Objects YAML for the Software Development Domain
+
+# Entities represent objects with a distinct identity.
+entities:
+  - name: Project
+    definition: An Entity representing a software development project. It has a unique identity and is associated with various attributes and behaviors.
+
+  - name: Developer
+    definition: An Entity representing a developer involved in a software project. It has a unique identity and associated properties.
+
+  - name: SourceCode
+    definition: "An Entity representing source code within a software project. It has a unique identity, represented by its filepath, and is associated with various attributes and behaviors."
+
+# Value Objects represent immutable objects without a distinct identity.
+value_objects:
+  - name: Date
+    definition: A Value Object representing a date in the context of project milestones or deadlines. It is immutable and provides date-related functionalities.
+    properties:
+      - name: year
+        type: int
+      - name: month
+        type: int
+      - name: day
+        type: int
+
+  - name: Task
+    definition: A Value Object representing a task or work item within a software project. It encapsulates task-related attributes and behaviors and is immutable.
+    properties:
+      - name: title
+        type: str
+      - name: description
+        type: str
+
+  - name: SourceCodeAttributes
+    definition: A Value Object representing source code within a software project. It encapsulates code-related properties and is immutable.
+    properties:
+      - name: filepath
+        type: str
+      - name: classes
+        type: List[str]
+      - name: functions
+        type: List[str]
+      - name: imports
+        type: List[str]
+
+# Business functions for Entities and Value Objects.
+business_functions:
+  - entity: Project
+    name: assignDeveloper
+    parameters:
+      - parameter: developer
+        type: Developer
+      - parameter: start_date
+        type: Date
+    definition: Assigns a developer to the project with a specified start date.
+    contract:
+      pre:
+        - condition: "lambda developer, start_date: developer is not None"
+        - condition: "lambda developer, start_date: start_date is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: completeTask
+    parameters:
+      - parameter: task
+        type: Task
+    definition: Marks a task as completed by the developer.
+    contract:
+      pre:
+        - condition: "lambda task: task is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: analyzeCode
+    parameters:
+      - parameter: task
+        type: Task
+    definition: Analyzes the source code within the context of a specific task.
+    contract:
+      pre:
+        - condition: "lambda task: task is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: fixCode
+    parameters:
+      - parameter: task
+        type: Task
+    definition: Fixes the source code within the context of a specific task.
+    contract:
+      pre:
+        - condition: "lambda task: task is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: isValidSourceCode
+    parameters:
+      - parameter: source_code
+        type: SourceCode
+    definition: Checks if the given source code is valid.
+    contract:
+      pre:
+        - condition: "lambda source_code: source_code is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: addNecessaryImports
+    parameters:
+      - parameter: source_code
+        type: SourceCode
+    definition: Adds necessary imports to the given source code.
+    contract:
+      pre:
+        - condition: "lambda source_code: source_code is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Developer
+    name: getNecessaryImports
+    parameters:
+      - parameter: source_code
+        type: SourceCode
+    definition: Gets the list of necessary imports for the given source code.
+    contract:
+      pre:
+        - condition: "lambda source_code: source_code is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: SourceCode
+    name: refactorCode
+    parameters:
+      - parameter: refactor_strategy
+        type: str
+    definition: |
+      Refactors the source code based on a given strategy.
+    contract:
+      pre:
+        - condition: "lambda refactor_strategy: refactor_strategy in ['simple', 'complex']"
+      post:
+        - condition: "lambda result: result is not None"
+
+# Additional information can be included if necessary.
+additional_info:
+  - key: Important Note
+    value: In the Software Development Domain, Entities represent distinct objects with identity, while Value Objects are immutable and lack identity. Business functions are defined with Design by Contract (DbC) using the icontract library, specifying preconditions and postconditions for each function.

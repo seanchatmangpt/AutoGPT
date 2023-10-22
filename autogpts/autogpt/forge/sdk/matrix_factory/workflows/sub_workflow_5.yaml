@@ -1,0 +1,11 @@
+workflow:
+      - name: "installation"
+        description: "To install the project, follow these steps:"
+        params:
+          clone_command: "git clone https://link-to-project"
+          navigate_command: "cd project-directory"
+      - name: "frontend_setup"
+        description: "To set up the frontend, follow these steps:"
+        params:
+          bootstrap_command: "npx create-react-app frontend"
+          navigate_command: "cd frontend"

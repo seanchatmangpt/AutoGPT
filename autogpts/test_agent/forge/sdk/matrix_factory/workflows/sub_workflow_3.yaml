@@ -1,0 +1,61 @@
+workflow:
+      - name: "database_model"
+        description: "Define the 'Users' database model using SQLAlchemy."
+        params:
+          model_name: "Users"
+          attributes:
+            - name: "id"
+              type: "Integer"
+            - name: "name"
+              type: "String"
+            - name: "email"
+              type: "String"
+            - name: "password"
+              type: "String"
+
+      - name: "create_user"
+        description: "Endpoint to create a new user."
+        params:
+          method: "POST"
+          endpoint: "/api/users"
+          body:
+            - name: "name"
+              type: "String"
+            - name: "email"
+              type: "String"
+            - name: "password"
+              type: "String"
+
+      - name: "get_user"
+        description: "Endpoint to get a specific user."
+        params:
+          method: "GET"
+          endpoint: "/api/users/{id}"
+          path_params:
+            - name: "id"
+              type: "Integer"
+
+      - name: "update_user"
+        description: "Endpoint to update a user's information."
+        params:
+          method: "PUT"
+          endpoint: "/api/users/{id}"
+          path_params:
+            - name: "id"
+              type: "Integer"
+          body:
+            - name: "name"
+              type: "String"
+            - name: "email"
+              type: "String"
+            - name: "password"
+              type: "String"
+
+      - name: "delete_user"
+        description: "Endpoint to delete a user."
+        params:
+          method: "DELETE"
+          endpoint: "/api/users/{id}"
+          path_params:
+            - name: "id"
+              type: "Integer"

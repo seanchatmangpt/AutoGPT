@@ -1,0 +1,17 @@
+workflow:
+      - name: "installation"
+        description: "To install the project, follow these steps:"
+        params:
+          clone_command: "git clone https://link-to-project"
+          navigate_command: "cd project-directory"
+      - name: "fetch_items"
+        description: "Endpoint to fetch all items."
+        params:
+          method: "GET"
+          endpoint: "/api/items"
+      - name: "styling"
+        description: "To enhance user experience, implement styling using either 'styled-components' or a CSS framework like Bootstrap. Make sure the design is responsive."
+        params:
+          styling_library: "styled-components"
+          css_framework: "Bootstrap"
+          responsive_design: true

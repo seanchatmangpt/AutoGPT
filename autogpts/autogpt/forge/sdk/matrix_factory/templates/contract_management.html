@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto my-12 p-12 bg-white rounded shadow-xl">
+    <h1 class="text-2xl font-semibold mb-6">Contracts</h1>
+
+    <table class="min-w-full table-auto">
+        <thead class="justify-between">
+            <tr class="bg-gray-800">
+                <th class="px-16 py-2">
+                    <span class="text-gray-300">Contract Content</span>
+                </th>
+                <th class="px-16 py-2">
+                    <span class="text-gray-300">Status</span>
+                </th>
+                <th class="px-16 py-2">
+                    <span class="text-gray-300">Actions</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-gray-200">
+            {% for contract in contracts %}
+            <tr class="bg-white border-4 border-gray-200">
+    <td class="px-16 py-2">
+        {{ contract.content }}
+        <!-- Display markups for each contract -->
+        <div class="mt-2 text-xs">
+            <strong>Markups:</strong><br>
+            {% for markup in contract.markups %}
+                {{ markup.author }}: {{ markup.content }}<br>
+            {% endfor %}
+        </div>
+    </td>                <td class="px-16 py-2">{{ contract.status }}</td>
+                <td class="px-16 py-2">
+                    <form method="post" action="/contract/{{ contract.id }}/sign">
+                        <button type="submit" class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline-blue">
+                            Sign Contract
+                        </button>
+                    </form>
+                    <br>
+                    <form method="post" action="/contract/{{ contract.id }}/add_markup" class="mt-2">
+                        <textarea name="markup_content" placeholder="Enter markup content" class="p-2 rounded w-full"></textarea>
+                        <input type="text" name="markup_author" placeholder="Enter author" class="p-2 rounded w-full mt-2">
+                        <button type="submit" class="mt-2 text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline-green">
+                            Add Markup
+                        </button>
+                    </form>
+                    <form method="post" action="/contract/{{ contract.id }}/delete" class="mt-2">
+                        <button type="submit" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline-red">
+                            Delete Contract
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Create New Contract</h2>
+        <form method="post" action="/">
+            <textarea name="content" placeholder="Enter contract content" class="p-2 rounded w-full"></textarea>
+            <button type="submit" class="mt-4 text-sm bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo">
+                Create Contract
+            </button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

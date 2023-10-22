@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corporate Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        .dashboard-card {
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto py-8">
+        <h1 class="text-4xl font-semibold text-gray-800 mb-6">Corporate Dashboard</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="AdministrationModule.html">AdministrationModule</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">dealWithLookAndFeel</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">dealWithSecurity</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">drawInformation</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">auditTrails</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">interfaceBackToDecisionMakingFacility</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">setTolerances</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">FederatedSecurityFramework</li>
+                    
+                    <li class="text-gray-600">DecisionMakingFacility</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="OnlineContractSigningFacility.html">OnlineContractSigningFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">uploadContract</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">markupContract</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">signContract</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">reviewPreviousWork</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">setApprovalLevels</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">autoAdministerContracts</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">setMilestones</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">Calendar</li>
+                    
+                    <li class="text-gray-600">Signatory</li>
+                    
+                    <li class="text-gray-600">CarbonCopy</li>
+                    
+                    <li class="text-gray-600">Administrator</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="HeadlessCRM.html">HeadlessCRM</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">connect</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">drawData</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">queryData</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">storeInformation</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">predictReactions</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">DatabaseConnectivityModule</li>
+                    
+                    <li class="text-gray-600">Agent</li>
+                    
+                    <li class="text-gray-600">AdministrationModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="HeadlessEmailFacility.html">HeadlessEmailFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">connectEmailServer</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">drawEmailData</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">predictEmailReactions</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">HeadlessCRM</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="ContentCreationFacility.html">ContentCreationFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">createPosts</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">createEmails</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">createLandingPages</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">AdministrationModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="EventPlanningFacility.html">EventPlanningFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">createEvents</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">trackEvents</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">linkToCompetitiveRadar</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">CompetitiveRadarModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="SocialMediaFacility.html">SocialMediaFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">connectToSocialMedia</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">trackDescriptions</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">predictReactions</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">Twitter</li>
+                    
+                    <li class="text-gray-600">LinkedIn</li>
+                    
+                    <li class="text-gray-600">Instagram</li>
+                    
+                    <li class="text-gray-600">Facebook</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="FinancialSoftwareConnectionFacility.html">FinancialSoftwareConnectionFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">ingestData</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">addGLEntry</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">addAccountsPayable</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">addAccountsReceivable</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">ERPSoftware</li>
+                    
+                    <li class="text-gray-600">AdministrationModule</li>
+                    
+                    <li class="text-gray-600">CompetitiveRadarModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="CompetitiveRadarFacility.html">CompetitiveRadarFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">enterCompanyName</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">drillDownAnalysis</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">displayInformation</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">AdministrationModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="WebModule.html">WebModule</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">createOrModifyWebProperty</button></li>
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">infuseWithCompetitiveUnderstanding</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">HeadlessCRM</li>
+                    
+                    <li class="text-gray-600">HeadlessEmailFacility</li>
+                    
+                    <li class="text-gray-600">CompetitiveRadarModule</li>
+                    
+                    <li class="text-gray-600">FinancialSoftwareConnectionFacility</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+            <div class="dashboard-card p-4">
+                <h2 class="text-xl font-semibold text-blue-600 mb-2"><a href="DecisionMakingFacility.html">DecisionMakingFacility</a></h2>
+                <p class="text-gray-600 mb-4">Type: Class</p>
+                <h3 class="text-lg font-semibold">Methods:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li><button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">makeDecisions</button></li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Subdependencies:</h3>
+                <ul class="list-disc ml-6 mb-4">
+                    
+                    <li class="text-gray-600">AdministrationModule</li>
+                    
+                </ul>
+                <h3 class="text-lg font-semibold">Inheritance:</h3>
+                <ul class="list-disc ml-6">
+                    
+                    <li class="text-gray-600">Module</li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

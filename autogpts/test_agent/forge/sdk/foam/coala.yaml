@@ -1,0 +1,140 @@
+aggregates:
+- aggregate_business_functions:
+  - contract:
+      ensure:
+      - condition: 'lambda result: isinstance(result, Memory)'
+      require:
+      - condition: 'lambda agent, memory: agent is not None and memory is not None'
+    definition: Initialize the agent\'s memory modules within the CoALA framework
+    name: InitializeMemory
+    parameters:
+    - parameter: agent
+      type: Agent
+    - parameter: memory
+      type: Memory
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda agent, action: agent is not None and action is not None'
+    definition: Define and structure the agent\'s action spaces
+    name: DefineActionSpaces
+    parameters:
+    - parameter: agent
+      type: Agent
+    - parameter: action
+      type: Action
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda agent, environment: agent is not None and environment is not None'
+    definition: Procedures for grounding actions, allowing the agent to interact with external environments
+    name: GroundingActions
+    parameters:
+    - parameter: agent
+      type: Agent
+    - parameter: environment
+      type: Environment
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda agent: agent is not None'
+    definition: Retrieval procedures to read information from long-term memories into the working memory
+    name: RetrievalActions
+    parameters:
+    - parameter: agent
+      type: Agent
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda agent, memory: agent is not None and memory is not None'
+    definition: Reasoning procedures to process working memory contents and generate new knowledge
+    name: ReasoningActions
+    parameters:
+    - parameter: agent
+      type: Agent
+    - parameter: memory
+      type: Memory
+  - contract:
+      ensure:
+      - condition: 'lambda result: result is True'
+      require:
+      - condition: 'lambda agent, memory: agent is not None and memory is not None'
+    definition: Enable the agent to learn by updating long-term memory
+    name: LearningActions
+    parameters:
+    - parameter: agent
+      type: Agent
+    - parameter: memory
+      type: Memory
+  - contract:
+      ensure:
+      - condition: 'lambda result: isinstance(result, Decision)'
+      require:
+      - condition: 'lambda agent: agent is not None'
+    definition: Design a decision-making process that allows the agent to choose actions
+    name: DecisionMaking
+    parameters:
+    - parameter: agent
+      type: Agent
+  entities:
+  - business_functions:
+      - contract:
+          ensure:
+          - condition: 'lambda result: result is not None'
+          require:
+          - condition: 'lambda agent: agent is not None'
+        definition: Create an agent according to the CoALA framework
+        name: CreateAgent
+        parameters:
+        - parameter: agent
+          type: Agent
+    definition: An Agent entity based on the CoALA framework
+    factories:
+    - name: CreateAgent
+      parameters:
+      - parameter: name
+        type: string
+    name: Agent
+    repositories:
+    - methods:
+      - name: find_by_name
+        parameters:
+        - parameter: name
+          type: string
+      name: AgentRepository
+  root_entity: Agent
+  value_objects:
+  - definition: A Memory value object, contains various types of memory modules
+    name: Memory
+    properties:
+    - name: working_memory
+      type: dict
+    - name: long_term_memory
+      type: dict
+  - definition: An Action value object, embodies agent activities
+    name: Action
+    properties:
+    - name: type
+      type: string
+    - name: parameters
+      type: dict
+  - definition: An Environment value object, denotes different external environments
+    name: Environment
+    properties:
+    - name: type
+      type: string
+    - name: properties
+      type: dict
+  - definition: A Decision value object, encapsulates decision-making process
+    name: Decision
+    properties:
+    - name: evaluations
+      type: list
+    - name: proposals
+      type: list
+    - name: simulations
+      type: list

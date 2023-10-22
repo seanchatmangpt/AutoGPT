@@ -1,0 +1,21 @@
+business_functions:
+- contract:
+    ensure:
+    - condition: 'lambda result: result is not None'
+    require:
+    - condition: 'lambda developer: developer is not None'
+  definition: Assigns a developer to the project.
+  entity: Project
+  name: assignDeveloper
+  parameters:
+  - parameter: developer
+    type: Developer
+entities:
+- definition: An Entity representing a software development project.
+  name: Project
+value_objects:
+- definition: A Value Object representing a date.
+  name: Date
+  properties:
+  - name: year
+    type: int

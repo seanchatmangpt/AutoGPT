@@ -1,0 +1,15 @@
+from dataclasses import dataclass, field
+from typing import List
+
+{% for import_statement in import_statements %}
+{{ import_statement }}
+{% endfor %}
+
+@dataclass(frozen=True)
+class {{ value_object_name }}:
+    """
+    {{ value_object_definition }}
+    """
+    {% for prop in properties %}
+    {{ prop.name }}: {{ prop.type }}
+    {% endfor %}

@@ -1,0 +1,35 @@
+workflow:
+  - name: "Setup_Environment"
+    description: "Initialize and setup the necessary environment and configurations"
+    params:
+      models: "best_models"
+      prompt: "email_prompt"
+      template_class: "SarahMikeEmailTemplate"
+
+  - name: "Run_GPT_Models"
+    description: "Use GPT-3 models to derive the dictionary to populate the Jinja template"
+    params:
+      prompt_data: "prompt"
+      models_to_use: "models"
+
+  - name: "Filter_Valid_Results"
+    description: "Post-process the results to discard unsuccessful attempts"
+    params:
+      raw_results: "model_output_data"
+
+  - name: "Generate_Emails"
+    description: "Generate emails using the valid results"
+    params:
+      results_data: "filtered_results"
+      template_class_name: "template_class"
+
+  - name: "Save_To_Files"
+    description: "Persist the generated emails to files"
+    params:
+      emails: "generated_emails"
+
+  - name: "Display_Results_Summary"
+    description: "Provide a concise summary of the entire operation"
+    params:
+      start_time: "start_timestamp"
+      valid_model_count: "valid_model_count"

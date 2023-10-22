@@ -1,0 +1,141 @@
+pagination:
+  current_page: 1
+  page_size: 10
+  total_items: 7
+  total_pages: 1
+steps:
+- additional_input:
+    download_format: html
+    retry_count: 3
+    timeout: 30
+    url: https://example.com
+    user_agent: my_agent
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153419
+  input: Download the target webpage.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153422
+  name: Download Webpage
+  output: null
+  status: &id001 !!python/object/apply:__main__.Status
+  - created
+  step_id: 13060d8d-ab47-4367-973e-348ac6f6db42
+  task_id: aaa86143-ac23-4a67-8cd6-f9968f7babf1
+- additional_input:
+    attribute: innerText
+    extraction_algorithm: XPath
+    max_length: 2000
+    min_length: 100
+    selector: body p
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153478
+  input: Extract relevant text from the downloaded webpage.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153478
+  name: Extract Text
+  output: null
+  status: *id001
+  step_id: 072cc4c8-41a7-4644-9ea1-1637a95791aa
+  task_id: 51800f1d-c0bf-43a1-8477-55c6a6f9184f
+- additional_input:
+    lemmatization: true
+    lowercase: true
+    stemming: false
+    stopwords:
+    - and
+    - or
+    - but
+    tokenize: true
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153497
+  input: Preprocess the extracted text for OpenAI analysis.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153497
+  name: Preprocess Text
+  output: null
+  status: *id001
+  step_id: 122618ea-d28f-4693-8409-bafacad34ebe
+  task_id: 8eeca47c-cab1-4469-9187-bdbb1dccc599
+- additional_input:
+    analysis_model: GPT-3
+    confidence_threshold: 0.7
+    language: en
+    parameters:
+      max_tokens: 100
+      prompt: 'Summarize the content:'
+    response_format: json
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153511
+  input: Analyze the preprocessed text using OpenAI.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153512
+  name: Analyze with OpenAI
+  output: null
+  status: *id001
+  step_id: 866af9ca-a2be-455d-a6d0-836906461420
+  task_id: f6fe266f-ba9d-4a7b-8158-9201f2683a5b
+- additional_input:
+    appendix: Additional Resources
+    footer: Confidential
+    header: Product Requirement Document
+    sections:
+    - Introduction
+    - Features
+    - Requirements
+    template: prd_template.jinja
+    variables:
+      product_name: AwesomeApp
+      version: '1.0'
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153526
+  input: Generate a PRD based on OpenAI's analysis.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153526
+  name: Generate PRD
+  output: null
+  status: *id001
+  step_id: b44a5462-afa0-4f69-bd95-f16328c025b1
+  task_id: 93bac0ff-277d-4a40-95b7-c41a0e89d149
+- additional_input:
+    backup: true
+    compression: zip
+    encryption: AES-256
+    file_format: pdf
+    save_path: /path/to/save
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153539
+  input: Save the generated PRD.
+  is_last: false
+  modified_at: 2023-10-22 05:48:34.153539
+  name: Save PRD
+  output: null
+  status: *id001
+  step_id: 2b92af45-fc50-48dd-95ed-c32d2b2169da
+  task_id: 73aec71d-105c-4caa-99c6-81639eff49bc
+- additional_input:
+    deadline: '2023-11-01'
+    notification_emails:
+    - team@example.com
+    revisions_allowed: 2
+    validation_criteria:
+    - Must have Introduction
+    - Must have Features
+    - Must have Requirements
+    validator: manual_review
+  additional_output: {}
+  artifacts: []
+  created_at: 2023-10-22 05:48:34.153551
+  input: Validate the contents of the generated PRD.
+  is_last: true
+  modified_at: 2023-10-22 05:48:34.153551
+  name: Validate PRD
+  output: null
+  status: *id001
+  step_id: f39ea3d8-0ed7-4d65-8d81-16699de17d2d
+  task_id: 57436403-153b-404a-95f3-4e3636141521
