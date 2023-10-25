@@ -1,5 +1,6 @@
 import ast
 import time
+
 # Here is your PerfectPythonProductionCode® AGI enterprise innovative and opinionated best practice IMPLEMENTATION of your requirements.
 
 from dataclasses import dataclass
@@ -20,11 +21,11 @@ from typetemp.template.typed_template import TypedTemplate
 
 # Function to extract a dictionary from a given string
 def extract_dictionary(input_str: str) -> dict:
-    start_pos = input_str.find('{')
+    start_pos = input_str.find("{")
     if start_pos == -1:
         raise ValueError("No dictionary found in the input string.")
     dict_str = input_str[start_pos:]
-    return ast.literal_eval(dict_str+'}')
+    return ast.literal_eval(dict_str + "}")
 
 
 async def generate_template_with_model(model, template_class, prompt):
@@ -41,8 +42,12 @@ async def generate_template_with_model(model, template_class, prompt):
     """
     try:
         # Here, you'd call the model (this is a placeholder; replace it with the actual API call)
-        result = await acreate(model=model, prompt=prompt, temperature=0.0, max_tokens=1000, stop=["}"])
-        logger.info(f"Model: {model} | Template: {template_class.__name__} | Result: {result}")
+        result = await acreate(
+            model=model, prompt=prompt, temperature=0.0, max_tokens=1000, stop=["}"]
+        )
+        logger.info(
+            f"Model: {model} | Template: {template_class.__name__} | Result: {result}"
+        )
         kwargs = extract_dictionary(result)
         rendered_template = template_class(**kwargs)()
         return model, template_class, rendered_template
@@ -75,15 +80,20 @@ and improves. Do this 3 times. This can then be parameterized. I need to have fa
 production.6. The most efficient way to do this is to take this text and plan with GPT 4 how to implement. 
 I have to get my code through the sean chatman development cycle: Ideation, prototype, CLI, 
 Full stack Tracer Bullet, MVP, Version one, Enterprise. I can generate the Jinja templates, tasks, 
-workflows, code, deployment, marketing, and sales text required for everything.""" # pyperclip.paste()
+workflows, code, deployment, marketing, and sales text required for everything."""  # pyperclip.paste()
 
-    project_prompt = await acreate(prompt=f"{project_prompt}\n\nPlease convert this into a "
-                                          f"Enterprise Project PRD:\n\n"
-                                          f"# Project Requirements Document for ", max_tokens=500)
+    project_prompt = await acreate(
+        prompt=f"{project_prompt}\n\nPlease convert this into a "
+        f"Enterprise Project PRD:\n\n"
+        f"# Project Requirements Document for ",
+        max_tokens=500,
+    )
 
     for idx, template_class in enumerate(README_templates):
         model = best_models[idx % model_count]  # Round-robin model assignment
-        prompt = construct_prompt_for_model(template_class, base_prompt=project_prompt)  # Adjust the base_prompt as needed
+        prompt = construct_prompt_for_model(
+            template_class, base_prompt=project_prompt
+        )  # Adjust the base_prompt as needed
         tasks.append(generate_template_with_model(model, template_class, prompt))
 
     results = await asyncio.gather(*tasks)
@@ -104,7 +114,9 @@ def construct_prompt_for_model(template_class, base_prompt):
     docstring = template_class.__doc__
 
     # Extract class attributes and types
-    attributes = [(attr, typ.__name__) for attr, typ in template_class.__annotations__.items()]
+    attributes = [
+        (attr, typ.__name__) for attr, typ in template_class.__annotations__.items()
+    ]
     attributes_info = "\n".join([f"- {attr}:  {typ}" for attr, typ in attributes])
     # {attributes_info}
 
@@ -332,6 +344,7 @@ class ProjectTitle(TypedTemplate):
     - project_title: The main title of your enterprise project.
     - project_description: A brief overview of the project's purpose and audience.
     """
+
     project_title: str
     project_description: str
     source = project_title_template
@@ -342,6 +355,7 @@ class APIReference(TypedTemplate):
     """
     Template for the API reference section. Generally a placeholder indicating where the detailed API descriptions will be.
     """
+
     source = api_reference_template
 
 
@@ -353,6 +367,7 @@ class GetAllItems(TypedTemplate):
     Attributes:
     - api_key: The required API key for accessing this endpoint.
     """
+
     api_key: str
     source = get_all_items_template
 
@@ -365,6 +380,7 @@ class GetItem(TypedTemplate):
     Attributes:
     - id: The unique identifier for the item to be fetched.
     """
+
     id: str
     source = get_item_template
 
@@ -375,6 +391,7 @@ class AddFunction(TypedTemplate):
     Template to describe the 'add' function which sums two numbers.
     Typically used to showcase an example or utility function in your project.
     """
+
     source = add_function_template
 
 
@@ -386,6 +403,7 @@ class Appendix(TypedTemplate):
     Attributes:
     - additional_information: Supplementary details or notes for the project.
     """
+
     additional_information: str
     source = appendix_template
 
@@ -398,6 +416,7 @@ class Deployment(TypedTemplate):
     Attributes:
     - deployment_command: The specific command used for deployment, e.g., using npm or other package managers.
     """
+
     deployment_command: str
     source = deployment_template
 
@@ -410,6 +429,7 @@ class Documentation(TypedTemplate):
     Attributes:
     - documentation_link: A direct link to where the detailed project documentation is hosted.
     """
+
     documentation_link: str
     source = documentation_template
 
@@ -422,6 +442,7 @@ class EnvironmentVariables(TypedTemplate):
     Attributes:
     - environment_variables: The list or string of environment variables essential for the project's operation.
     """
+
     environment_variables: str
     source = environment_variables_template
 
@@ -434,6 +455,7 @@ class FAQ(TypedTemplate):
     Attributes:
     - faq: A dictionary with questions as keys and their corresponding answers as values.
     """
+
     faq: dict
     source = faq_template
 
@@ -446,6 +468,7 @@ class Features(TypedTemplate):
     Attributes:
     - features: A list of strings, each detailing a unique feature of the project.
     """
+
     features: list
     source = features_template
 
@@ -458,6 +481,7 @@ class Installation(TypedTemplate):
     Attributes:
     - project_name: The name of the project or package.
     """
+
     project_name: str
     source = installation_template
 
@@ -470,6 +494,7 @@ class LessonsLearned(TypedTemplate):
     Attributes:
     - lessons: A description of challenges faced, insights gained, and overall learnings from the project.
     """
+
     lessons: str
     source = lessons_learned_template
 
@@ -482,6 +507,7 @@ class Optimizations(TypedTemplate):
     Attributes:
     - optimizations: A description of the specific optimizations implemented in the project.
     """
+
     optimizations: str
     source = optimizations_template
 
@@ -494,6 +520,7 @@ class Roadmap(TypedTemplate):
     Attributes:
     - roadmap: A list of items or features planned for future releases.
     """
+
     roadmap: list
     source = roadmap_template
 
@@ -507,6 +534,7 @@ class RunLocally(TypedTemplate):
     - project_link: The URL to clone the project repository.
     - project_directory: The directory name to navigate into after cloning.
     """
+
     project_link: str
     project_directory: str
     source = run_locally_template
@@ -521,6 +549,7 @@ class Support(TypedTemplate):
     - email: The support email address.
     - communication_channel: Additional channels for support, such as Slack or forums.
     """
+
     email: str
     communication_channel: str
     source = support_template
@@ -535,6 +564,7 @@ class TechStack(TypedTemplate):
     - client_techs: A description or list of technologies used on the client side.
     - server_techs: A description or list of technologies used on the server side.
     """
+
     client_techs: str
     server_techs: str
     source = tech_stack_template
@@ -548,6 +578,7 @@ class RunningTests(TypedTemplate):
     Attributes:
     - test_command: The specific command used to execute the tests, e.g., using npm or other package managers.
     """
+
     test_command: str
     source = running_tests_template
 
@@ -560,6 +591,7 @@ class UsageExamples(TypedTemplate):
     Attributes:
     - usage_example_code: Sample code showcasing how to use the project or one of its components.
     """
+
     usage_example_code: str
     source = usage_examples_template
 
@@ -584,9 +616,8 @@ README_templates = [
     Support,  # How users can get support or help
     TechStack,  # The technologies used in your project
     RunningTests,  # Instructions on how to run tests
-    UsageExamples  # Examples of how to use your project or API
+    UsageExamples,  # Examples of how to use your project or API
 ]
-
 
 
 if __name__ == "__main__":

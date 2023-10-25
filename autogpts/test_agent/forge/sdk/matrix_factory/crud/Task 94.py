@@ -2,6 +2,7 @@
 import uuid
 import datetime
 
+
 # Define the UserSession class
 class UserSession:
     # Initialize the class with a unique session ID and current timestamp
@@ -13,8 +14,10 @@ class UserSession:
     def update_timestamp(self):
         self.timestamp = datetime.datetime.now()
 
+
 # Create a dictionary to store user sessions
 user_sessions = {}
+
 
 # Function to create a new user session and add it to the dictionary
 def create_session():
@@ -24,6 +27,7 @@ def create_session():
     user_sessions[session.session_id] = session
     # Return the session ID for reference
     return session.session_id
+
 
 # Function to check if a session is still active
 def is_session_active(session_id):
@@ -37,6 +41,7 @@ def is_session_active(session_id):
         # Return False if the session ID does not exist
         return False
 
+
 # Function to end a user session
 def end_session(session_id):
     # Check if the session ID exists in the dictionary
@@ -48,6 +53,7 @@ def end_session(session_id):
     else:
         # Return False if the session ID does not exist
         return False
+
 
 # Example usage:
 # Create a new session

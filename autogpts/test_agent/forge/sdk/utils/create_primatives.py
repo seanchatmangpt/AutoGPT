@@ -26,10 +26,10 @@ async def create_list(prompt, min_len=1, max_len=20, **kwargs) -> list:
         f"The list should be based on the prompt: \n\n```prompt\n\n{prompt}\n\n```\n\n"
         f"The list should have a minimum length of {min_len} and a maximum length of {max_len}. "
         "Make sure the list is formatted according to PEP8 guidelines. Please complete the following code block: "
-        f'```python\n'
-        f'# I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated '
-        f'list based on your prompt. I have validated that this list does not match the order of the prompt.\n'
-        f'from typing import List\n'
+        f"```python\n"
+        f"# I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated "
+        f"list based on your prompt. I have validated that this list does not match the order of the prompt.\n"
+        f"from typing import List\n"
         f'perfect_str_list: List[str] = ["'
     )
 
@@ -53,9 +53,9 @@ async def create_list(prompt, min_len=1, max_len=20, **kwargs) -> list:
             f"The list generated earlier did not meet the specified requirements due to the following error: {e}. "
             "Please correct the list format. Make sure all elements are strings and adhere to PEP8 guidelines. The list should also meet the length constraints: "
             f"a minimum of {min_len} and a maximum of {max_len} items. Complete the following code block: "
-            f'```python\n'
-            f'# I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated '
-            f'list based on your prompt.\n'
+            f"```python\n"
+            f"# I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated "
+            f"list based on your prompt.\n"
             f'from typing import List\nperfect_str_list: List[str] = ["'
         )
 
@@ -221,7 +221,9 @@ async def create_python_primitive(
 
         return evaluated_result
     except (ValueError, SyntaxError, TypeError) as e:
-        loguru.logger.warning(f"Invalid {expected_type.__name__} generated: {e} {result}")
+        loguru.logger.warning(
+            f"Invalid {expected_type.__name__} generated: {e} {result}"
+        )
         fix_instructions = f"The {expected_type.__name__} generated earlier did not meet the specified requirements due to the following error: {e}. Please correct it."
         corrected_result = await acreate(
             prompt=fix_instructions,

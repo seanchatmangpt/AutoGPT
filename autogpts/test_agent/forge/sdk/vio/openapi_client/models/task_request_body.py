@@ -21,16 +21,21 @@ import json
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, StrictStr
 
+
 class TaskRequestBody(BaseModel):
     """
     Body of the task request.  # noqa: E501
     """
+
     input: Optional[StrictStr] = Field(None, description="Input prompt for the task.")
-    additional_input: Optional[Dict[str, Any]] = Field(None, description="Input parameters for the task. Any value is allowed.")
+    additional_input: Optional[Dict[str, Any]] = Field(
+        None, description="Input parameters for the task. Any value is allowed."
+    )
     __properties = ["input", "additional_input"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -49,14 +54,11 @@ class TaskRequestBody(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # set to None if input (nullable) is None
         # and __fields_set__ contains the field
         if self.input is None and "input" in self.__fields_set__:
-            _dict['input'] = None
+            _dict["input"] = None
 
         return _dict
 
@@ -69,10 +71,7 @@ class TaskRequestBody(BaseModel):
         if not isinstance(obj, dict):
             return TaskRequestBody.parse_obj(obj)
 
-        _obj = TaskRequestBody.parse_obj({
-            "input": obj.get("input"),
-            "additional_input": obj.get("additional_input")
-        })
+        _obj = TaskRequestBody.parse_obj(
+            {"input": obj.get("input"), "additional_input": obj.get("additional_input")}
+        )
         return _obj
-
-

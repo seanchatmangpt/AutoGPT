@@ -6,7 +6,7 @@ import anyio
 
 
 async def read(filename, to_type=None):
-    async with await anyio.open_file(filename, mode='r') as f:
+    async with await anyio.open_file(filename, mode="r") as f:
         contents = await f.read()
     if to_type == "dict":
         if filename.endswith(".yaml") or filename.endswith(".yml"):
@@ -18,7 +18,9 @@ async def read(filename, to_type=None):
 
 async def write(contents=None, filename="", mode="w+", extension="txt"):
     if extension == "yaml" or extension == "yml":
-        contents = yaml.dump(contents, default_style='', default_flow_style=False, width=1000)
+        contents = yaml.dump(
+            contents, default_style="", default_flow_style=False, width=1000
+        )
     elif extension == "json":
         contents = json.dumps(contents)
 

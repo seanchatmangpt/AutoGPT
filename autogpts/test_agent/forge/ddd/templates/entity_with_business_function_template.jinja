@@ -1,0 +1,41 @@
+{% if entity_name and entity_definition %}
+from icontract import require, ensure
+from typing import List, Dict, Optional, Union, Tuple, Any
+
+
+{% for import_statement in import_statements %}
+{{ import_statement }}
+{% endfor %}
+
+{% for vo_name in value_object_imports %}
+from .{{ vo_name }} import {{ vo_name }}
+{% endfor %}
+
+class {{ entity_name }}:
+    """
+    {{ entity_definition }}
+    """
+    def __init__(self, identity: str):
+        """
+        Initialize the entity with a unique identity.
+        """
+        self._id = identity
+{% endif %}
+
+{% if business_functions %}
+    # Business Functions
+    {% for bf in business_functions %}
+    {% for require in bf.contract.require %}
+    @require({{ require.condition}})
+    {% endfor %}
+    {% for ensure in bf.contract.ensure %}
+    @ensure({{ ensure.condition }})
+    {% endfor %}
+    def {{ bf.name|underscore }}(self{% for param in bf.parameters %}, {{ param.parameter }}: {{ param.type }}{% endfor %}):
+        """
+        {{ bf.definition }}
+        """
+        # All validation logic is in the icontract decorators
+        pass
+    {% endfor %}
+{% endif %}

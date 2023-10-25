@@ -47,7 +47,10 @@ class TypedPrompt(RenderMixin):
 if __name__ == "__main__":
     # Instantiate TypedPrompt class
     # typed_prompt = TypedPrompt(source="What is 2 + 2", to="stdout")
-    typed_prompt = TypedPrompt(source="Hello, I am {{ name }}! How are you doing today?\n\nHello, I am an AGI and I feel ", to="stdout")
+    typed_prompt = TypedPrompt(
+        source="Hello, I am {{ name }}! How are you doing today?\n\nHello, I am an AGI and I feel ",
+        to="stdout",
+    )
 
     # Call the instance to render the prompt and interact with the user
     user_input = typed_prompt(name="John Doe")

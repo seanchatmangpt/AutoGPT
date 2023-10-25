@@ -13,11 +13,16 @@ import icontract
 logger = logging.getLogger(__name__)
 
 
-@icontract.require(lambda task_fn: callable(task_fn), "The task function must be callable.")
 @icontract.require(
-    lambda args_iterable: hasattr(args_iterable, "__iter__"), "The argument must be an iterable."
+    lambda task_fn: callable(task_fn), "The task function must be callable."
 )
-@icontract.ensure(lambda result: isinstance(result, list), "The function must return a list.")
+@icontract.require(
+    lambda args_iterable: hasattr(args_iterable, "__iter__"),
+    "The argument must be an iterable.",
+)
+@icontract.ensure(
+    lambda result: isinstance(result, list), "The function must return a list."
+)
 async def run_in_parallel(
     task_fn: Callable[..., Any],
     args_iterable: Iterable[Any],
@@ -47,7 +52,9 @@ async def run_in_parallel(
         List[Any]: A list containing the results from each call to task_fn.
     """
     responses = {}
-    ordered_indices = deque()  # Use a deque to keep track of the order of the task indices.
+    ordered_indices = (
+        deque()
+    )  # Use a deque to keep track of the order of the task indices.
     task_fn_with_kwargs = partial(task_fn, **kwargs)
 
     async def worker(index: int, arg: Any) -> None:
@@ -55,7 +62,9 @@ async def run_in_parallel(
         try:
             result = await task_fn_with_kwargs(arg)
             responses[index] = result
-            ordered_indices.append(index)  # Store the task index to maintain original order.
+            ordered_indices.append(
+                index
+            )  # Store the task index to maintain original order.
         except Exception as e:
             logger.error(f"Worker {worker_name or ''} failed for index {index}: {e}")
             responses[index] = None

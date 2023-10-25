@@ -1,0 +1,73 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - These files should contain the necessary code to implement the specified actions,
+    as well as any necessary imports and formatting.
+  - ''
+  - 'Feature: Code compilation and execution. Scenario: The system should compile
+    and execute the generated Python code to ensure proper functionality.Feature:'
+  - ''
+  - ''
+- - ''
+  - 'It should also provide suggestions for potential improvements.Feature: Code review
+    and collaboration. Scenario: The system should allow for code review and'
+  - ''
+  - ''
+  - ''
+  - It should also provide suggestions for code optimization and simplification.
+  - It should also provide suggestions for refactoring to improve code readability
+    and maintainability.
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'The results should be displayed to the user.Feature: Collaboration and project
+    management. Scenario: The system should allow multiple users to collaborate'
+  - The results of the tests and debugging should be displayed to the user.
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'These reports should include code complexity, code coverage, and other relevant
+    performance indicators.Feature: Integration with bug tracking systems. Scenario:'
+  - ''
+  - These reports should include information such as execution time, memory usage,
+    and CPU usage.
+  - ''
+  - 'These reports should include information such as code complexity, code coverage,
+    and performance benchmarks.
+
+
+    Feature: Integration with version control system.'
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'Feature: Task assignment and tracking. Scenario: The system should allow managers
+    to assign tasks to team members and track their progress.Feature'
+  - ''
+  - 'Feature: Integration with version control systems. Scenario: The system should
+    be able to integrate with popular version control systems such as Git'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''

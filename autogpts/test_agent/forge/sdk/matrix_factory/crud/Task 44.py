@@ -1,6 +1,7 @@
 # Import the functools module
 import functools
 
+
 # Define a decorator function to cache the results of a function
 def cache(func):
     # Create a dictionary to store the cached results
@@ -24,14 +25,16 @@ def cache(func):
     # Return the wrapper function
     return wrapper
 
+
 # Define a function to be cached
 @cache
 def expensive_function(x, y):
     # Perform some expensive calculations
-    result = x ** y
+    result = x**y
 
     # Return the result
     return result
+
 
 # Call the expensive function with the same arguments multiple times
 expensive_function(2, 3)

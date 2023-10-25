@@ -52,7 +52,9 @@ steps:
     ```yaml\n
         """
 
-    return await acreate(prompt=plan_prompt, model=best_models[0], stop=["```"], max_tokens=500)
+    return await acreate(
+        prompt=plan_prompt, model=best_models[0], stop=["```"], max_tokens=500
+    )
 
 
 async def generate_meta_workflow(generated_plan, steps):
@@ -74,7 +76,9 @@ async def generate_meta_workflow(generated_plan, steps):
     ```yaml\n
     """
     print(meta_workflow_prompt)
-    return await acreate(prompt=meta_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500)
+    return await acreate(
+        prompt=meta_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500
+    )
 
 
 async def generate_sub_workflow(step, sub_steps):
@@ -102,7 +106,9 @@ async def generate_sub_workflow(step, sub_steps):
     ```yaml\n
     """
     print(sub_workflow_prompt)
-    return await acreate(prompt=sub_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500)
+    return await acreate(
+        prompt=sub_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500
+    )
 
 
 async def write_to_file(content, path):
@@ -117,9 +123,7 @@ async def generate_workflow_structure(given_input, steps=7, sub_steps=7):
     # meta_workflow_result = await generate_meta_workflow(generated_plan, steps)
     # await write_to_file(meta_workflow_result, "workflows/meta_workflow.yaml")
 
-    meta = yaml.load(await read("workflows/meta_workflow.yaml")
-                     , Loader=yaml.FullLoader)
-
+    meta = yaml.load(await read("workflows/meta_workflow.yaml"), Loader=yaml.FullLoader)
 
     # Generate Sub-Workflows
     for step in meta.get("workflow"):
@@ -168,6 +172,7 @@ async def main():
     It's essential that the application is built following best practices, is maintainable, and considers both security and performance. Include comprehensive documentation for each feature and function.
     """
     await generate_workflow_structure(given_input, steps, sub_steps)
+
 
 if __name__ == "__main__":
     asyncio.run(main())

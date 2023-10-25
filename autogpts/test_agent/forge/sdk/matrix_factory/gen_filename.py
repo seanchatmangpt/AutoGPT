@@ -48,7 +48,6 @@ Please produce the perfect Python dictionary based on the given data.
 """
 
 
-
 chat_models = [
     "gpt_3_5_turbo",
     "gpt_3_5_turbo_0301",
@@ -61,44 +60,46 @@ chat_models = [
 ]
 
 models_returning_dict = [
-    'gpt_3_5_turbo_instruct',
-    'gpt_3_5_turbo_instruct_0914',
-    'ada',
-    'ada_similarity',
-    'babbage',
-    'babbage_002',
-    'curie',
-    'curie_instruct_beta',
-    'curie_search_document',
-    'curie_search_query',
-    'curie_similarity',
-    'davinci',
-    'davinci_002',
-    'davinci_instruct_beta',
-    'text_ada_001',
-    'text_babbage_001',
-    'text_curie_001',
-    'text_davinci_001',
-    'text_davinci_002',
-    'text_davinci_003',
-    'text_search_curie_doc_001',
-    'text_search_curie_query_001',
-    'text_similarity_ada_001',
-    'text_similarity_curie_001',
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "ada",
+    "ada_similarity",
+    "babbage",
+    "babbage_002",
+    "curie",
+    "curie_instruct_beta",
+    "curie_search_document",
+    "curie_search_query",
+    "curie_similarity",
+    "davinci",
+    "davinci_002",
+    "davinci_instruct_beta",
+    "text_ada_001",
+    "text_babbage_001",
+    "text_curie_001",
+    "text_davinci_001",
+    "text_davinci_002",
+    "text_davinci_003",
+    "text_search_curie_doc_001",
+    "text_search_curie_query_001",
+    "text_similarity_ada_001",
+    "text_similarity_curie_001",
 ]
 
-best_models = ['gpt_3_5_turbo_instruct',
-               'gpt_3_5_turbo_instruct_0914',
-               'davinci_instruct_beta',
-               'text_davinci_002',
-               'text_davinci_003']
+best_models = [
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "davinci_instruct_beta",
+    "text_davinci_002",
+    "text_davinci_003",
+]
 
 ok_models = [
-    'curie_instruct_beta',
-    'curie_similarity',
-    'davinci_002',
-    'text_curie_001',
-    'text_similarity_curie_001',
+    "curie_instruct_beta",
+    "curie_similarity",
+    "davinci_002",
+    "text_curie_001",
+    "text_similarity_curie_001",
 ]
 
 all_models = [
@@ -192,7 +193,7 @@ def extract_dictionary(input_str: str) -> dict:
     - dict: The extracted dictionary.
     """
     # Find the starting position of the dictionary
-    start_pos = input_str.find('{')
+    start_pos = input_str.find("{")
 
     # Check if '{' is not found
     if start_pos == -1:
@@ -204,8 +205,10 @@ def extract_dictionary(input_str: str) -> dict:
     # Safely evaluate the dictionary substring
     return ast.literal_eval(dict_str)
 
+
 import re
 from time import strftime, gmtime
+
 
 async def generate_filename(
     prompt,
@@ -217,7 +220,7 @@ async def generate_filename(
     max_chars=60,
     char_limit=300,
     time_stamp=False,
-    **completion_kwargs
+    **completion_kwargs,
 ) -> str:
     prompt = prompt[:char_limit]
 
@@ -232,7 +235,9 @@ async def generate_filename(
         "Suggested filename:"
     )
 
-    file_name = await complete.acreate(prompt=completion_prompt, max_tokens=max_chars*2, **completion_kwargs)
+    file_name = await complete.acreate(
+        prompt=completion_prompt, max_tokens=max_chars * 2, **completion_kwargs
+    )
 
     # Post-process the filename
     file_name = re.sub(r"[^a-zA-Z0-9_]", "", file_name)

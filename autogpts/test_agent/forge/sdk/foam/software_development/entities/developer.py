@@ -173,7 +173,9 @@ class Developer:
         """
         fixed_filepath = self.fix_source_code_filepath(source_code_attributes.filepath)
         fixed_classes = self.fix_source_code_classes(source_code_attributes.classes)
-        fixed_functions = self.fix_source_code_functions(source_code_attributes.functions)
+        fixed_functions = self.fix_source_code_functions(
+            source_code_attributes.functions
+        )
         fixed_imports = self.fix_source_code_imports(source_code_attributes.imports)
         fixed_source_code = self.create_fixed_source_code(
             fixed_filepath, fixed_classes, fixed_functions, fixed_imports
@@ -274,7 +276,9 @@ class Developer:
         """
         Fixes the given source code functions.
         """
-        fixed_functions = [self.fix_function_name(function_name) for function_name in functions]
+        fixed_functions = [
+            self.fix_function_name(function_name) for function_name in functions
+        ]
         return fixed_functions
 
     def fix_source_code_imports(self, imports: List[str]) -> List[str]:
@@ -285,12 +289,18 @@ class Developer:
         return fixed_imports
 
     def create_fixed_source_code(
-        self, filepath: str, classes: List[str], functions: List[str], imports: List[str]
+        self,
+        filepath: str,
+        classes: List[str],
+        functions: List[str],
+        imports: List[str],
     ) -> str:
         """
         Creates the fixed source code from the given filepath, classes, functions, and imports.
         """
-        fixed_source_code = self.create_source_code(filepath, classes, functions, imports)
+        fixed_source_code = self.create_source_code(
+            filepath, classes, functions, imports
+        )
         return fixed_source_code
 
     def get_source_code(self, filepath: str) -> str:

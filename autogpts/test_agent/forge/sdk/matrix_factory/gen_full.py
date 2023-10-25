@@ -25,7 +25,7 @@ Please refer to the detailed documentation for in-depth explanations and user gu
 """
 
 # Load your template using Jinja2
-env = Environment(loader=FileSystemLoader('.'))
+env = Environment(loader=FileSystemLoader("."))
 template = env.from_string(template_str)
 
 # Load your YAML data
@@ -241,8 +241,11 @@ async def generate_template_with_model(model_selector, prompt):
     Asynchronously generates content using a round-robin model.
     """
     model = next(model_selector)
-    result = await acreate(model=model, prompt=prompt, temperature=0.0, max_tokens=1000, stop=["```"])
+    result = await acreate(
+        model=model, prompt=prompt, temperature=0.0, max_tokens=1000, stop=["```"]
+    )
     return result
+
 
 def round_robin_models():
     """A generator that yields models in a round-robin fashion."""
@@ -250,6 +253,7 @@ def round_robin_models():
     while True:
         yield MODELS[idx % len(MODELS)]
         idx += 1
+
 
 def construct_prompt_for_model(module, content):
     """Constructs a prompt for a given module and content."""
@@ -277,7 +281,9 @@ async def main():
     print("Generating React Components...")
 
     for module, content in data.items():
-        prompt = construct_prompt_for_model(module, content)  # Assuming you'd build your prompt this way
+        prompt = construct_prompt_for_model(
+            module, content
+        )  # Assuming you'd build your prompt this way
         tasks.append(generate_template_with_model(model_selector, prompt))
 
     results = await asyncio.gather(*tasks)
@@ -288,6 +294,6 @@ async def main():
             file.write(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Execute
     asyncio.run(main())

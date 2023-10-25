@@ -4,11 +4,11 @@ import shutil
 import datetime
 
 # Define the source and destination directories
-source_dir = '/home/user/test_data'
-dest_dir = '/home/user/backup'
+source_dir = "/home/user/test_data"
+dest_dir = "/home/user/backup"
 
 # Create a timestamp for the backup folder
-timestamp = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 # Create the backup folder with the timestamp
 backup_dir = os.path.join(dest_dir, timestamp)
@@ -27,4 +27,4 @@ for file in os.listdir(source_dir):
         shutil.copy(file_path, backup_dir)
 
 # Print a success message
-print('Backup completed successfully.')
+print("Backup completed successfully.")

@@ -1,0 +1,78 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Feature: Task prioritization. Scenario: The system should allow users to prioritize
+    tasks based on urgency and importance.Feature: Task deadline'
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'If any errors or failures occur, the system should provide detailed information
+    on the issue and suggest solutions.
+
+
+    Feature: Code review and'
+  - ''
+  - 'If any errors are found, the system should display the error message and location
+    in the code.Feature: Code completion and suggestion.'
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Given a database schema:
+
+    - Customer (id: int, first_name: string, last_name: string, email:'
+  - 'Feature: Code linting. Scenario: The system should perform code linting on the
+    generated Python code to ensure it follows Python'
+  - ''
+  - ''
+- - ''
+  - ''
+  - 'It should also provide suggestions for code optimization and improvements.Feature:
+    Real-time code collaboration. Scenario: The system should allow multiple users'
+  - 'It should also offer suggestions for code improvements based on industry standards
+    and community guidelines.Feature: Integration with version control systems. Scenario:'
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Feature: Collaboration and version control. Scenario: Multiple developers should
+    be able to work on the same codebase simultaneously, with version'
+  - It should also provide suggestions for code improvement and automatically make
+    the changes upon confirmation from the user.
+- - This will help developers identify potential performance bottlenecks and optimize
+    their code.
+  - These reports should provide information on code complexity, test coverage, and
+    other performance indicators.
+  - ''
+  - These reports should provide information on the performance of the code, such
+    as execution time, memory usage, and any potential bottlene
+  - ''
+  - These reports should include information such as code complexity, code coverage,
+    and performance benchmarks, and should be available in various formats such
+  - ''
+  - ''
+  - 'Feature: Integrate with version control systems. Scenario: The system should
+    support integration with popular version control systems such as Git'
+  - ''

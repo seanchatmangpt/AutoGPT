@@ -4,6 +4,7 @@ from lchop.context.work_context import default_work_context, load_workflow
 
 from lchop.tasks.gen_email_tasks import *
 
+
 async def main():
     work_ctx = default_work_context()
 

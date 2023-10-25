@@ -23,16 +23,19 @@ from pydantic import BaseModel, Field, conlist
 from agent.openapi_client.models.pagination import Pagination
 from agent.openapi_client.models.task import Task
 
+
 class TaskListResponse(BaseModel):
     """
     TaskListResponse
     """
+
     tasks: conlist(Task) = Field(...)
     pagination: Pagination = Field(...)
     __properties = ["tasks", "pagination"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -51,20 +54,17 @@ class TaskListResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of each item in tasks (list)
         _items = []
         if self.tasks:
             for _item in self.tasks:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['tasks'] = _items
+            _dict["tasks"] = _items
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
+            _dict["pagination"] = self.pagination.to_dict()
         return _dict
 
     @classmethod
@@ -76,10 +76,14 @@ class TaskListResponse(BaseModel):
         if not isinstance(obj, dict):
             return TaskListResponse.parse_obj(obj)
 
-        _obj = TaskListResponse.parse_obj({
-            "tasks": [Task.from_dict(_item) for _item in obj.get("tasks")] if obj.get("tasks") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None
-        })
+        _obj = TaskListResponse.parse_obj(
+            {
+                "tasks": [Task.from_dict(_item) for _item in obj.get("tasks")]
+                if obj.get("tasks") is not None
+                else None,
+                "pagination": Pagination.from_dict(obj.get("pagination"))
+                if obj.get("pagination") is not None
+                else None,
+            }
+        )
         return _obj
-
-

@@ -278,44 +278,46 @@ chat_models = [
 ]
 
 models_returning_dict = [
-    'gpt_3_5_turbo_instruct',
-    'gpt_3_5_turbo_instruct_0914',
-    'ada',
-    'ada_similarity',
-    'babbage',
-    'babbage_002',
-    'curie',
-    'curie_instruct_beta',
-    'curie_search_document',
-    'curie_search_query',
-    'curie_similarity',
-    'davinci',
-    'davinci_002',
-    'davinci_instruct_beta',
-    'text_ada_001',
-    'text_babbage_001',
-    'text_curie_001',
-    'text_davinci_001',
-    'text_davinci_002',
-    'text_davinci_003',
-    'text_search_curie_doc_001',
-    'text_search_curie_query_001',
-    'text_similarity_ada_001',
-    'text_similarity_curie_001',
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "ada",
+    "ada_similarity",
+    "babbage",
+    "babbage_002",
+    "curie",
+    "curie_instruct_beta",
+    "curie_search_document",
+    "curie_search_query",
+    "curie_similarity",
+    "davinci",
+    "davinci_002",
+    "davinci_instruct_beta",
+    "text_ada_001",
+    "text_babbage_001",
+    "text_curie_001",
+    "text_davinci_001",
+    "text_davinci_002",
+    "text_davinci_003",
+    "text_search_curie_doc_001",
+    "text_search_curie_query_001",
+    "text_similarity_ada_001",
+    "text_similarity_curie_001",
 ]
 
-best_models = ['gpt_3_5_turbo_instruct',
-               'gpt_3_5_turbo_instruct_0914',
-               'davinci_instruct_beta',
-               'text_davinci_002',
-               'text_davinci_003']
+best_models = [
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "davinci_instruct_beta",
+    "text_davinci_002",
+    "text_davinci_003",
+]
 
 ok_models = [
-    'curie_instruct_beta',
-    'curie_similarity',
-    'davinci_002',
-    'text_curie_001',
-    'text_similarity_curie_001',
+    "curie_instruct_beta",
+    "curie_similarity",
+    "davinci_002",
+    "text_curie_001",
+    "text_similarity_curie_001",
 ]
 
 all_models = [
@@ -397,15 +399,9 @@ Best regards,
 {{ sender_name }}
     """
 
-async def generate_boolean(
-    completion_function,
-    prompt,
-    **completion_kwargs
-):
 
-    completion_prompt = (
-        f"Based on the following text, provide a boolean response ('true' or 'false'): '{prompt}'"
-    )
+async def generate_boolean(completion_function, prompt, **completion_kwargs):
+    completion_prompt = f"Based on the following text, provide a boolean response ('true' or 'false'): '{prompt}'"
 
     result = await completion_function(prompt=completion_prompt, **completion_kwargs)
     # Convert the result to lowercase and check against "true" and "false"

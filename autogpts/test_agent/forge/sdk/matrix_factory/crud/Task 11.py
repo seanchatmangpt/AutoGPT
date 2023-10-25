@@ -1,5 +1,6 @@
 # Create components for each database model
 
+
 class DatabaseModel:
     def __init__(self, name, components):
         self.name = name
@@ -17,6 +18,7 @@ class DatabaseModel:
     def __repr__(self):
         return f"{self.name} Database Model"
 
+
 class Component:
     def __init__(self, name, data_type):
         self.name = name
@@ -25,10 +27,13 @@ class Component:
     def __repr__(self):
         return f"{self.name} ({self.data_type})"
 
+
 # Example usage:
 
 # Create a User database model with two components: username and password
-user_model = DatabaseModel("User", [Component("username", "string"), Component("password", "string")])
+user_model = DatabaseModel(
+    "User", [Component("username", "string"), Component("password", "string")]
+)
 
 # Add a new component to the User model
 user_model.add_component(Component("email", "string"))

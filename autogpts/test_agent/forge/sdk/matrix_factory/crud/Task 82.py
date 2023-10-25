@@ -1,6 +1,7 @@
 # Import the necessary modules
 import re
 
+
 # Define the data validation system
 def validate(data, pattern):
     # Use the re module to match the pattern to the data
@@ -12,10 +13,11 @@ def validate(data, pattern):
     else:
         return False
 
+
 # Define the pattern to be used for validation
-pattern = r'^[a-zA-Z]+$'
+pattern = r"^[a-zA-Z]+$"
 
 # Test the validation system with different inputs
-print(validate("Hello", pattern)) # Output: True
-print(validate("123", pattern)) # Output: False
-print(validate("Hello123", pattern)) # Output: False
+print(validate("Hello", pattern))  # Output: True
+print(validate("123", pattern))  # Output: False
+print(validate("Hello123", pattern))  # Output: False

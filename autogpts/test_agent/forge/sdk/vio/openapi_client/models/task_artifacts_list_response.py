@@ -23,16 +23,19 @@ from pydantic import BaseModel, Field, conlist
 from agent.openapi_client.models.artifact import Artifact
 from agent.openapi_client.models.pagination import Pagination
 
+
 class TaskArtifactsListResponse(BaseModel):
     """
     TaskArtifactsListResponse
     """
+
     artifacts: conlist(Artifact) = Field(...)
     pagination: Pagination = Field(...)
     __properties = ["artifacts", "pagination"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -51,20 +54,17 @@ class TaskArtifactsListResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of each item in artifacts (list)
         _items = []
         if self.artifacts:
             for _item in self.artifacts:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['artifacts'] = _items
+            _dict["artifacts"] = _items
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
+            _dict["pagination"] = self.pagination.to_dict()
         return _dict
 
     @classmethod
@@ -76,10 +76,16 @@ class TaskArtifactsListResponse(BaseModel):
         if not isinstance(obj, dict):
             return TaskArtifactsListResponse.parse_obj(obj)
 
-        _obj = TaskArtifactsListResponse.parse_obj({
-            "artifacts": [Artifact.from_dict(_item) for _item in obj.get("artifacts")] if obj.get("artifacts") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None
-        })
+        _obj = TaskArtifactsListResponse.parse_obj(
+            {
+                "artifacts": [
+                    Artifact.from_dict(_item) for _item in obj.get("artifacts")
+                ]
+                if obj.get("artifacts") is not None
+                else None,
+                "pagination": Pagination.from_dict(obj.get("pagination"))
+                if obj.get("pagination") is not None
+                else None,
+            }
+        )
         return _obj
-
-

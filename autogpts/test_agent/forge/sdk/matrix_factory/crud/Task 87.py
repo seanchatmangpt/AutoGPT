@@ -1,6 +1,7 @@
 # Import the necessary modules
 from hashlib import sha256
 
+
 # Define the User class
 class User:
     # Initialize the class with a username and password
@@ -21,6 +22,7 @@ class User:
             print("Authentication successful!")
         else:
             print("Authentication failed.")
+
 
 # Create a new user
 user = User("JohnDoe", "password123")

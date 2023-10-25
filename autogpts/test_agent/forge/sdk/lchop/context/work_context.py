@@ -8,6 +8,7 @@ from lchop.context.state_context import StateContext
 from lchop.context.step_context import StepContext
 from lchop.context.template_context import TemplateContext
 
+
 class WorkContext:
     globals()
 

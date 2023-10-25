@@ -27,7 +27,9 @@ class Project:
         tasks = self.get_tasks()
         source_code_attributes = developer.get_source_code_attributes()
         if not self.check_skills(source_code_attributes):
-            raise ValueError("Developer does not have the necessary skills for the project.")
+            raise ValueError(
+                "Developer does not have the necessary skills for the project."
+            )
         if not developer.is_available(start_date):
             raise ValueError("Developer is not available for the project's start date.")
         self.developers.append(developer)

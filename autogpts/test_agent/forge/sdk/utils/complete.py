@@ -68,7 +68,7 @@ DEFAULT_SYS_MSG = "AI chatbot that converses like a LLM 7 AGI Hive-Mind simulato
 DEFAULT_MODEL = "4"
 DEFAULT_MAX_RETRY = 5
 DEFAULT_BACKOFF_FACTOR = 2
-DEFAULT_INITIAL_WAIT = 0.25
+DEFAULT_INITIAL_WAIT = 1
 
 
 def chat(
@@ -152,7 +152,9 @@ def chat(
             wait_time = initial_wait * (backoff_factor ** (retry - 1))
 
             # Print the error and wait before retrying
-            logger.warning(f"Error communicating with OpenAI (attempt {retry}/{max_retry}): {oops}")
+            logger.warning(
+                f"Error communicating with OpenAI (attempt {retry}/{max_retry}): {oops}"
+            )
             sleep(wait_time)
 
 
@@ -240,7 +242,9 @@ async def achat(
 
             wait_time = initial_wait * (backoff_factor ** (retry - 1))
 
-            print(f"Error communicating with OpenAI (attempt {retry}/{max_retry}): {oops}")
+            print(
+                f"Error communicating with OpenAI (attempt {retry}/{max_retry}): {oops}"
+            )
             await asyncio.sleep(wait_time)
 
 

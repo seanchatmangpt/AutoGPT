@@ -13,6 +13,7 @@ handler.setLevel(logging.ERROR)
 # Add the handler to the logger
 logger.addHandler(handler)
 
+
 # Define a function to test error monitoring
 def test_error_monitoring():
     try:
@@ -21,6 +22,7 @@ def test_error_monitoring():
     except Exception as e:
         # Log the error
         logger.error("An error occurred: %s", e)
+
 
 # Call the function to test error monitoring
 test_error_monitoring()

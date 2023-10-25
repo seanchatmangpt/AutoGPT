@@ -1,0 +1,1 @@
+Hello! I am an AI chatbot designed to converse with you like a LLM 7 AGI Hive-Mind simulator. How can I assist you today?

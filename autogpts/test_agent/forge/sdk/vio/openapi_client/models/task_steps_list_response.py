@@ -23,16 +23,19 @@ from pydantic import BaseModel, Field, conlist
 from agent.openapi_client.models.pagination import Pagination
 from agent.openapi_client.models.step import Step
 
+
 class TaskStepsListResponse(BaseModel):
     """
     TaskStepsListResponse
     """
+
     steps: conlist(Step) = Field(...)
     pagination: Pagination = Field(...)
     __properties = ["steps", "pagination"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -51,20 +54,17 @@ class TaskStepsListResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of each item in steps (list)
         _items = []
         if self.steps:
             for _item in self.steps:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['steps'] = _items
+            _dict["steps"] = _items
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
+            _dict["pagination"] = self.pagination.to_dict()
         return _dict
 
     @classmethod
@@ -76,10 +76,14 @@ class TaskStepsListResponse(BaseModel):
         if not isinstance(obj, dict):
             return TaskStepsListResponse.parse_obj(obj)
 
-        _obj = TaskStepsListResponse.parse_obj({
-            "steps": [Step.from_dict(_item) for _item in obj.get("steps")] if obj.get("steps") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None
-        })
+        _obj = TaskStepsListResponse.parse_obj(
+            {
+                "steps": [Step.from_dict(_item) for _item in obj.get("steps")]
+                if obj.get("steps") is not None
+                else None,
+                "pagination": Pagination.from_dict(obj.get("pagination"))
+                if obj.get("pagination") is not None
+                else None,
+            }
+        )
         return _obj
-
-

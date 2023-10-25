@@ -1,0 +1,75 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - It should also provide comprehensive reports on test results and debugging information,
+    such as line numbers and error messages.
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - It should also provide suggestions for better coding practices and offer the option
+    to automatically implement them.
+  - ''
+  - It should also provide suggestions for refactoring to improve readability and
+    maintainability of the code.
+  - This includes identifying unused variables, optimizing loops, and suggesting more
+    efficient code structures.
+  - ''
+  - ''
+  - It should also provide suggestions for improving code structure and organization.
+- - ''
+  - ''
+  - ''
+  - 'Feature: Collaboration and version control. Scenario: The system should allow
+    multiple users to collaborate on a task and track changes made by'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - This should include code complexity, test coverage, and other relevant performance
+    measures.
+  - These metrics and reports should include code coverage, code complexity, and code
+    quality.
+  - 'These reports should include information such as code complexity, execution time,
+    memory usage, and other relevant performance indicators.
+
+
+    Feature: Debug'
+  - ''
+  - 'These reports should include metrics such as code complexity, code coverage,
+    and performance benchmarks.
+
+
+    Feature: Code review and collaboration. Scenario'
+  - ''
+  - ''
+  - ''
+  - ''

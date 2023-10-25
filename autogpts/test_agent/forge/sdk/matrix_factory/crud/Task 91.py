@@ -2,10 +2,11 @@
 import hashlib
 import base64
 
+
 # Define the encryption function
 def encrypt(data):
     # Encode the data using UTF-8
-    encoded_data = data.encode('utf-8')
+    encoded_data = data.encode("utf-8")
     # Create a hash object using SHA-256 algorithm
     hash_object = hashlib.sha256()
     # Update the hash object with the encoded data
@@ -16,6 +17,7 @@ def encrypt(data):
     encoded_digest = base64.b64encode(digest)
     # Return the encoded digest
     return encoded_digest
+
 
 # Define the test data
 test_data = "This is a test string"

@@ -4,7 +4,7 @@ import json
 
 
 def read(filename, to_type=None):
-    with open(filename, mode='r') as f:
+    with open(filename, mode="r") as f:
         contents = f.read()
     if to_type == "dict":
         # Check the extension
@@ -19,7 +19,9 @@ def read(filename, to_type=None):
 def write(contents=None, filename="", mode="w+", extension="txt"):
     # the extension is yaml then try to convert the contents to yaml
     if extension == "yaml" or extension == "yml":
-        contents = yaml.dump(contents, default_style='', default_flow_style=False, width=1000)
+        contents = yaml.dump(
+            contents, default_style="", default_flow_style=False, width=1000
+        )
     elif extension == "json":
         contents = json.dumps(contents)
 

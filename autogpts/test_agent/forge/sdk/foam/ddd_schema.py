@@ -22,13 +22,21 @@ ddd_instance = DDD(
                     business_functions=[
                         BusinessFunction(
                             name="AssignDeveloper",
-                            parameters=[{"parameter": "developer", "type": "Developer"}],
+                            parameters=[
+                                {"parameter": "developer", "type": "Developer"}
+                            ],
                             definition="Assigns a developer to the project.",
                             contract={
                                 "require": [
-                                    Require(condition="lambda developer: developer is not None")
+                                    Require(
+                                        condition="lambda developer: developer is not None"
+                                    )
                                 ],
-                                "ensure": [Ensure(condition="lambda result: result is not None")],
+                                "ensure": [
+                                    Ensure(
+                                        condition="lambda result: result is not None"
+                                    )
+                                ],
                             },
                         )
                     ],
@@ -44,7 +52,9 @@ ddd_instance = DDD(
                             methods=[
                                 {
                                     "name": "find_by_name",
-                                    "parameters": [{"parameter": "name", "type": "string"}],
+                                    "parameters": [
+                                        {"parameter": "name", "type": "string"}
+                                    ],
                                 }
                             ],
                         )
@@ -192,9 +202,7 @@ def generate_prompt(project_description: str, demo_yaml: str) -> str:
     Returns:
     - str: The complete chat prompt string.
     """
-    prompt_intro = (
-        "You are tasked with creating a DDD YAML Schema framework based on the project description."
-    )
+    prompt_intro = "You are tasked with creating a DDD YAML Schema framework based on the project description."
     schema_example_intro = "To assist you, here is a sample YAML Schema for reference:"
     detailed_instruction = (
         "Please carefully adhere to the schema constraints demonstrated above, "

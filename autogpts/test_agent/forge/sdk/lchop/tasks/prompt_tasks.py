@@ -19,7 +19,7 @@ async def type_prompt(work_ctx, message="Hello, World!", **kwargs):
 
 
 # if __name__ == "__main__":
-    # work_ctx = default_work_context()
-    # loop = asyncio.get_event_loop()
-    # loop.run_until_complete(type_prompt(work_ctx))
-    # print(work_ctx.task_ctx.results)
+# work_ctx = default_work_context()
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(type_prompt(work_ctx))
+# print(work_ctx.task_ctx.results)

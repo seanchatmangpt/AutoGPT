@@ -8,6 +8,7 @@ def check_permissions(user):
         # If user is not an admin, print a message
         print("User does not have admin permissions.")
 
+
 # Create a user object with admin permissions
 user1 = User(is_admin=True)
 

@@ -2,6 +2,7 @@
 import os
 import subprocess
 
+
 # Define function to set up continuous integration
 def setup_ci():
     # Set up continuous integration
@@ -13,13 +14,15 @@ def setup_ci():
     subprocess.run(["python", "setup.py", "test"])
     subprocess.run(["python", "setup.py", "sdist"])
     subprocess.run(["twine", "upload", "dist/*"])
-    
+
+
 # Define function to set up continuous deployment
 def setup_cd():
     # Set up continuous deployment
     subprocess.run(["python", "setup.py", "bdist_wheel"])
     subprocess.run(["twine", "upload", "dist/*"])
-    
+
+
 # Call functions to set up continuous integration and deployment
 setup_ci()
 setup_cd()

@@ -1,0 +1,89 @@
+# Entities and Value Objects YAML for Python Systems Architecture Interview Domain
+
+# Entities represent objects with a distinct identity.
+entities:
+  - name: Interview
+    definition: An Entity representing a single interview instance. It has a unique identity and associated properties like interview type, date, and candidates.
+
+  - name: Candidate
+    definition: An Entity representing an interviewee. It has a unique identity and is evaluated based on different skills and metrics.
+
+  - name: Interviewer
+    definition: An Entity representing the interviewer who conducts the interview. Has a unique identity and can evaluate candidates.
+
+  - name: PythonSystem
+    definition: An Entity representing a Python-based system. It has a unique identity and can be evaluated, scaled, or modified.
+
+# Value Objects represent immutable objects without a distinct identity.
+value_objects:
+  - name: InterviewQuestion
+    definition: A Value Object representing a single interview question. It encapsulates question-related attributes and is immutable.
+    properties:
+      - name: title
+        type: str
+      - name: difficulty
+        type: str
+      - name: domain
+        type: str
+
+  - name: SkillMetric
+    definition: A Value Object that holds the metrics for skills. Immutable and can be used for evaluations.
+    properties:
+      - name: skill_name
+        type: str
+      - name: rating
+        type: int
+
+  - name: SystemAttributes
+    definition: A Value Object encapsulating Python system attributes like architecture type, dependencies, etc. Immutable.
+    properties:
+      - name: architecture_type
+        type: str
+      - name: dependencies
+        type: List[str]
+
+# Business functions for Entities and Value Objects.
+business_functions:
+  - entity: Interview
+    name: evaluateCandidate
+    parameters:
+      - parameter: candidate
+        type: Candidate
+      - parameter: metrics
+        type: List[SkillMetric]
+    definition: Evaluates the candidate based on given metrics.
+    contract:
+      pre:
+        - condition: "lambda candidate, metrics: candidate is not None"
+        - condition: "lambda candidate, metrics: metrics is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: Interviewer
+    name: askQuestion
+    parameters:
+      - parameter: question
+        type: InterviewQuestion
+    definition: Asks the specified question during an interview.
+    contract:
+      pre:
+        - condition: "lambda question: question is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+  - entity: PythonSystem
+    name: evaluateSystem
+    parameters:
+      - parameter: attributes
+        type: SystemAttributes
+    definition: Evaluates the Python system based on given attributes.
+    contract:
+      pre:
+        - condition: "lambda attributes: attributes is not None"
+      post:
+        - condition: "lambda result: result is not None"
+
+# Additional information can be included if necessary.
+additional_info:
+  - key: Important Note
+    value: In the Python Systems Architecture Interview Domain, Entities represent distinct objects with identity, while Value Objects are immutable and lack identity. Business functions are defined with Design by Contract (DbC) using the icontract library, specifying preconditions and postconditions for each function.

@@ -57,14 +57,14 @@ async def acreate(model, prompt, **kwargs):
         temperature=0.0,
         max_tokens=100,
         stop=["}"],
-        messages=[{"role": "user", "content": prompt }],
+        messages=[{"role": "user", "content": prompt}],
         **kwargs,
     )
 
 
 async def chat(model, **kwargs):
     return await achat(model=model, **kwargs)
-    
+
 
 async def gpt_3_5_turbo(**kwargs):
     return await chat(model="gpt-3.5-turbo", **kwargs)
@@ -96,6 +96,7 @@ async def gpt_4_0314(**kwargs):
 
 async def gpt_4_0613(**kwargs):
     return await chat(model="gpt-4-0613", **kwargs)
+
 
 async def gpt_3_5_turbo_instruct(**kwargs):
     return await acreate(model="gpt-3.5-turbo-instruct", **kwargs)
@@ -313,45 +314,48 @@ chat_models = [
 ]
 
 models_returning_dict = [
-'gpt_3_5_turbo_instruct',
-'gpt_3_5_turbo_instruct_0914',
-'ada',
-'ada_similarity',
-'babbage',
-'babbage_002',
-'curie',
-'curie_instruct_beta',
-'curie_search_document',
-'curie_search_query',
-'curie_similarity',
-'davinci',
-'davinci_002',
-'davinci_instruct_beta',
-'text_ada_001',
-'text_babbage_001',
-'text_curie_001',
-'text_davinci_001',
-'text_davinci_002',
-'text_davinci_003',
-'text_search_curie_doc_001',
-'text_search_curie_query_001',
-'text_similarity_ada_001',
-'text_similarity_curie_001',
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "ada",
+    "ada_similarity",
+    "babbage",
+    "babbage_002",
+    "curie",
+    "curie_instruct_beta",
+    "curie_search_document",
+    "curie_search_query",
+    "curie_similarity",
+    "davinci",
+    "davinci_002",
+    "davinci_instruct_beta",
+    "text_ada_001",
+    "text_babbage_001",
+    "text_curie_001",
+    "text_davinci_001",
+    "text_davinci_002",
+    "text_davinci_003",
+    "text_search_curie_doc_001",
+    "text_search_curie_query_001",
+    "text_similarity_ada_001",
+    "text_similarity_curie_001",
 ]
 
-best_models = ['gpt_3_5_turbo_instruct',
-'gpt_3_5_turbo_instruct_0914',
-'davinci_instruct_beta',
-'text_davinci_002',
-'text_davinci_003']
+best_models = [
+    "gpt_3_5_turbo_instruct",
+    "gpt_3_5_turbo_instruct_0914",
+    "davinci_instruct_beta",
+    "text_davinci_002",
+    "text_davinci_003",
+]
 
 ok_models = [
-'curie_instruct_beta',
-'curie_similarity',
-'davinci_002',
-'text_curie_001',
-'text_similarity_curie_001',
+    "curie_instruct_beta",
+    "curie_similarity",
+    "davinci_002",
+    "text_curie_001",
+    "text_similarity_curie_001",
 ]
+
 
 @dataclass
 class SarahMikeEmailTemplate(TypedTemplate):
@@ -383,7 +387,7 @@ def extract_dictionary(input_str: str) -> dict:
     - dict: The extracted dictionary.
     """
     # Find the starting position of the dictionary
-    start_pos = input_str.find('{')
+    start_pos = input_str.find("{")
 
     # Check if '{' is not found
     if start_pos == -1:
@@ -395,11 +399,12 @@ def extract_dictionary(input_str: str) -> dict:
     # Safely evaluate the dictionary substring
     return ast.literal_eval(dict_str)
 
+
 async def main():
     async def run_model(model):
         try:
             result = await globals()[model](prompt=email_prompt)
-            if 'sender_name' in result:
+            if "sender_name" in result:
                 return model, result
             else:
                 return None, None
@@ -432,7 +437,7 @@ async def main():
         try:
             # print(f"\n####################\n{model}:,")
             # print(extract_dictionary(result+"}"))
-            kwargs = extract_dictionary(result+"}")
+            kwargs = extract_dictionary(result + "}")
             to = f"./emails/{model}{time.time()}.py"
             email = SarahMikeEmailTemplate(**kwargs)()
             with open(to, "w") as f:

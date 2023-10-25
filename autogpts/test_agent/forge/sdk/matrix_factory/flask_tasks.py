@@ -32,7 +32,10 @@ async def create_virtual_environment(work_ctx, venv_name="my_venv", **kwargs):
     logger.info("Creating a new virtual environment.")
     ensure_dependency("virtualenv")
     subprocess.run(["virtualenv", venv_name], check=True)
-    return {"success": True, "results": f"Successfully created virtual environment: {venv_name}."}
+    return {
+        "success": True,
+        "results": f"Successfully created virtual environment: {venv_name}.",
+    }
 
 
 @register_task
@@ -48,14 +51,20 @@ async def add_flask_dependencies_with_poetry(work_ctx, **kwargs):
     for dep in dependencies:
         ensure_dependency(dep, use_poetry=True)
     logger.info("Flask dependencies are set up using Poetry.")
-    return {"success": True, "results": "Successfully added Flask dependencies using Poetry."}
+    return {
+        "success": True,
+        "results": "Successfully added Flask dependencies using Poetry.",
+    }
 
 
 @register_task
 async def start_flask_app(work_ctx, **kwargs):
     logger.info("Starting the Flask app with Poetry.")
     subprocess.run(["poetry", "run", "flask", "run"], check=True)
-    return {"success": True, "results": "Successfully started the Flask app with Poetry."}
+    return {
+        "success": True,
+        "results": "Successfully started the Flask app with Poetry.",
+    }
 
 
 @register_task
@@ -67,7 +76,10 @@ async def create_flask_app_from_ai(work_ctx, filename="app.py", **kwargs):
     """
     await create_python(prompt=prompt, filepath=filename)
 
-    return {"success": True, "results": f"Successfully created Flask app in {filename} using AI model output."}
+    return {
+        "success": True,
+        "results": f"Successfully created Flask app in {filename} using AI model output.",
+    }
 
 
 async def main():

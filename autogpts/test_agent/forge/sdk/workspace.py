@@ -32,6 +32,7 @@ class Workspace(abc.ABC):
     def list(self, task_id: str, path: str) -> typing.List[str]:
         pass
 
+
 class LocalWorkspace(Workspace):
     def __init__(self, base_path: str):
         self.base_path = Path(base_path).resolve()

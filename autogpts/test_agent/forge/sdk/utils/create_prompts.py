@@ -4,14 +4,18 @@ from textwrap import dedent
 import anyio
 import inflection
 import loguru
+from icontract import require, ensure
 
+from forge.sdk.typetemp.template.typed_template import TypedTemplate
 from .create_primatives import create_list
 from .complete import achat, acreate
 from .models import get_model
 from .file_tools import extract_code, write
 
 
-async def create_domain_model_from_yaml(prompt, max_tokens=2500, model="gpt4", filepath=None):
+async def create_domain_model_from_yaml(
+    prompt, max_tokens=2500, model="gpt4", filepath=None
+):
     model = get_model(model)
 
     prompt = dedent(prompt)
@@ -101,7 +105,11 @@ async def create_domain_model_from_yaml(prompt, max_tokens=2500, model="gpt4", f
     """
     )
     return await __chat(
-        prompt=yaml_prompt, md_type="python", model=model, max_tokens=max_tokens, filepath=filepath
+        prompt=yaml_prompt,
+        md_type="python",
+        model=model,
+        max_tokens=max_tokens,
+        filepath=filepath,
     )
 
 
@@ -119,27 +127,38 @@ async def create_yaml(prompt, max_tokens=2500, model=None):
     GIVEN OUTPUT:
     """
     )
-    return await __create(prompt=yaml_prompt, md_type="python", model=model, max_tokens=max_tokens)
+    return await __create(
+        prompt=yaml_prompt, md_type="yaml", model=model, max_tokens=max_tokens
+    )
 
 
-async def create_python(prompt, max_tokens=2500, model=None, filepath=None, temperature=0.0):
+create_python_template = """
+Objective:
+Transform the given input (whether it's Python code, project documentation, or another form of structured data) 
+into PYTHON CODE that aligns with the Pythonic practices Luciano Ramalho would advocate for based on his 
+teachings in "Fluent Python". Ensure it's idiomatic, concise, and leverages Python's features effectively.
+Use the standard library and built-in functions unless the library is specified in the prompt.
+Use functional programming without classes. Do not use the keyword pass.
+
+You are generating answer code for a job interview question. The code should be production-ready and
+ready to be deployed to a production environment.
+
+```prompt
+{{prompt}}
+```
+
+"""
+
+
+async def create_python(
+    prompt, max_tokens=2500, model=None, filepath=None, temperature=0.7
+):
     model = get_model(model)
 
-    python_prompt = dedent(
-        f"""
-    Objective:
-    Transform the given input (whether it's Python code, project documentation, or another form of structured data) 
-    into PYTHON CODE that aligns with the Pythonic practices Luciano Ramalho would advocate for based on his 
-    teachings in "Fluent Python". Ensure it's idiomatic, concise, and leverages Python's features effectively.
+    create_prompt = TypedTemplate(source=create_python_template, prompt=prompt)()
 
-
-    GIVEN INPUT:
-    {prompt}
-
-    GIVEN OUTPUT:"""
-    )
     return await __create(
-        prompt=python_prompt,
+        prompt=create_prompt,
         filepath=filepath,
         md_type="python",
         model=model,
@@ -148,19 +167,28 @@ async def create_python(prompt, max_tokens=2500, model=None, filepath=None, temp
     )
 
 
+__create_template = """
+{{prompt}}
+```{{md_type}}
+# Here is your PerfectPythonProductionCode® AGI response.\n\n
+"""
+
+
 async def __create(
     prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0
 ):
     model = get_model(model)
 
-    prompt = dedent(
-        f"""{prompt}
-    ```{md_type}
-    """
-    )
+    create_prompt = TypedTemplate(
+        source=__create_template, prompt=prompt, md_type=md_type
+    )()
 
     result = await acreate(
-        prompt=prompt, model=model, stop=["```"], max_tokens=max_tokens, temperature=temperature
+        prompt=create_prompt,
+        model=model,
+        stop=["```"],
+        max_tokens=max_tokens,
+        temperature=temperature,
     )
     loguru.logger.info(f"Prompt: {result}")
     loguru.logger.info(f"Result: {result}")
@@ -172,16 +200,21 @@ async def __create(
 
 
 async def __chat(
-    prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0
+    prompt,
+    md_type="text",
+    max_tokens=2500,
+    filepath=None,
+    temperature=0.0,
+    model="gpt4",
+    **kwargs,
 ):
     model = get_model(model)
 
     prompt = dedent(
-        f"""{prompt}
-    ```{md_type}
-    """
+        f"""
+    {prompt}
+    ```{md_type}\n# Here is your PerfectPythonProductionCode® AGI response. Tests have been written to a different file:\n"""
     )
-
     result = await achat(prompt=prompt, model=model)
     loguru.logger.info(f"Prompt: {result}")
     loguru.logger.info(f"Result: {result}")
@@ -210,7 +243,9 @@ async def create_dict(model, prompt, **kwargs):
         return extract_dictionary("{" + result)
     except ValueError:
         loguru.logger.warning(f"Invalid dictionary generated: {result}")
-        fix_instructions = f"Please fix the dictionary {result} ```python\nperfect_dict = {{\n"
+        fix_instructions = (
+            f"Please fix the dictionary {result} ```python\nperfect_dict = {{\n"
+        )
         return await acreate(
             model=model,
             temperature=0.0,
@@ -220,9 +255,7 @@ async def create_dict(model, prompt, **kwargs):
 
 
 async def create_boolean(completion_function, prompt, **completion_kwargs):
-    completion_prompt = (
-        f"Based on the following text, provide a boolean response ('true' or 'false'): '{prompt}'"
-    )
+    completion_prompt = f"Based on the following text, provide a boolean response ('true' or 'false'): '{prompt}'"
 
     result = await completion_function(prompt=completion_prompt, **completion_kwargs)
     # Convert the result to lowercase and check against "true" and "false"
@@ -255,7 +288,9 @@ def extract_dictionary(input_str: str) -> dict:
 
 
 async def main():
-    prompt = "The system uses phone AI to talk to customers and answer their questions. "
+    prompt = (
+        "The system uses phone AI to talk to customers and answer their questions. "
+    )
     "If a human is needed to answer the question, the system will transfer the "
     "customer to a human. The system will also record the conversation and "
     "transcribe it into text. The system will also send a summary of the "
@@ -268,7 +303,8 @@ async def main():
     #                         "SummaryEmail"]
 
     domain_model_classes = await create_list(
-        prompt="Generate a list of multi word domain model class names from\n\n" + prompt,
+        prompt="Generate a list of multi word domain model class names from\n\n"
+        + prompt,
         min_len=5,
         max_len=7,
     )

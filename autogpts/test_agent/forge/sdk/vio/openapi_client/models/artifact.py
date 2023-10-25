@@ -21,18 +21,25 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr
 
+
 class Artifact(BaseModel):
     """
     An Artifact either created by or submitted to the agent.  # noqa: E501
     """
+
     artifact_id: StrictStr = Field(..., description="ID of the artifact.")
-    agent_created: StrictBool = Field(..., description="Whether the artifact has been created by the agent.")
+    agent_created: StrictBool = Field(
+        ..., description="Whether the artifact has been created by the agent."
+    )
     file_name: StrictStr = Field(..., description="Filename of the artifact.")
-    relative_path: Optional[StrictStr] = Field(None, description="Relative path of the artifact in the agent's workspace.")
+    relative_path: Optional[StrictStr] = Field(
+        None, description="Relative path of the artifact in the agent's workspace."
+    )
     __properties = ["artifact_id", "agent_created", "file_name", "relative_path"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -51,14 +58,11 @@ class Artifact(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # set to None if relative_path (nullable) is None
         # and __fields_set__ contains the field
         if self.relative_path is None and "relative_path" in self.__fields_set__:
-            _dict['relative_path'] = None
+            _dict["relative_path"] = None
 
         return _dict
 
@@ -71,12 +75,12 @@ class Artifact(BaseModel):
         if not isinstance(obj, dict):
             return Artifact.parse_obj(obj)
 
-        _obj = Artifact.parse_obj({
-            "artifact_id": obj.get("artifact_id"),
-            "agent_created": obj.get("agent_created"),
-            "file_name": obj.get("file_name"),
-            "relative_path": obj.get("relative_path")
-        })
+        _obj = Artifact.parse_obj(
+            {
+                "artifact_id": obj.get("artifact_id"),
+                "agent_created": obj.get("agent_created"),
+                "file_name": obj.get("file_name"),
+                "relative_path": obj.get("relative_path"),
+            }
+        )
         return _obj
-
-

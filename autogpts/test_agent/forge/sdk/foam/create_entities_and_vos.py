@@ -8,11 +8,7 @@ import yaml
 from icontract import ensure, require
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from foam.pickle_cache import auto_lru_cache
-from llm.complete import create as llm_create
-from py_module import PyModule
-from typetemp.environment.typed_environment import TypedEnvironment
-from utils.file_tools import get_project_root
+from forge.sdk.typetemp.environment.typed_environment import TypedEnvironment
 
 
 def setup_jinja_environment(template_folder_path: str) -> Environment:
@@ -98,7 +94,9 @@ def prepare_import_statements(spec: Dict) -> Dict[str, List[str]]:
         imports_for_entity = set()  # Use a set to avoid duplicates
 
         # Get business functions for the entity
-        bfs_for_entity = [bf for bf in spec.get("business_functions", []) if bf["entity"] == entity]
+        bfs_for_entity = [
+            bf for bf in spec.get("business_functions", []) if bf["entity"] == entity
+        ]
 
         for bf in bfs_for_entity:
             parameters = bf.get("parameters", [])
@@ -118,9 +116,9 @@ def prepare_import_statements(spec: Dict) -> Dict[str, List[str]]:
 
     for value_object in all_value_objects:
         value_object_imports = set()
-        properties = [p for p in spec.get("value_objects", []) if p["name"] == value_object][0].get(
-            "properties", []
-        )
+        properties = [
+            p for p in spec.get("value_objects", []) if p["name"] == value_object
+        ][0].get("properties", [])
         for prop in properties:
             if "List" in prop["type"]:
                 value_object_imports.add("from typing import List")
@@ -131,8 +129,12 @@ def prepare_import_statements(spec: Dict) -> Dict[str, List[str]]:
 
 
 @require(lambda spec: spec is not None and len(spec) > 0, "yaml_path must not be empty")
-@ensure(lambda result: all(code for code in result), "All rendered code must be non-empty")
-def generate_entities_and_functions(spec: dict, import_statements: dict, value_objects: dict):
+@ensure(
+    lambda result: all(code for code in result), "All rendered code must be non-empty"
+)
+def generate_entities_and_functions(
+    spec: dict, import_statements: dict, value_objects: dict
+):
     template = env.get_template("entity_with_business_function_template.jinja")
 
     # Parse each Entity and its associated Business Functions
@@ -141,7 +143,9 @@ def generate_entities_and_functions(spec: dict, import_statements: dict, value_o
         entity_definition = entity.get("definition")
 
         business_functions_for_entity = [
-            bf for bf in spec.get("business_functions", []) if bf.get("entity") == entity_name
+            bf
+            for bf in spec.get("business_functions", [])
+            if bf.get("entity") == entity_name
         ]
 
         context = {
@@ -179,7 +183,9 @@ def generate_value_objects(spec, import_statements: dict) -> dict:
 
         code = template.render(context)
 
-        module = PyModule(f"./value_objects/{inflection.underscore(value_object_name)}.py", code)
+        module = PyModule(
+            f"./value_objects/{inflection.underscore(value_object_name)}.py", code
+        )
         module.save()
 
         rendered_classes[value_object_name] = code
@@ -198,7 +204,9 @@ def main(spec: dict):
 
         value_objects = generate_value_objects(spec, import_statements)
 
-        entities = generate_entities_and_functions(spec, import_statements, value_objects)
+        entities = generate_entities_and_functions(
+            spec, import_statements, value_objects
+        )
 
         print("Code generation successful.", value_objects, entities)
     except Exception as e:

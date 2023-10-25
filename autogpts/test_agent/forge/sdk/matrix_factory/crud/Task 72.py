@@ -3,6 +3,7 @@ import os
 import sys
 import hashlib
 
+
 # Define a function to check the user's password
 def check_password(password):
     # Hash the password using SHA-256
@@ -12,6 +13,7 @@ def check_password(password):
         print("Access granted")
     else:
         print("Access denied")
+
 
 # Get the stored password from a secure location
 stored_password = os.environ.get("PASSWORD")

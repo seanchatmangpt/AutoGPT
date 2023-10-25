@@ -3,6 +3,7 @@ import os
 import sys
 import logging
 
+
 # Set up database migration system
 class DatabaseMigration:
     def __init__(self, database):
@@ -16,6 +17,7 @@ class DatabaseMigration:
         for migration in self.migrations:
             migration.run(self.database)
 
+
 # Define migration class
 class Migration:
     def __init__(self, name):
@@ -24,6 +26,7 @@ class Migration:
     def run(self, database):
         # Code to run migration on database
         pass
+
 
 # Create database migration system instance
 migration_system = DatabaseMigration(database)

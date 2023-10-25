@@ -15,19 +15,19 @@ calc = Calculator()
 
 # Addition
 result = calc.add(5, 10)
-print(result) # Output: 15
+print(result)  # Output: 15
 
 # Subtraction
 result = calc.subtract(10, 5)
-print(result) # Output: 5
+print(result)  # Output: 5
 
 # Multiplication
 result = calc.multiply(5, 10)
-print(result) # Output: 50
+print(result)  # Output: 50
 
 # Division
 result = calc.divide(10, 5)
-print(result) # Output: 2
+print(result)  # Output: 2
 
 # The calculator also has a memory feature that allows you to store a number and use it in subsequent calculations.
 
@@ -36,7 +36,7 @@ calc.store(10)
 
 # To use the number in memory, simply omit one of the arguments in the calculation method.
 result = calc.add(5)
-print(result) # Output: 15 (10 + 5)
+print(result)  # Output: 15 (10 + 5)
 
 # You can also clear the memory by using the "clear" method.
 calc.clear()

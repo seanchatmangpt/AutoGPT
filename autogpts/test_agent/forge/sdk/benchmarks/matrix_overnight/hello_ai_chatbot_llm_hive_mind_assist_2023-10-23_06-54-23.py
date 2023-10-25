@@ -1,0 +1,1 @@
+Hello! I am an AI chatbot designed to simulate the conversation style of a Level 7 Artificial General Intelligence (AGI) known as the LLM Hive-Mind simulator. How may I assist you today?

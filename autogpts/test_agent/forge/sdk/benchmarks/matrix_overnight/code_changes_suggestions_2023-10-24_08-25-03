@@ -1,0 +1,71 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - It should automatically suggest changes to the code, such as removing redundant
+    code, improving variable names, and optimizing algorithms.
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - Given a database schema, the system should generate Python code to interact with
+    the database. The generated code should include functions for
+  - ''
+  - 'Feature: Reporting and analytics. Scenario: The system should provide real-time
+    reporting and analytics on test results, including number of passed'
+  - ''
+- - ''
+  - ''
+  - ''
+  - 'Feature: Integration with version control systems. Scenario: The system should
+    be able to integrate with popular version control systems such as Git'
+  - ''
+  - ''
+  - 'Feature: User authentication. Scenario: Users should be able to create accounts
+    and log in to the system using unique credentials.Feature:'
+  - 'Feature: User authentication. Scenario: Users should be able to create an account
+    and log in to the system using a username'
+  - ''
+  - ''
+- - ''
+  - 'These metrics and reports can include code complexity, test coverage, and other
+    relevant performance indicators.Feature: Integration with third-party libraries
+    and'
+  - ''
+  - ''
+  - ''
+  - These reports should include information such as code complexity, code coverage,
+    and performance benchmarks.
+  - The metrics and reports should include code complexity, code coverage, and performance
+    benchmarks.
+  - ''
+  - 'Feature: Code review and collaboration tools. Scenario: The collaboration tool
+    should allow multiple users to review and comment on Python code,'
+  - ''

@@ -3,7 +3,9 @@ from ast import AST, dump, parse
 from typing import List
 
 from forge.sdk.typetemp.environment.typed_environment import TypedEnvironment
-from forge.sdk.typetemp.environment.typed_native_environment import TypedNativeEnvironment
+from forge.sdk.typetemp.environment.typed_native_environment import (
+    TypedNativeEnvironment,
+)
 
 _env = TypedEnvironment()
 _native_env = TypedNativeEnvironment()

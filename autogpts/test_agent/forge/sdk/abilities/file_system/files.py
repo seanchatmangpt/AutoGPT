@@ -7,7 +7,12 @@ from ..registry import ability, AbilityParameter
     name="list_files",
     description="List files in a directory",
     parameters=[
-        AbilityParameter(name="path", description="Path to the directory", type="string", required=True)
+        AbilityParameter(
+            name="path",
+            description="Path to the directory",
+            type="string",
+            required=True,
+        )
     ],
     output_type="list[str]",
 )
@@ -22,8 +27,18 @@ async def list_files(agent, task_id: str, path: str) -> List[str]:
     name="write_file",
     description="Write data to a file",
     parameters=[
-        AbilityParameter(name="file_path", description="Path to the file", type="string", required=True),
-        AbilityParameter(name="data", description="Data to write to the file", type="bytes", required=True),
+        AbilityParameter(
+            name="file_path",
+            description="Path to the file",
+            type="string",
+            required=True,
+        ),
+        AbilityParameter(
+            name="data",
+            description="Data to write to the file",
+            type="bytes",
+            required=True,
+        ),
     ],
     output_type="None",
 )
@@ -47,7 +62,12 @@ async def write_file(agent, task_id: str, file_path: str, data: bytes):
     name="read_file",
     description="Read data from a file",
     parameters=[
-        AbilityParameter(name="file_path", description="Path to the file", type="string", required=True),
+        AbilityParameter(
+            name="file_path",
+            description="Path to the file",
+            type="string",
+            required=True,
+        ),
     ],
     output_type="bytes",
 )

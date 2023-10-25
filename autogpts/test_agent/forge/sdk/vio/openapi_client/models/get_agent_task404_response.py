@@ -18,18 +18,22 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
+
 
 class GetAgentTask404Response(BaseModel):
     """
     GetAgentTask404Response
     """
-    message: StrictStr = Field(..., description="Message stating the entity was not found")
+
+    message: StrictStr = Field(
+        ..., description="Message stating the entity was not found"
+    )
     __properties = ["message"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,10 +52,7 @@ class GetAgentTask404Response(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         return _dict
 
     @classmethod
@@ -63,9 +64,5 @@ class GetAgentTask404Response(BaseModel):
         if not isinstance(obj, dict):
             return GetAgentTask404Response.parse_obj(obj)
 
-        _obj = GetAgentTask404Response.parse_obj({
-            "message": obj.get("message")
-        })
+        _obj = GetAgentTask404Response.parse_obj({"message": obj.get("message")})
         return _obj
-
-

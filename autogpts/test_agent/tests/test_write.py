@@ -64,9 +64,10 @@ async def test_write_file(mock_agent, mock_workspace_write, mock_db_create_artif
 
     result = await write_file(mock_agent, task_id, file_path, data)
 
-
     # Check if workspace.write was called with the correct arguments
-    mock_agent.workspace.write.assert_called_once_with(task_id=task_id, path=file_path, data=data)
+    mock_agent.workspace.write.assert_called_once_with(
+        task_id=task_id, path=file_path, data=data
+    )
 
     # Check if db.create_artifact was called with the correct arguments
     mock_agent.db.create_artifact.assert_called_once_with(
@@ -101,5 +102,3 @@ async def test_read_file(mock_agent, mock_workspace_read):
 
     # Check if the actual_result matches the expected_result
     assert actual_result == expected_result
-
-

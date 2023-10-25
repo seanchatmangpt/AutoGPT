@@ -1,0 +1,68 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - The generated code should be properly structured and follow best practices for
+    secure coding.
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - The reports should include code quality metrics, test coverage, and performance
+    benchmarks. The metrics and reports should be easily accessible and share
+  - ''
+  - These reports should include information such as execution time, memory usage,
+    and any potential bottlenecks in the code. The system
+  - ''
+  - These reports should include information on code complexity, test coverage, and
+    performance benchmarks.
+  - ''
+  - ''
+  - ''
+  - 'These metrics and reports should include code complexity, execution time, and
+    memory usage.Feature: Integrated development environment (IDE) support.'
+- - ''
+  - 'Feature: Task assignment and tracking. Scenario: The system should allow managers
+    to assign tasks to team members and track their progress'
+  - ''
+  - ''
+  - ''
+  - 'Feature: Integration with project management tools. Scenario: The system should
+    be able to integrate with popular project management tools such as J'
+  - ''
+  - 'Feature: Task scheduling. Scenario: The Task Scheduler should be able to prioritize
+    and schedule tasks based on their due dates and dependencies'
+  - ''
+  - ''

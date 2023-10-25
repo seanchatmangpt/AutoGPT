@@ -1,3 +1,4 @@
+import random
 from itertools import cycle
 
 gpt_4_models = [
@@ -50,7 +51,11 @@ instruct_models = [
 ]
 
 # 4k max tokens
-best_models = ["gpt-3.5-turbo-instruct", "gpt-3.5-turbo-instruct-0914", "text-davinci-003"]
+best_models = [
+    "gpt-3.5-turbo-instruct",
+    "gpt-3.5-turbo-instruct-0914",
+    "text-davinci-003",
+]
 
 # 2k max tokens
 ok_models = [
@@ -133,6 +138,8 @@ def round_robin_ok_models():
 
 def round_robin_gpt_4_models():
     models = cycle(gpt_4_models)
+
+    random.shuffle(gpt_4_models)
 
     while True:
         yield next(models)

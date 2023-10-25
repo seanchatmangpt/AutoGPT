@@ -1,0 +1,70 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - It should also allow users to define their own features and scenarios.
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - It should also suggest changes to improve the code's readability and maintainability.
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Given a database schema:
+
+    - Tables: Users, Products, Orders
+
+    - Columns: Users (id, name, email'
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'These reports should include but not be limited to: 1. Code complexity 2. Code
+    coverage 3. Execution time'
+  - ''
+  - These reports should include information such as execution time, memory usage,
+    and CPU usage.
+  - ''
+  - These reports should include information on performance bottlenecks, memory usage,
+    and other relevant metrics for optimizing the performance of the code
+  - ''
+  - ''
+  - ''
+  - ''
+- - 'Feature: Integrate with external APIs. Scenario: The system should be able to
+    connect and communicate with external APIs to retrieve'
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Feature: Automated testing. Scenario: The system should automatically run unit
+    tests and integration tests on the codebase to ensure functionality'
+  - ''
+  - ''
+  - 'Feature: User authentication. Scenario: Users should be able to create accounts
+    and log in to the system to access their tasks and'
+  - ''

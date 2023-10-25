@@ -204,11 +204,13 @@ def generate_artifact(file: str, relative_path: str) -> Artifact:
         artifact_id=create_unique_id(),
         agent_created=True,
         relative_path=relative_path,
-        file_name=file
+        file_name=file,
     )
 
 
-def generate_step(name: str, input: str, status: Status, is_last: bool, additional_input: dict) -> Step:
+def generate_step(
+    name: str, input: str, status: Status, is_last: bool, additional_input: dict
+) -> Step:
     return Step(
         created_at=datetime.utcnow(),
         modified_at=datetime.utcnow(),
@@ -218,11 +220,13 @@ def generate_step(name: str, input: str, status: Status, is_last: bool, addition
         status=status,
         is_last=is_last,
         input=input,
-        additional_input=additional_input
+        additional_input=additional_input,
     )
 
 
-def generate_task(input: str, steps: List[Step]) -> Task:
+def generate_task(
+    input: str, steps: List[Step], artifacts: List[Artifact], additional_input: dict
+) -> Task:
     task_id = create_unique_id()
     for step in steps:
         step.task_id = task_id
@@ -232,18 +236,20 @@ def generate_task(input: str, steps: List[Step]) -> Task:
         modified_at=datetime.utcnow(),
         task_id=task_id,
         input=input,
-        artifacts=[generate_artifact("webpage.html", "webpage/"), generate_artifact("prd.txt", "prd/")],
-        additional_input={"openai_key": "your_openai_key_here"}
+        artifacts=artifacts,
+        additional_input=additional_input,
     )
 
 
-def generate_steps_list_response(steps: List[Step], pagination: Pagination) -> TaskStepsListResponse:
-    return TaskStepsListResponse(
-        steps=steps,
-        pagination=pagination
-    )
+def generate_steps_list_response(
+    steps: List[Step], pagination: Pagination
+) -> TaskStepsListResponse:
+    return TaskStepsListResponse(steps=steps, pagination=pagination)
 
-def generate_step(name: str, input: str, status: Status, is_last: bool, additional_input: dict) -> Step:
+
+def generate_step(
+    name: str, input: str, status: Status, is_last: bool, additional_input: dict
+) -> Step:
     return Step(
         created_at=datetime.utcnow(),
         modified_at=datetime.utcnow(),
@@ -253,23 +259,23 @@ def generate_step(name: str, input: str, status: Status, is_last: bool, addition
         status=status,
         is_last=is_last,
         input=input,
-        additional_input=additional_input
+        additional_input=additional_input,
     )
 
+
 def main():
-    # Step 1: Download Webpage
     download_step = generate_step(
         name="Download Webpage",
         input="Download the target webpage.",
         status=Status.created,
         is_last=False,
         additional_input={
-            'url': 'https://example.com',
-            'download_format': 'html',
-            'timeout': 30,
-            'user_agent': 'my_agent',
-            'retry_count': 3
-        }
+            "url": "https://example.com",
+            "download_format": "html",
+            "timeout": 30,
+            "user_agent": "my_agent",
+            "retry_count": 3,
+        },
     )
 
     # Step 2: Extract Text from Webpage
@@ -279,12 +285,12 @@ def main():
         status=Status.created,
         is_last=False,
         additional_input={
-            'selector': 'body p',
-            'extraction_algorithm': 'XPath',
-            'attribute': 'innerText',
-            'min_length': 100,
-            'max_length': 2000
-        }
+            "selector": "body p",
+            "extraction_algorithm": "XPath",
+            "attribute": "innerText",
+            "min_length": 100,
+            "max_length": 2000,
+        },
     )
 
     # Step 3: Preprocess Text
@@ -294,12 +300,12 @@ def main():
         status=Status.created,
         is_last=False,
         additional_input={
-            'stopwords': ['and', 'or', 'but'],
-            'tokenize': True,
-            'lowercase': True,
-            'stemming': False,
-            'lemmatization': True
-        }
+            "stopwords": ["and", "or", "but"],
+            "tokenize": True,
+            "lowercase": True,
+            "stemming": False,
+            "lemmatization": True,
+        },
     )
 
     # Step 4: Analyze with OpenAI
@@ -309,12 +315,12 @@ def main():
         status=Status.created,
         is_last=False,
         additional_input={
-            'analysis_model': 'GPT-3',
-            'parameters': {'prompt': 'Summarize the content:', 'max_tokens': 100},
-            'response_format': 'json',
-            'confidence_threshold': 0.7,
-            'language': 'en'
-        }
+            "analysis_model": "GPT-3",
+            "parameters": {"prompt": "Summarize the content:", "max_tokens": 100},
+            "response_format": "json",
+            "confidence_threshold": 0.7,
+            "language": "en",
+        },
     )
 
     # Step 5: Generate PRD (Product Requirement Document)
@@ -324,13 +330,13 @@ def main():
         status=Status.created,
         is_last=False,
         additional_input={
-            'template': 'prd_template.jinja',
-            'sections': ['Introduction', 'Features', 'Requirements'],
-            'variables': {'product_name': 'AwesomeApp', 'version': '1.0'},
-            'footer': 'Confidential',
-            'header': 'Product Requirement Document',
-            'appendix': 'Additional Resources'
-        }
+            "template": "prd_template.jinja",
+            "sections": ["Introduction", "Features", "Requirements"],
+            "variables": {"product_name": "AwesomeApp", "version": "1.0"},
+            "footer": "Confidential",
+            "header": "Product Requirement Document",
+            "appendix": "Additional Resources",
+        },
     )
 
     # Step 6: Save PRD
@@ -340,12 +346,12 @@ def main():
         status=Status.created,
         is_last=False,
         additional_input={
-            'save_path': '/path/to/save',
-            'file_format': 'pdf',
-            'compression': 'zip',
-            'encryption': 'AES-256',
-            'backup': True
-        }
+            "save_path": "/path/to/save",
+            "file_format": "pdf",
+            "compression": "zip",
+            "encryption": "AES-256",
+            "backup": True,
+        },
     )
 
     # Step 7: Validate PRD
@@ -355,36 +361,43 @@ def main():
         status=Status.created,
         is_last=True,
         additional_input={
-            'validation_criteria': ['Must have Introduction', 'Must have Features', 'Must have Requirements'],
-            'validator': 'manual_review',
-            'deadline': '2023-11-01',
-            'notification_emails': ['team@example.com'],
-            'revisions_allowed': 2
-        }
+            "validation_criteria": [
+                "Must have Introduction",
+                "Must have Features",
+                "Must have Requirements",
+            ],
+            "validator": "manual_review",
+            "deadline": "2023-11-01",
+            "notification_emails": ["team@example.com"],
+            "revisions_allowed": 2,
+        },
     )
 
     # Create Pagination instance
     pagination_instance = Pagination(
-        total_items=7,
-        total_pages=1,
-        current_page=1,
-        page_size=10
+        total_items=7, total_pages=1, current_page=1, page_size=10
     )
 
     # Generate TaskStepsListResponse instance
-    response_instance = generate_steps_list_response(steps=[
-        download_step,
-        extract_text_step,
-        preprocess_text_step,
-        analysis_step,
-        generate_prd_step,
-        save_prd_step,
-        validate_prd_step
-    ], pagination=pagination_instance)
+    response_instance = generate_steps_list_response(
+        steps=[
+            download_step,
+            extract_text_step,
+            preprocess_text_step,
+            analysis_step,
+            generate_prd_step,
+            save_prd_step,
+            validate_prd_step,
+        ],
+        pagination=pagination_instance,
+    )
+    # Step 1: Download Webpage
 
     # Now, response_instance contains your enhanced mock data with additional input for generating a PRD.
 
-    print("Generated TaskStepsListResponse:", response_instance.to_yaml("prd_steps.yaml"))
+    print(
+        "Generated TaskStepsListResponse:", response_instance.to_yaml("prd_steps.yaml")
+    )
 
     # Output the response to verify it has been created as expected
     # Now, response_instance contains your mock data
@@ -392,4 +405,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -28,17 +28,16 @@ from agent.openapi_client.models.artifact import Artifact
 from agent.openapi_client.models.step import Step
 from agent.openapi_client.models.step_request_body import StepRequestBody
 from agent.openapi_client.models.task import Task
-from agent.openapi_client.models.task_artifacts_list_response import TaskArtifactsListResponse
+from agent.openapi_client.models.task_artifacts_list_response import (
+    TaskArtifactsListResponse,
+)
 from agent.openapi_client.models.task_list_response import TaskListResponse
 from agent.openapi_client.models.task_request_body import TaskRequestBody
 from agent.openapi_client.models.task_steps_list_response import TaskStepsListResponse
 
 from agent.openapi_client.api_client import ApiClient
 from agent.openapi_client.api_response import ApiResponse
-from agent.openapi_client.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
-)
+from agent.openapi_client.exceptions import ApiTypeError, ApiValueError  # noqa: F401
 
 
 class AgentApi:
@@ -54,15 +53,27 @@ class AgentApi:
         self.api_client = api_client
 
     @overload
-    async def create_agent_task(self, task_request_body : Optional[TaskRequestBody] = None, **kwargs) -> Task:  # noqa: E501
+    async def create_agent_task(
+        self, task_request_body: Optional[TaskRequestBody] = None, **kwargs
+    ) -> Task:  # noqa: E501
         ...
 
     @overload
-    def create_agent_task(self, task_request_body : Optional[TaskRequestBody] = None, async_req: Optional[bool]=True, **kwargs) -> Task:  # noqa: E501
+    def create_agent_task(
+        self,
+        task_request_body: Optional[TaskRequestBody] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> Task:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_agent_task(self, task_request_body : Optional[TaskRequestBody] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
+    def create_agent_task(
+        self,
+        task_request_body: Optional[TaskRequestBody] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[Task, Awaitable[Task]]:  # noqa: E501
         """Creates a task for the agent.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -84,16 +95,20 @@ class AgentApi:
                  returns the request thread.
         :rtype: Task
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the create_agent_task_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.create_agent_task_with_http_info(task_request_body, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.create_agent_task_with_http_info(
+            task_request_body, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def create_agent_task_with_http_info(self, task_request_body : Optional[TaskRequestBody] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_agent_task_with_http_info(
+        self, task_request_body: Optional[TaskRequestBody] = None, **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Creates a task for the agent.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -131,30 +146,28 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_request_body'
-        ]
+        _all_params = ["task_request_body"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method create_agent_task" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
@@ -164,36 +177,39 @@ class AgentApi:
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['task_request_body'] is not None:
-            _body_params = _params['task_request_body']
+        if _params["task_request_body"] is not None:
+            _body_params = _params["task_request_body"]
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["application/json"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Task",
-            '422': "object",
+            "200": "Task",
+            "422": "object",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks', 'POST',
+            "/ap/v1/agent/tasks",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -202,23 +218,41 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def download_agent_task_artifact(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], artifact_id : Annotated[StrictStr, Field(..., description="ID of the artifact")], **kwargs) -> bytearray:  # noqa: E501
+    async def download_agent_task_artifact(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        artifact_id: Annotated[StrictStr, Field(..., description="ID of the artifact")],
+        **kwargs,
+    ) -> bytearray:  # noqa: E501
         ...
 
     @overload
-    def download_agent_task_artifact(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], artifact_id : Annotated[StrictStr, Field(..., description="ID of the artifact")], async_req: Optional[bool]=True, **kwargs) -> bytearray:  # noqa: E501
+    def download_agent_task_artifact(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        artifact_id: Annotated[StrictStr, Field(..., description="ID of the artifact")],
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> bytearray:  # noqa: E501
         ...
 
     @validate_arguments
-    def download_agent_task_artifact(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], artifact_id : Annotated[StrictStr, Field(..., description="ID of the artifact")], async_req: Optional[bool]=None, **kwargs) -> Union[bytearray, Awaitable[bytearray]]:  # noqa: E501
+    def download_agent_task_artifact(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        artifact_id: Annotated[StrictStr, Field(..., description="ID of the artifact")],
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[bytearray, Awaitable[bytearray]]:  # noqa: E501
         """Download a specified artifact.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -242,16 +276,23 @@ class AgentApi:
                  returns the request thread.
         :rtype: bytearray
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the download_agent_task_artifact_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.download_agent_task_artifact_with_http_info(task_id, artifact_id, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.download_agent_task_artifact_with_http_info(
+            task_id, artifact_id, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def download_agent_task_artifact_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], artifact_id : Annotated[StrictStr, Field(..., description="ID of the artifact")], **kwargs) -> ApiResponse:  # noqa: E501
+    def download_agent_task_artifact_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        artifact_id: Annotated[StrictStr, Field(..., description="ID of the artifact")],
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """Download a specified artifact.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -291,66 +332,64 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'artifact_id'
-        ]
+        _all_params = ["task_id", "artifact_id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method download_agent_task_artifact" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
-        if _params['artifact_id']:
-            _path_params['artifact_id'] = _params['artifact_id']
-
+        if _params["artifact_id"]:
+            _path_params["artifact_id"] = _params["artifact_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/octet-stream', 'application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/octet-stream", "application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "bytearray",
-            '404': "GetAgentTask404Response",
+            "200": "bytearray",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/artifacts/{artifact_id}', 'GET',
+            "/ap/v1/agent/tasks/{task_id}/artifacts/{artifact_id}",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -359,23 +398,41 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def execute_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_request_body : Optional[StepRequestBody] = None, **kwargs) -> Step:  # noqa: E501
+    async def execute_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_request_body: Optional[StepRequestBody] = None,
+        **kwargs,
+    ) -> Step:  # noqa: E501
         ...
 
     @overload
-    def execute_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_request_body : Optional[StepRequestBody] = None, async_req: Optional[bool]=True, **kwargs) -> Step:  # noqa: E501
+    def execute_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_request_body: Optional[StepRequestBody] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> Step:  # noqa: E501
         ...
 
     @validate_arguments
-    def execute_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_request_body : Optional[StepRequestBody] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Step, Awaitable[Step]]:  # noqa: E501
+    def execute_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_request_body: Optional[StepRequestBody] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[Step, Awaitable[Step]]:  # noqa: E501
         """Execute a step in the specified agent task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -399,16 +456,23 @@ class AgentApi:
                  returns the request thread.
         :rtype: Step
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the execute_agent_task_step_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.execute_agent_task_step_with_http_info(task_id, step_request_body, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.execute_agent_task_step_with_http_info(
+            task_id, step_request_body, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def execute_agent_task_step_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_request_body : Optional[StepRequestBody] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def execute_agent_task_step_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_request_body: Optional[StepRequestBody] = None,
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """Execute a step in the specified agent task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -448,74 +512,73 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'step_request_body'
-        ]
+        _all_params = ["task_id", "step_request_body"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method execute_agent_task_step" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
-
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['step_request_body'] is not None:
-            _body_params = _params['step_request_body']
+        if _params["step_request_body"] is not None:
+            _body_params = _params["step_request_body"]
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["application/json"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Step",
-            '404': "GetAgentTask404Response",
-            '422': "object",
+            "200": "Step",
+            "404": "GetAgentTask404Response",
+            "422": "object",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/steps', 'POST',
+            "/ap/v1/agent/tasks/{task_id}/steps",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -524,23 +587,38 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def get_agent_task(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], **kwargs) -> Task:  # noqa: E501
+    async def get_agent_task(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        **kwargs,
+    ) -> Task:  # noqa: E501
         ...
 
     @overload
-    def get_agent_task(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], async_req: Optional[bool]=True, **kwargs) -> Task:  # noqa: E501
+    def get_agent_task(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> Task:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_agent_task(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
+    def get_agent_task(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[Task, Awaitable[Task]]:  # noqa: E501
         """Get details about a specified agent task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -562,16 +640,20 @@ class AgentApi:
                  returns the request thread.
         :rtype: Task
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the get_agent_task_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
+            kwargs["async_req"] = async_req
         return self.get_agent_task_with_http_info(task_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_agent_task_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_agent_task_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """Get details about a specified agent task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -609,62 +691,61 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id'
-        ]
+        _all_params = ["task_id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_agent_task" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
-
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Task",
-            '404': "GetAgentTask404Response",
+            "200": "Task",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}', 'GET',
+            "/ap/v1/agent/tasks/{task_id}",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -673,23 +754,41 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def get_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_id : Annotated[StrictStr, Field(..., description="ID of the step")], **kwargs) -> Step:  # noqa: E501
+    async def get_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_id: Annotated[StrictStr, Field(..., description="ID of the step")],
+        **kwargs,
+    ) -> Step:  # noqa: E501
         ...
 
     @overload
-    def get_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_id : Annotated[StrictStr, Field(..., description="ID of the step")], async_req: Optional[bool]=True, **kwargs) -> Step:  # noqa: E501
+    def get_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_id: Annotated[StrictStr, Field(..., description="ID of the step")],
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> Step:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_agent_task_step(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_id : Annotated[StrictStr, Field(..., description="ID of the step")], async_req: Optional[bool]=None, **kwargs) -> Union[Step, Awaitable[Step]]:  # noqa: E501
+    def get_agent_task_step(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_id: Annotated[StrictStr, Field(..., description="ID of the step")],
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[Step, Awaitable[Step]]:  # noqa: E501
         """Get details about a specified task step.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -713,16 +812,23 @@ class AgentApi:
                  returns the request thread.
         :rtype: Step
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the get_agent_task_step_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.get_agent_task_step_with_http_info(task_id, step_id, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.get_agent_task_step_with_http_info(
+            task_id, step_id, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def get_agent_task_step_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], step_id : Annotated[StrictStr, Field(..., description="ID of the step")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_agent_task_step_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        step_id: Annotated[StrictStr, Field(..., description="ID of the step")],
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """Get details about a specified task step.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -762,66 +868,64 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'step_id'
-        ]
+        _all_params = ["task_id", "step_id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_agent_task_step" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
-        if _params['step_id']:
-            _path_params['step_id'] = _params['step_id']
-
+        if _params["step_id"]:
+            _path_params["step_id"] = _params["step_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Step",
-            '404': "GetAgentTask404Response",
+            "200": "Step",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/steps/{step_id}', 'GET',
+            "/ap/v1/agent/tasks/{task_id}/steps/{step_id}",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -830,23 +934,61 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def list_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> TaskArtifactsListResponse:  # noqa: E501
+    async def list_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> TaskArtifactsListResponse:  # noqa: E501
         ...
 
     @overload
-    def list_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=True, **kwargs) -> TaskArtifactsListResponse:  # noqa: E501
+    def list_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> TaskArtifactsListResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskArtifactsListResponse, Awaitable[TaskArtifactsListResponse]]:  # noqa: E501
+    def list_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[
+        TaskArtifactsListResponse, Awaitable[TaskArtifactsListResponse]
+    ]:  # noqa: E501
         """List all artifacts that have been created for the given task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -872,16 +1014,29 @@ class AgentApi:
                  returns the request thread.
         :rtype: TaskArtifactsListResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the list_agent_task_artifacts_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.list_agent_task_artifacts_with_http_info(task_id, current_page, page_size, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.list_agent_task_artifacts_with_http_info(
+            task_id, current_page, page_size, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def list_agent_task_artifacts_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_agent_task_artifacts_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """List all artifacts that have been created for the given task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -923,70 +1078,67 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'current_page',
-            'page_size'
-        ]
+        _all_params = ["task_id", "current_page", "page_size"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method list_agent_task_artifacts" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
-
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
         # process the query parameters
         _query_params = []
-        if _params.get('current_page') is not None:  # noqa: E501
-            _query_params.append(('current_page', _params['current_page']))
+        if _params.get("current_page") is not None:  # noqa: E501
+            _query_params.append(("current_page", _params["current_page"]))
 
-        if _params.get('page_size') is not None:  # noqa: E501
-            _query_params.append(('page_size', _params['page_size']))
+        if _params.get("page_size") is not None:  # noqa: E501
+            _query_params.append(("page_size", _params["page_size"]))
 
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "TaskArtifactsListResponse",
-            '404': "GetAgentTask404Response",
+            "200": "TaskArtifactsListResponse",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/artifacts', 'GET',
+            "/ap/v1/agent/tasks/{task_id}/artifacts",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -995,23 +1147,59 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def list_agent_task_steps(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task.")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> TaskStepsListResponse:  # noqa: E501
+    async def list_agent_task_steps(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task.")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> TaskStepsListResponse:  # noqa: E501
         ...
 
     @overload
-    def list_agent_task_steps(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task.")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=True, **kwargs) -> TaskStepsListResponse:  # noqa: E501
+    def list_agent_task_steps(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task.")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> TaskStepsListResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_agent_task_steps(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task.")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskStepsListResponse, Awaitable[TaskStepsListResponse]]:  # noqa: E501
+    def list_agent_task_steps(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task.")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[TaskStepsListResponse, Awaitable[TaskStepsListResponse]]:  # noqa: E501
         """List all steps for the specified task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1037,16 +1225,29 @@ class AgentApi:
                  returns the request thread.
         :rtype: TaskStepsListResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the list_agent_task_steps_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.list_agent_task_steps_with_http_info(task_id, current_page, page_size, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.list_agent_task_steps_with_http_info(
+            task_id, current_page, page_size, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def list_agent_task_steps_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task.")], current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_agent_task_steps_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task.")],
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """List all steps for the specified task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1088,70 +1289,67 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'current_page',
-            'page_size'
-        ]
+        _all_params = ["task_id", "current_page", "page_size"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method list_agent_task_steps" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
-
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
         # process the query parameters
         _query_params = []
-        if _params.get('current_page') is not None:  # noqa: E501
-            _query_params.append(('current_page', _params['current_page']))
+        if _params.get("current_page") is not None:  # noqa: E501
+            _query_params.append(("current_page", _params["current_page"]))
 
-        if _params.get('page_size') is not None:  # noqa: E501
-            _query_params.append(('page_size', _params['page_size']))
+        if _params.get("page_size") is not None:  # noqa: E501
+            _query_params.append(("page_size", _params["page_size"]))
 
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "TaskStepsListResponse",
-            '404': "GetAgentTask404Response",
+            "200": "TaskStepsListResponse",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/steps', 'GET',
+            "/ap/v1/agent/tasks/{task_id}/steps",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -1160,23 +1358,56 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def list_agent_tasks(self, current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> TaskListResponse:  # noqa: E501
+    async def list_agent_tasks(
+        self,
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> TaskListResponse:  # noqa: E501
         ...
 
     @overload
-    def list_agent_tasks(self, current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=True, **kwargs) -> TaskListResponse:  # noqa: E501
+    def list_agent_tasks(
+        self,
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> TaskListResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_agent_tasks(self, current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskListResponse, Awaitable[TaskListResponse]]:  # noqa: E501
+    def list_agent_tasks(
+        self,
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[TaskListResponse, Awaitable[TaskListResponse]]:  # noqa: E501
         """List all tasks that have been created for the agent.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1200,16 +1431,28 @@ class AgentApi:
                  returns the request thread.
         :rtype: TaskListResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the list_agent_tasks_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.list_agent_tasks_with_http_info(current_page, page_size, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.list_agent_tasks_with_http_info(
+            current_page, page_size, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def list_agent_tasks_with_http_info(self, current_page : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Page number")] = None, page_size : Annotated[Optional[conint(strict=True, ge=1)], Field(description="Number of items per page")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_agent_tasks_with_http_info(
+        self,
+        current_page: Annotated[
+            Optional[conint(strict=True, ge=1)], Field(description="Page number")
+        ] = None,
+        page_size: Annotated[
+            Optional[conint(strict=True, ge=1)],
+            Field(description="Number of items per page"),
+        ] = None,
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """List all tasks that have been created for the agent.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1249,31 +1492,28 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'current_page',
-            'page_size'
-        ]
+        _all_params = ["current_page", "page_size"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method list_agent_tasks" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
@@ -1282,32 +1522,34 @@ class AgentApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('current_page') is not None:  # noqa: E501
-            _query_params.append(('current_page', _params['current_page']))
+        if _params.get("current_page") is not None:  # noqa: E501
+            _query_params.append(("current_page", _params["current_page"]))
 
-        if _params.get('page_size') is not None:  # noqa: E501
-            _query_params.append(('page_size', _params['page_size']))
+        if _params.get("page_size") is not None:  # noqa: E501
+            _query_params.append(("page_size", _params["page_size"]))
 
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "TaskListResponse",
+            "200": "TaskListResponse",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks', 'GET',
+            "/ap/v1/agent/tasks",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -1316,23 +1558,65 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @overload
-    async def upload_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="File to upload.")], relative_path : Annotated[Optional[StrictStr], Field(description="Relative path of the artifact in the agent's workspace.")] = None, **kwargs) -> Artifact:  # noqa: E501
+    async def upload_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        file: Annotated[
+            Union[StrictBytes, StrictStr], Field(..., description="File to upload.")
+        ],
+        relative_path: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Relative path of the artifact in the agent's workspace."
+            ),
+        ] = None,
+        **kwargs,
+    ) -> Artifact:  # noqa: E501
         ...
 
     @overload
-    def upload_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="File to upload.")], relative_path : Annotated[Optional[StrictStr], Field(description="Relative path of the artifact in the agent's workspace.")] = None, async_req: Optional[bool]=True, **kwargs) -> Artifact:  # noqa: E501
+    def upload_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        file: Annotated[
+            Union[StrictBytes, StrictStr], Field(..., description="File to upload.")
+        ],
+        relative_path: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Relative path of the artifact in the agent's workspace."
+            ),
+        ] = None,
+        async_req: Optional[bool] = True,
+        **kwargs,
+    ) -> Artifact:  # noqa: E501
         ...
 
     @validate_arguments
-    def upload_agent_task_artifacts(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="File to upload.")], relative_path : Annotated[Optional[StrictStr], Field(description="Relative path of the artifact in the agent's workspace.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Artifact, Awaitable[Artifact]]:  # noqa: E501
+    def upload_agent_task_artifacts(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        file: Annotated[
+            Union[StrictBytes, StrictStr], Field(..., description="File to upload.")
+        ],
+        relative_path: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Relative path of the artifact in the agent's workspace."
+            ),
+        ] = None,
+        async_req: Optional[bool] = None,
+        **kwargs,
+    ) -> Union[Artifact, Awaitable[Artifact]]:  # noqa: E501
         """Upload an artifact for the specified task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1358,16 +1642,31 @@ class AgentApi:
                  returns the request thread.
         :rtype: Artifact
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
             message = "Error! Please call the upload_agent_task_artifacts_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.upload_agent_task_artifacts_with_http_info(task_id, file, relative_path, **kwargs)  # noqa: E501
+            kwargs["async_req"] = async_req
+        return self.upload_agent_task_artifacts_with_http_info(
+            task_id, file, relative_path, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def upload_agent_task_artifacts_with_http_info(self, task_id : Annotated[StrictStr, Field(..., description="ID of the task")], file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="File to upload.")], relative_path : Annotated[Optional[StrictStr], Field(description="Relative path of the artifact in the agent's workspace.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def upload_agent_task_artifacts_with_http_info(
+        self,
+        task_id: Annotated[StrictStr, Field(..., description="ID of the task")],
+        file: Annotated[
+            Union[StrictBytes, StrictStr], Field(..., description="File to upload.")
+        ],
+        relative_path: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Relative path of the artifact in the agent's workspace."
+            ),
+        ] = None,
+        **kwargs,
+    ) -> ApiResponse:  # noqa: E501
         """Upload an artifact for the specified task.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1409,77 +1708,75 @@ class AgentApi:
 
         _params = locals()
 
-        _all_params = [
-            'task_id',
-            'file',
-            'relative_path'
-        ]
+        _all_params = ["task_id", "file", "relative_path"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method upload_agent_task_artifacts" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['task_id']:
-            _path_params['task_id'] = _params['task_id']
-
+        if _params["task_id"]:
+            _path_params["task_id"] = _params["task_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
-        if _params['file']:
-            _files['file'] = _params['file']
+        if _params["file"]:
+            _files["file"] = _params["file"]
 
-        if _params['relative_path']:
-            _form_params.append(('relative_path', _params['relative_path']))
+        if _params["relative_path"]:
+            _form_params.append(("relative_path", _params["relative_path"]))
 
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['multipart/form-data']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["multipart/form-data"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "Artifact",
-            '404': "GetAgentTask404Response",
+            "200": "Artifact",
+            "404": "GetAgentTask404Response",
         }
 
         return self.api_client.call_api(
-            '/ap/v1/agent/tasks/{task_id}/artifacts', 'POST',
+            "/ap/v1/agent/tasks/{task_id}/artifacts",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -1488,9 +1785,10 @@ class AgentApi:
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )

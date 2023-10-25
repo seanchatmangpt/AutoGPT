@@ -7,7 +7,9 @@ from forge.sdk.abilities.registry import ability, AbilityParameter
     name="fetch_webpage",
     description="Retrieve the content of a webpage",
     parameters=[
-        AbilityParameter(name="url", description="Webpage URL", type="string", required=True)
+        AbilityParameter(
+            name="url", description="Webpage URL", type="string", required=True
+        )
     ],
     output_type="string",
 )

@@ -9,10 +9,8 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 # Define the users and their passwords
-users = {
-    "john": "password123",
-    "jane": "secret"
-}
+users = {"john": "password123", "jane": "secret"}
+
 
 # Define the authentication function
 @auth.verify_password
@@ -24,17 +22,20 @@ def verify_password(username, password):
             return True
     return False
 
+
 # Define the route for testing authentication
 @app.route("/auth")
 @auth.login_required
 def test_auth():
     return jsonify({"message": "Authentication successful!"})
 
+
 # Define the route for testing authorization
 @app.route("/auth/authorized")
 @auth.login_required(role="admin")
 def test_auth_authorized():
     return jsonify({"message": "Authorization successful!"})
+
 
 # Run the app
 if __name__ == "__main__":

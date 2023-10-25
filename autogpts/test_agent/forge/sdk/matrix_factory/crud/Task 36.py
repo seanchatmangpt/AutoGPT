@@ -32,10 +32,10 @@ cov.console_report()
 cov.annotate()
 
 # Optionally, exclude certain files or directories from coverage analysis
-cov.exclude('file_or_directory_name')
+cov.exclude("file_or_directory_name")
 
 # Optionally, include only certain files or directories in coverage analysis
-cov.include('file_or_directory_name')
+cov.include("file_or_directory_name")
 
 # Optionally, clear previously collected coverage data
 cov.erase()

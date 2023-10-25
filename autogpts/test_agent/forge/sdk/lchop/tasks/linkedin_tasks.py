@@ -139,7 +139,6 @@ async def detect_recession(work_ctx, **kwargs):
     await page.goto("https://www.census.gov/economic-indicators/")
 
 
-
 class LinkedInGroup:
     name: str
 

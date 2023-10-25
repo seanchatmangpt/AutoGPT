@@ -6,8 +6,10 @@ from time import gmtime, strftime
 import anyio
 import openai
 import yaml
+from icontract import require, ensure
 
-from .models import get_model
+from forge.sdk.utils.models import get_model
+
 
 # async def generate_extension(
 #         prompt,
@@ -50,12 +52,14 @@ from .models import get_model
 #     return file_name
 
 
+@require(lambda prompt: isinstance(prompt, str))
+@ensure(lambda result: isinstance(result, str))
 async def generate_filename(
     prompt,
     prefix="",
     suffix="",
     extension="txt",
-    min_chars=30,
+    min_chars=20,
     max_chars=60,
     char_limit=300,
     time_stamp=False,
@@ -103,6 +107,39 @@ async def generate_filename(
     return file_name
 
 
+def extract_filename(text: str, allowed_extensions=None) -> str:
+    """
+    Extracts a filename from a text, aligning with Pythonic practices as advocated
+    by Luciano Ramalho in "Fluent Python". It can also filter the search based on a list of allowed extensions.
+
+    Args:
+        text (str): The text from which to extract the filename.
+        allowed_extensions (List[str], optional): A list of allowed file extensions (without the dot). Defaults to None.
+
+    Returns:
+        str: The extracted filename.
+
+    Raises:
+        ValueError: If no filename with allowed extensions is found.
+    """
+
+    # Create the regex pattern based on allowed extensions
+    if allowed_extensions is None:
+        allowed_extensions = ["py"]
+
+    if allowed_extensions:
+        pattern = rf'\b\w+[-\w]*\.({"|".join(allowed_extensions)})\b'
+    else:
+        pattern = r"\b\w+[-\w]*(\.\w+)\b"
+
+    match = re.search(pattern, text)
+
+    if match:
+        return match.group(0)
+    else:
+        raise ValueError("No filename with allowed extensions found.")
+
+
 async def read(filename, to_type=None):
     async with await anyio.open_file(filename, mode="r") as f:
         contents = await f.read()
@@ -114,14 +151,20 @@ async def read(filename, to_type=None):
     return contents
 
 
-async def write(contents=None, filename=None, mode="w+", extension="txt"):
+async def write(
+    contents=None, filename=None, mode="w+", extension="txt", time_stamp=False
+):
     if extension == "yaml" or extension == "yml":
-        contents = yaml.dump(contents, default_style="", default_flow_style=False, width=1000)
+        contents = yaml.dump(
+            contents, default_style="", default_flow_style=False, width=1000
+        )
     elif extension == "json":
         contents = json.dumps(contents)
 
     if not filename:
-        filename = generate_filename(prompt=contents, extension=extension)
+        filename = await generate_filename(
+            prompt=contents, extension=extension, time_stamp=time_stamp
+        )
 
     async with await anyio.open_file(filename, mode=mode) as f:
         await f.write(contents)
@@ -132,12 +175,13 @@ def extract_code(text: str) -> str:
     # Use a regular expression to find code blocks enclosed in triple backticks.
     text_code = re.findall(r"```([\s\S]+?)```", text)
 
-    # If no code blocks are found, return an empty string.
     if not text_code:
-        return ""
+        return text
 
     # Concatenate all the code blocks together with double newline separators.
-    concatenated_code = "\n\n".join([code[code.index("\n") + 1 :] for code in text_code])
+    concatenated_code = "\n\n".join(
+        [code[code.index("\n") + 1 :] for code in text_code]
+    )
 
     return concatenated_code
 
@@ -145,4 +189,12 @@ def extract_code(text: str) -> str:
 # project root directory
 # Path: src/utils/file_tools.py
 def get_project_root() -> str:
-    return str(Path(__file__).parent.parent)
+    return str(Path(__file__).parent.parent.parent)
+
+
+def main():
+    print(get_project_root())
+
+
+if __name__ == '__main__':
+    main()

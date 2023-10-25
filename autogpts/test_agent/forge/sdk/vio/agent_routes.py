@@ -2,7 +2,17 @@
 # This FastAPI implementation covers all routes as defined in the OpenAPI 3.0.1 specification.
 # I have included detailed explanations in the docstrings and comments to walk you through the best practices, which would be appreciated by Luciano Ramalho for its Pythonic elegance and Sebastián Ramírez for its use of FastAPI.
 
-from fastapi import FastAPI, HTTPException, Query, Path, Body, Form, File, UploadFile, Depends
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    Query,
+    Path,
+    Body,
+    Form,
+    File,
+    UploadFile,
+    Depends,
+)
 from typing import List, Optional
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -28,10 +38,7 @@ async def create_agent_task(task: TaskRequestBody, db: Session = Depends(get_db)
     """
 
     # Create a new task instance
-    db_task = Task(
-        input=task.input,
-        additional_input=task.additional_input
-    )
+    db_task = Task(input=task.input, additional_input=task.additional_input)
     db.add(db_task)
     db.commit()
     db.refresh(db_task)
@@ -41,9 +48,10 @@ async def create_agent_task(task: TaskRequestBody, db: Session = Depends(get_db)
 
 @app.get("/ap/v1/agent/tasks", tags=["agent"])
 async def list_agent_tasks(
-        current_page: int = Query(1, alias="page"),
-        page_size: int = Query(10, alias="size"),
-        db: Session = Depends(get_db)):
+    current_page: int = Query(1, alias="page"),
+    page_size: int = Query(10, alias="size"),
+    db: Session = Depends(get_db),
+):
     """
     List tasks for the agent with pagination.
 
@@ -79,10 +87,11 @@ async def get_agent_task(task_id: str, db: Session = Depends(get_db)):
 
 @app.get("/ap/v1/agent/tasks/{task_id}/steps", tags=["agent"])
 async def list_agent_task_steps(
-        task_id: str,
-        current_page: int = Query(1),
-        page_size: int = Query(10),
-        db: Session = Depends(get_db)):
+    task_id: str,
+    current_page: int = Query(1),
+    page_size: int = Query(10),
+    db: Session = Depends(get_db),
+):
     """
     List all steps related to a specific task, with pagination.
 
@@ -95,7 +104,13 @@ async def list_agent_task_steps(
     Returns:
         List of Step objects related to the specified task_id.
     """
-    steps = db.query(Step).filter(Step.task_id == task_id).offset((current_page - 1) * page_size).limit(page_size).all()
+    steps = (
+        db.query(Step)
+        .filter(Step.task_id == task_id)
+        .offset((current_page - 1) * page_size)
+        .limit(page_size)
+        .all()
+    )
     if not steps:
         raise HTTPException(status_code=404, detail="Steps for the task not found")
     return steps
@@ -103,8 +118,11 @@ async def list_agent_task_steps(
 
 # I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated best practice IMPLEMENTATION code of your requirements.
 
+
 @app.post("/ap/v1/agent/tasks/{task_id}/steps", tags=["agent"])
-async def create_agent_task_step(task_id: str, step: StepRequestBody, db: Session = Depends(get_db)):
+async def create_agent_task_step(
+    task_id: str, step: StepRequestBody, db: Session = Depends(get_db)
+):
     """
     Create a new step for a specific task.
 
@@ -138,10 +156,11 @@ async def create_agent_task_step(task_id: str, step: StepRequestBody, db: Sessio
 
 @app.post("/ap/v1/agent/tasks/{task_id}/steps/{step_id}/artifacts", tags=["agent"])
 async def upload_artifact_for_step(
-        task_id: str,
-        step_id: str,
-        artifact: UploadFile = File(...),
-        db: Session = Depends(get_db)):
+    task_id: str,
+    step_id: str,
+    artifact: UploadFile = File(...),
+    db: Session = Depends(get_db),
+):
     """
     Upload an artifact for a specific step of a task.
 
@@ -156,7 +175,9 @@ async def upload_artifact_for_step(
     """
 
     # Validate if the parent step and task exist
-    step = db.query(Step).filter(Step.step_id == step_id, Step.task_id == task_id).first()
+    step = (
+        db.query(Step).filter(Step.step_id == step_id, Step.task_id == task_id).first()
+    )
     if not step:
         raise HTTPException(status_code=404, detail="Step or Task not found")
 
@@ -176,6 +197,7 @@ async def upload_artifact_for_step(
 
 
 # I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated best practice IMPLEMENTATION code of your requirements.
+
 
 @app.get("/ap/v1/agent/tasks/{task_id}", tags=["agent"])
 async def get_agent_task_by_id(task_id: str, db: Session = Depends(get_db)):
@@ -199,7 +221,9 @@ async def get_agent_task_by_id(task_id: str, db: Session = Depends(get_db)):
 
 
 @app.put("/ap/v1/agent/tasks/{task_id}", tags=["agent"])
-async def update_agent_task_by_id(task_id: str, updated_task: TaskUpdateRequestBody, db: Session = Depends(get_db)):
+async def update_agent_task_by_id(
+    task_id: str, updated_task: TaskUpdateRequestBody, db: Session = Depends(get_db)
+):
     """
     Update the details of a specific task by its ID.
 
@@ -219,7 +243,11 @@ async def update_agent_task_by_id(task_id: str, updated_task: TaskUpdateRequestB
 
     # Update the task details
     task.input = updated_task.input if updated_task.input else task.input
-    task.additional_input = updated_task.additional_input if updated_task.additional_input else task.additional_input
+    task.additional_input = (
+        updated_task.additional_input
+        if updated_task.additional_input
+        else task.additional_input
+    )
 
     db.commit()
 
@@ -249,5 +277,6 @@ async def delete_agent_task_by_id(task_id: str, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "Task deleted successfully"}
+
 
 # ... you can add more routes as needed

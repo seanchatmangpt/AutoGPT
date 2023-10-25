@@ -1,0 +1,74 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Feature: User authentication
+
+    Scenario: User successfully logs in with correct credentials
+
+    Given the user is on the login page'
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'This code should be well-structured and adhere to Python coding standards.Feature:
+    Code debugging capabilities. Scenario: The IDE should provide'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - It should also provide suggestions for fixing any errors or issues found in the
+    code.
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - 'Feature: Collaboration and version control. Scenario: The system should allow
+    multiple users to collaborate on the same code and track changes made'
+  - ''
+  - ''
+  - ''
+  - 'Feature: User login and authentication. Scenario: The system should allow users
+    to create accounts and login to access personalized features and data'
+  - ''
+  - ''
+- - ''
+  - 'These reports should include metrics such as code complexity, performance, and
+    test coverage.Feature: Collaboration tools for team members. Scenario:'
+  - ''
+  - 'These reports should include information such as execution time, memory usage,
+    and line-by-line performance breakdowns.
+
+
+    Feature: Automatic'
+  - ''
+  - These reports should include information on code complexity, execution time, and
+    memory usage.
+  - ''
+  - ''
+  - ''
+  - ''

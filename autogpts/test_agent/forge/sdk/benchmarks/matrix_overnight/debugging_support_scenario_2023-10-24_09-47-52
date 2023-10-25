@@ -1,0 +1,70 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'Feature: Debugging support. Scenario: The IDE should provide debugging support
+    for Python projects, allowing users to set breakpoints, step'
+  - ''
+  - ''
+- - ''
+  - "Example: Task description: \"Create a login form for the website.\"Actionable\
+    \ items: \n- Create a new HTML form"
+  - ''
+  - ''
+  - ''
+  - 'Feature: Automated code review. Scenario: The system should automatically review
+    the Python source code for adherence to coding standards and best practices'
+  - ''
+  - 'Feature: User authentication. Scenario: The system should allow users to create
+    accounts and log in to access their tasks and projects.'
+  - ''
+  - 'Feature: Collaborative code review. Scenario: The system should allow multiple
+    users to review and provide feedback on code changes in'
+- - ''
+  - ''
+  - ''
+  - These reports should include information about execution time, memory usage, and
+    any potential bottlenecks in the code.
+  - ''
+  - 'These reports should include information such as code complexity, code coverage,
+    and performance metrics.
+
+
+    Feature: Continuous integration and deployment. Scenario'
+  - ''
+  - ''
+  - ''
+  - This will help developers identify performance bottlenecks and optimize the code.

@@ -12,24 +12,24 @@ class PeqDef:
 
     async def _load_from_file(self):
         if not os.path.exists(self.filepath):
-            async with await anyio.open_file(self.filepath, 'w') as f:
-                await f.write('')
-        async with await anyio.open_file(self.filepath, 'r') as f:
+            async with await anyio.open_file(self.filepath, "w") as f:
+                await f.write("")
+        async with await anyio.open_file(self.filepath, "r") as f:
             content = await f.read()
         if content.strip():
             self.red = RedBaron(content)
         else:
-            self.red = RedBaron('')  # Initialize with an empty RedBaron instance
+            self.red = RedBaron("")  # Initialize with an empty RedBaron instance
 
     async def _save_to_file(self, content):
-        async with await anyio.open_file(self.filepath, 'w') as f:
+        async with await anyio.open_file(self.filepath, "w") as f:
             await f.write(content)
 
     def __setitem__(self, key, value):
-        new_func = RedBaron(value).find('def')
+        new_func = RedBaron(value).find("def")
 
         if self.red:
-            existing_func = self.red.find('def', name=key)
+            existing_func = self.red.find("def", name=key)
             if existing_func:
                 existing_func.replace(new_func)
             else:
@@ -37,7 +37,7 @@ class PeqDef:
 
                 # Add any imports from the new code at the top if they don't already exist
                 for node in RedBaron(value):
-                    if node.type == 'import' or node.type == 'from_import':
+                    if node.type == "import" or node.type == "from_import":
                         self.red.insert(0, node)
         else:
             self.red = RedBaron(value)
@@ -55,24 +55,24 @@ class PeqClass:
     async def _load_from_file(self):
         # If the file doesn't exist, create it asynchronously
         if not os.path.exists(self.filepath):
-            async with await anyio.open_file(self.filepath, 'w') as f:
-                await f.write('')
-        async with await anyio.open_file(self.filepath, 'r') as f:
+            async with await anyio.open_file(self.filepath, "w") as f:
+                await f.write("")
+        async with await anyio.open_file(self.filepath, "r") as f:
             content = await f.read()
         if content.strip():
             self.red = RedBaron(content)
         else:
-            self.red = RedBaron('')  # Initialize with an empty RedBaron instance
+            self.red = RedBaron("")  # Initialize with an empty RedBaron instance
 
     async def _save_to_file(self, content):
-        async with await anyio.open_file(self.filepath, 'w') as f:
+        async with await anyio.open_file(self.filepath, "w") as f:
             await f.write(content)
 
     def __setitem__(self, key, value):
-        new_class = RedBaron(value).find('class')
+        new_class = RedBaron(value).find("class")
 
         if self.red:
-            existing_class = self.red.find('class', name=key)
+            existing_class = self.red.find("class", name=key)
             if existing_class:
                 existing_class.replace(new_class)
             else:
@@ -80,8 +80,9 @@ class PeqClass:
 
                 # Add any imports from the new code at the top if they don't already exist
                 for node in RedBaron(value):
-                    if (node.type == 'import' or node.type == 'from_import') and not self.red.find_all(type=node.type,
-                                                                                                       value=node.value):
+                    if (
+                        node.type == "import" or node.type == "from_import"
+                    ) and not self.red.find_all(type=node.type, value=node.value):
                         self.red.insert(0, node)
         else:
             self.red = RedBaron(value)
@@ -89,16 +90,17 @@ class PeqClass:
         anyio.run(self._save_to_file, self.red.dumps())
 
 
-
 # Test
 
-test_filepath = 'test_module.py'
+test_filepath = "test_module.py"
 
 
 peq = PeqDef(filepath=test_filepath)
 
 # Adding a function with imports and decorator
-peq["decorated_function"] = """
+peq[
+    "decorated_function"
+] = """
 from functools import wraps
 
 def decorator(f):

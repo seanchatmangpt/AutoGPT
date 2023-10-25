@@ -10,12 +10,12 @@ from forge.sdk import (
     StepRequestBody,
     Task,
     TaskRequestBody,
-    Workspace,    
-    PromptEngine,	
-    chat_completion_request,	
-    ChromaMemStore	
+    Workspace,
+    PromptEngine,
+    chat_completion_request,
+    ChromaMemStore,
 )
-import json	
+import json
 import pprint
 
 from forge.sdk.utils.create_primatives import create_list
@@ -134,10 +134,14 @@ class ForgeAgent(Agent):
         # I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated best practice IMPLEMENTATION code of your requirements.
 
         # Use PyYAML to present abilities in a readable format
-        choices = await create_list(f"{step.input} need to write to the filesystem.\n\n"
-                                    f"Here are the abilities you can use:\n"
-                                    f"{yaml.dump(abilities, default_flow_style=False)}\n\n"  # Modified this line to use yaml.dump
-                                    f"You must choose a limited number of abilities to use.\n", 1, 4)
+        choices = await create_list(
+            f"{step.input} need to write to the filesystem.\n\n"
+            f"Here are the abilities you can use:\n"
+            f"{yaml.dump(abilities, default_flow_style=False)}\n\n"  # Modified this line to use yaml.dump
+            f"You must choose a limited number of abilities to use.\n",
+            1,
+            4,
+        )
 
         print(choices)
 
@@ -149,7 +153,6 @@ class ForgeAgent(Agent):
 
         chat_response = None
         answer = None
-
 
         try:
             # Define the parameters for the chat completion request
@@ -163,18 +166,14 @@ class ForgeAgent(Agent):
             start_time = time.time()
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(
-                f'Generated prompt_map in {elapsed_time:.2f} seconds.'
-            )
+            print(f"Generated prompt_map in {elapsed_time:.2f} seconds.")
             # Make the chat completion request and parse the response
             start_time = time.time()
             chat_response = await chat_completion_request(**chat_completion_kwargs)
             print(chat_response)
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(
-                f'Generated chat_completion_request in {elapsed_time:.2f} seconds.'
-            )
+            print(f"Generated chat_completion_request in {elapsed_time:.2f} seconds.")
             answer = json.loads(chat_response["choices"][0]["message"]["content"])
             print(answer)
 
@@ -204,13 +203,13 @@ class ForgeAgent(Agent):
         return step
 
 
-
 import anyio
 
+
 async def main():
-    print('main')
+    print("main")
     # await
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     anyio.run(main)

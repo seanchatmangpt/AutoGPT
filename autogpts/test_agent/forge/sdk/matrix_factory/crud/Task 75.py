@@ -2,6 +2,7 @@
 from collections import defaultdict
 from datetime import datetime
 
+
 # Define a function to track user activity
 def track_activity(user, activity):
     # Get the current date and time
@@ -14,6 +15,7 @@ def track_activity(user, activity):
     print(f"Activity '{activity}' tracked for user '{user}' at {now}")
     # Return the updated user_activities dictionary
     return user_activities
+
 
 # Test the function
 user_activities = track_activity("John", "logged in")

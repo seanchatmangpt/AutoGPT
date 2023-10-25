@@ -28,8 +28,6 @@ class YAMLMixin:
 # I have IMPLEMENTED your PerfectPythonProductionCode® AGI enterprise innovative and opinionated best practice IMPLEMENTATION code of your requirements.
 
 
-
-
 def find_all_keys_in_file(filepath: str, target_key: str) -> List[Any]:
     """
     Find all occurrences of a key in a nested YAML-like dictionary or list from a YAML file and return the associated values.

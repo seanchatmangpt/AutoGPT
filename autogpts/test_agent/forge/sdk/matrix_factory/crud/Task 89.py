@@ -3,14 +3,14 @@ import sqlite3
 import pandas as pd
 
 # Define the source and destination databases
-source_db = sqlite3.connect('source.db')
-dest_db = sqlite3.connect('destination.db')
+source_db = sqlite3.connect("source.db")
+dest_db = sqlite3.connect("destination.db")
 
 # Create a cursor for the source database
 source_cursor = source_db.cursor()
 
 # Execute a query to retrieve data from the source database
-source_cursor.execute('SELECT * FROM table')
+source_cursor.execute("SELECT * FROM table")
 
 # Fetch all the data from the query
 data = source_cursor.fetchall()
@@ -26,7 +26,7 @@ source_db.close()
 dest_cursor = dest_db.cursor()
 
 # Execute a query to insert the data into the destination database
-dest_cursor.executemany('INSERT INTO table VALUES (?, ?, ?)', df.values.tolist())
+dest_cursor.executemany("INSERT INTO table VALUES (?, ?, ?)", df.values.tolist())
 
 # Commit the changes and close the cursor and destination database
 dest_db.commit()
@@ -34,4 +34,4 @@ dest_cursor.close()
 dest_db.close()
 
 # Print a success message
-print('Database replication successful.')
+print("Database replication successful.")

@@ -6,8 +6,8 @@ from typing import Iterable, List
 
 from icontract import ensure, require
 
-from .complete import acreate
-from .models import instruct_models, ok_models
+from forge.sdk.utils.complete import acreate
+from forge.sdk.utils.models import ok_models, instruct_models
 
 
 # 1. Model Selection
@@ -34,7 +34,11 @@ async def call_openai(
 
 # 4. Timing and Logging
 async def timed_openai_call(
-    prompt: str, item: str, model_name: str, max_tokens: int = 50, temperature: float = 0.7
+    prompt: str,
+    item: str,
+    model_name: str,
+    max_tokens: int = 50,
+    temperature: float = 0.7,
 ) -> str:
     start_time = time.time()
     response = await call_openai(prompt, model_name, max_tokens, temperature)
@@ -115,8 +119,12 @@ async def prompt_filter(
         for prompt in prompts_iterable
     ]
 
-    responses = await prompt_map(base_prompt, filterable, max_tokens, model_list)
-    results = [item for item, resp in zip(prompts_iterable, responses) if "true" in resp.lower()]
+    responses = await prompt_map(filterable, base_prompt, max_tokens, model_list)
+    results = [
+        item
+        for item, resp in zip(prompts_iterable, responses)
+        if "true" in resp.lower()
+    ]
 
     return results
 
@@ -162,7 +170,7 @@ async def prompt_reduce(
     """
 
     # First, we generate the responses based on the iterable and the base prompt
-    responses = await prompt_map(base_prompt, prompts_iterable, max_tokens, model_list)
+    responses = await prompt_map(prompts_iterable, base_prompt, max_tokens, model_list)
 
     # Then, we reduce the list of responses using the reducer function
     return reducer(responses)
@@ -194,7 +202,8 @@ async def create_python_class_from_function_names(
 @ensure(lambda result: isinstance(result, list))
 @ensure(lambda result: all(isinstance(sublist, list) for sublist in result))
 @ensure(
-    lambda x_prompts_iterable, y_prompts_iterable, result: len(result) == len(x_prompts_iterable)
+    lambda x_prompts_iterable, y_prompts_iterable, result: len(result)
+    == len(x_prompts_iterable)
 )
 @ensure(
     lambda x_prompts_iterable, y_prompts_iterable, result: all(
@@ -221,7 +230,9 @@ async def prompt_matrix(
             combined_prompt = f"{x_prompt} {y_prompt}"
 
             # Call the existing prompt_map function with the complete set of y_prompts.
-            single_response = await prompt_map(combined_prompt, [y_prompt], max_tokens, model_list)
+            single_response = await prompt_map(
+                [y_prompt], combined_prompt, max_tokens, model_list
+            )
 
             # Append the response for the current y_prompt to y_responses.
             y_responses.append(single_response[0])
@@ -233,11 +244,11 @@ async def prompt_matrix(
 
 
 # Example usage
-# async def main():
-#     x_prompts = ["Create a python function for", "Create a python class for"]
-#     y_prompts = ["sorting an array", "finding the maximum element"]
-#     result = await prompt_map2d(x_prompts, y_prompts, max_tokens=50)
-#     print(result)
+async def main():
+    x_prompts = ["Create a python function for", "Create a python class for"]
+    y_prompts = ["sorting an array", "finding the maximum element"]
+    result = await prompt_matrix(x_prompts, y_prompts, max_tokens=50)
+    print(result)
 
 
 from typing import Callable, List, Type
@@ -261,7 +272,10 @@ class Verifiers:
         """
         base_prompt = f"Given the concept of 'Self-Taught Reasoner' and 'rationale generation with rationalization', propose solutions for: {problem}"
         solutions = await prompt_map(
-            base_prompt, [problem for _ in range(5)], model_list=ok_models, max_tokens=300
+            [problem for _ in range(5)],
+            base_prompt,
+            model_list=ok_models,
+            max_tokens=300,
         )  # Simulating 5 potential solutions
         print("Generated solutions:", solutions)
         return solutions
@@ -280,36 +294,38 @@ class Verifiers:
         """
         base_prompt = f"Using the idea of 'N-step reasoning' and 'verification model', identify the best solution among the following verified solutions:"
         combined_solutions = "\n".join(verified_solutions)
-        best_solution = await prompt_map(base_prompt, [combined_solutions])
-        return best_solution[0]  # Return the first item as it should contain the best solution
+        best_solution = await prompt_map([combined_solutions], base_prompt)
+        return best_solution[
+            0
+        ]  # Return the first item as it should contain the best solution
 
 
-async def main():
-    verifier = Verifiers()
-    solutions = await verifier.generate_solutions(
-        "How to improve code readability in a DDD abstraction framework? Expert level Opinions only with Python examples. Out of the box ideas\n```python\n# Code examples\n```"
-    )
-    verified_solutions = await verifier.verify_solutions(solutions)
-    best_solution = await verifier.pick_best_solution(verified_solutions)
-    print("Best Solution:", best_solution)
+# async def main():
+#     verifier = Verifiers()
+#     solutions = await verifier.generate_solutions(
+#         "How to improve code readability in a DDD abstraction framework? Expert level Opinions only with Python examples. Out of the box ideas\n```python\n# Code examples\n```"
+#     )
+#     verified_solutions = await verifier.verify_solutions(solutions)
+#     best_solution = await verifier.pick_best_solution(verified_solutions)
+#     print("Best Solution:", best_solution)
 
 
 if __name__ == "__main__":
     anyio.run(main)
     # Example usage
-    domain_statements = [
-        "The user should be able to deposit money into their account.",
-        "The user must be able to withdraw funds.",
-        "The account should display the current balance.",
-        "The account should allow setting a preferred currency.",
-        "The account should allow setting a preferred language.",
-        "Loans should be approved within 24 hours.",
-    ]
+    # domain_statements = [
+    #     "The user should be able to deposit money into their account.",
+    #     "The user must be able to withdraw funds.",
+    #     "The account should display the current balance.",
+    #     "The account should allow setting a preferred currency.",
+    #     "The account should allow setting a preferred language.",
+    #     "Loans should be approved within 24 hours.",
+    # ]
 
-    function_names_base_prompt = (
-        "Based on the following statement by a domain expert, "
-        "suggest a suitable pythonic function name. Avoid the words get or set:"
-    )
+    # function_names_base_prompt = (
+    #     "Based on the following statement by a domain expert, "
+    #     "suggest a suitable pythonic function name. Avoid the words get or set:"
+    # )
 
     # Here you'll call the prompt_reduce function with the necessary parameters. For demonstration, we simulate it.
     # function_names = anyio.run(prompt_reduce, function_names_base_prompt, domain_statements, extract_function_names)

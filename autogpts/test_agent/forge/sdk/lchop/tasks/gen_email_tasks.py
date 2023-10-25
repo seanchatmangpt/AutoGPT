@@ -12,7 +12,6 @@ from matrix_factory.chat_helpers import extract_dictionary
 from typetemp.template.typed_template import TypedTemplate
 
 
-
 @dataclass
 class SarahMikeEmailTemplate(TypedTemplate):
     name: str = None
@@ -30,6 +29,7 @@ regarding {{ topic }}. Please let me know if you need to reschedule.
 Best regards,
 {{ sender_name }}
     """
+
 
 email_prompt = """
 Objective:
@@ -65,8 +65,7 @@ Please produce the perfect Python dictionary based on the given data.
 
 
 @register_task
-async def Setup_Environment(work_ctx, models, prompt, template_class,
-                            **kwargs):
+async def Setup_Environment(work_ctx, models, prompt, template_class, **kwargs):
     logger.info(f"Executing task: Setup_Environment")
     work_ctx.global_params.start = time.time()
 
@@ -74,7 +73,7 @@ async def Setup_Environment(work_ctx, models, prompt, template_class,
     work_ctx.global_params.prompt = prompt
     work_ctx.global_params.template_class = template_class
 
-    return {'success': True, 'results': f"Successfully executed: Setup_Environment"}
+    return {"success": True, "results": f"Successfully executed: Setup_Environment"}
 
 
 @register_task
@@ -89,27 +88,29 @@ async def Run_GPT_Models(work_ctx, **kwargs):
             max_tokens=100,
             stop=["}"],
         )
-        if 'sender_name' in result:
+        if "sender_name" in result:
             return model, result
         else:
             return None, None
 
-    tasks = [run_model(model) for model in chat_helpers.best_models*20]
+    tasks = [run_model(model) for model in chat_helpers.best_models * 20]
     results = await asyncio.gather(*tasks)
 
     work_ctx.raw_results = results
 
-    return {'success': True, 'results': f"Successfully executed: Run_GPT_Models"}
+    return {"success": True, "results": f"Successfully executed: Run_GPT_Models"}
 
 
 @register_task
 async def Filter_Valid_Results(work_ctx, **kwargs):
     logger.info(f"Executing task: Filter_Valid_Results")
 
-    valid_results = [(model, result) for model, result in work_ctx.raw_results if model and result]
+    valid_results = [
+        (model, result) for model, result in work_ctx.raw_results if model and result
+    ]
     work_ctx.valid_results = valid_results
 
-    return {'success': True, 'results': f"Successfully executed: Filter_Valid_Results"}
+    return {"success": True, "results": f"Successfully executed: Filter_Valid_Results"}
 
 
 @register_task
@@ -125,7 +126,7 @@ async def Generate_Emails(work_ctx, **kwargs):
 
     work_ctx.generated_emails = generated_emails
 
-    return {'success': True, 'results': f"Successfully executed: Generate_Emails"}
+    return {"success": True, "results": f"Successfully executed: Generate_Emails"}
 
 
 @register_task
@@ -137,7 +138,7 @@ async def Save_To_Files(work_ctx, **kwargs):
         with open(to, "w") as f:
             f.write(email)
 
-    return {'success': True, 'results': f"Successfully executed: Save_To_Files"}
+    return {"success": True, "results": f"Successfully executed: Save_To_Files"}
 
 
 @register_task
@@ -148,4 +149,7 @@ async def Display_Results_Summary(work_ctx, start_time, **kwargs):
     duration = end - work_ctx.global_params.start
     valid_model_count = len(work_ctx.valid_results)
 
-    return {'success': True, 'results': f"Duration: {duration}. Total models: {valid_model_count}"}
+    return {
+        "success": True,
+        "results": f"Duration: {duration}. Total models: {valid_model_count}",
+    }

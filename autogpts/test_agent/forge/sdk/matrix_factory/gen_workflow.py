@@ -46,9 +46,6 @@ Using the provided guidelines, transform the given input into the desired YAML f
 """
 
 
-
-
-
 async def main():
     # abs_path = os.path.abspath(__file__)
 
@@ -60,19 +57,26 @@ async def main():
     # )
     # print(result)
     print("Generating workflow...")
-    result = await acreate(prompt=prompt, model=best_models[0], stop=["```"], max_tokens=2500)
+    result = await acreate(
+        prompt=prompt, model=best_models[0], stop=["```"], max_tokens=2500
+    )
     # result = await achat(prompt=prompt, model=chat_models[-1])
     # result = "workflow:\n" + result
     # print(result)
 
-    await write(result, "/Users/candacechatman/dev/linkml-projects/matrix-factory/src/matrix_factory/home_page_workflow.yaml")
+    await write(
+        result,
+        "/Users/candacechatman/dev/linkml-projects/matrix-factory/src/matrix_factory/home_page_workflow.yaml",
+    )
 
     # result = await read(")
 
     print("Generating tasks...")
     # result = await generate_task_code_from_workflow(workflow=result, task_code_path=None, work_ctx=default_work_context())
     # print(result)
-    await load_workflow(filepath="/Users/candacechatman/dev/linkml-projects/matrix-factory/src/lchop/workflows/generate_workflow_workflow.yaml")
+    await load_workflow(
+        filepath="/Users/candacechatman/dev/linkml-projects/matrix-factory/src/lchop/workflows/generate_workflow_workflow.yaml"
+    )
     print("Done.")
 
 
@@ -80,6 +84,7 @@ async def main2():
     workflow = await read("home_page_workflow.yaml")
     print(workflow)
     await load_workflow(yaml_string=workflow)
+
 
 # Example usage
 if __name__ == "__main__":

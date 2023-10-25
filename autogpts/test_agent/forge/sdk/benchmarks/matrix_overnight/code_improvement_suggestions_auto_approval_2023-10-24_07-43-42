@@ -1,0 +1,68 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - It should also provide suggestions for code improvements and automatically implement
+    them if approved by the user.
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - These files should have all the necessary imports and class declarations needed
+    to perform CRUD operations on the database.
+  - ''
+  - ''
+  - ''
+- - ''
+  - These reports should include code complexity, code coverage, and other performance
+    metrics.
+  - ''
+  - This will allow developers to identify areas of improvement and track the overall
+    performance of their code.
+  - ''
+  - These reports should include code complexity, code coverage, and performance metrics
+    such as memory usage and CPU usage.
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - This could include breaking down the task into smaller subtasks, identifying key
+    terms and requirements, and suggesting potential solutions or resources to
+  - ''
+  - 'Feature: Integration with external project management tools. Scenario: The system
+    should allow for seamless integration with popular project management tools such'
+  - ''
+  - ''
+  - ''
+  - 'Feature: Integration with version control systems. Scenario: The system should
+    integrate with popular version control systems such as Git, allowing'

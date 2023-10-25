@@ -34,7 +34,9 @@ def read_yaml(file_path: str):
 
 
 # 2. Jinja Template Loader
-@require(lambda template_folder: template_folder is not None and len(template_folder) > 0)
+@require(
+    lambda template_folder: template_folder is not None and len(template_folder) > 0
+)
 def load_jinja_templates(template_folder: str) -> Environment:
     """
     Loads Jinja2 templates from a specified folder.
@@ -50,7 +52,10 @@ def load_jinja_templates(template_folder: str) -> Environment:
 
 
 # 4. Code Generator
-@require(lambda yaml_object, template_env: yaml_object is not None and template_env is not None)
+@require(
+    lambda yaml_object, template_env: yaml_object is not None
+    and template_env is not None
+)
 def generate_code(yaml_object, template_env: Environment):
     """
     Generates code from the DDD Python objects using Jinja templates.
@@ -62,7 +67,10 @@ def generate_code(yaml_object, template_env: Environment):
 
 
 # 5. File Writer
-@require(lambda code_snippets, output_path: code_snippets is not None and output_path is not None)
+@require(
+    lambda code_snippets, output_path: code_snippets is not None
+    and output_path is not None
+)
 def write_to_disk(code_snippets, output_path: str):
     """
     Writes the generated code snippets to disk.

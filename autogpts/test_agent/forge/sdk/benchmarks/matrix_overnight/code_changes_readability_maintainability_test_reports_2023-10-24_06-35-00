@@ -1,0 +1,71 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - It should also suggest code changes to improve code readability and maintainability.
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'It should also provide comprehensive test reports and allow for debugging of
+    failures.
+
+
+    Feature: Collaboration and project management. Scenario: The system'
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - 'Feature: Automatic error handling and reporting. Scenario: If an unexpected error
+    occurs during execution, the system should catch it and'
+  - ''
+  - ''
+  - 'Feature: Automated bug detection and resolution. Scenario: The system should
+    be able to detect and resolve common bugs in the code,'
+  - ''
+  - ''
+  - ''
+  - 'Feature: Integration with project management tools. Scenario: The system should
+    allow users to import and export tasks to and from popular project'
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - Given a database schema, the system should generate Python code to interact with
+    the database. This code should include functions for creating
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'These reports should include information such as code complexity, test coverage,
+    and lines of code.Feature: Integration with project management tools.'
+  - ''
+  - The metrics and reports should include information such as execution time, memory
+    usage, and line-by-line code coverage.
+  - ''
+  - This will allow developers to identify performance bottlenecks and make necessary
+    optimizations.
+  - ''
+  - ''
+  - ''
+  - ''

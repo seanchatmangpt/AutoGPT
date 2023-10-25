@@ -6,12 +6,13 @@ import logging
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
+
 # Define the database migration function
 def migrate_database():
     # Get the current working directory
     current_dir = os.getcwd()
     # Create a new directory for the migration files
-    migration_dir = os.path.join(current_dir, 'migrations')
+    migration_dir = os.path.join(current_dir, "migrations")
     # Check if the migration directory already exists
     if not os.path.exists(migration_dir):
         # If not, create it
@@ -21,11 +22,14 @@ def migrate_database():
     # Loop through the files
     for file in files:
         # Check if the file is a SQL file
-        if file.endswith('.sql'):
+        if file.endswith(".sql"):
             # If so, move it to the migration directory
-            os.rename(os.path.join(current_dir, file), os.path.join(migration_dir, file))
+            os.rename(
+                os.path.join(current_dir, file), os.path.join(migration_dir, file)
+            )
     # Log a message indicating the migration was successful
-    logging.info('Database migration completed successfully.')
+    logging.info("Database migration completed successfully.")
+
 
 # Call the database migration function
 migrate_database()

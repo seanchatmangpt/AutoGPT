@@ -2,6 +2,7 @@
 import re
 import json
 
+
 # Define the validation function
 def validate(data, schema):
     # Check if the data matches the schema
@@ -12,11 +13,12 @@ def validate(data, schema):
         # If it doesn't, return False
         return False
 
+
 # Define the schema for the test data
-schema = r'^[a-zA-Z0-9]+$'
+schema = r"^[a-zA-Z0-9]+$"
 
 # Define the test data
-data = 'Test123'
+data = "Test123"
 
 # Validate the test data using the defined schema
 result = validate(data, schema)
