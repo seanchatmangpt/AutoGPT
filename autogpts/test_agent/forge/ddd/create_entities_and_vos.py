@@ -58,7 +58,7 @@ def generate_example_code(module: PyModule, context: dict) -> str:
     prompt = template.render(context)
 
     # example_code = create(prompt, stop=["```", "\n\n"], max_tokens=1000)
-    example_code = create(prompt, stop=["```", "\n\ndef", "\n\n@", "\n\n\n"], max_tokens=2000)
+    example_code = create(prompt, stop=["```"], max_tokens=3000)
     example_code = autopep8.fix_code(example_code)
 
     defs = RedBaron(example_code).find_all("def")
@@ -105,6 +105,11 @@ def prepare_import_statements(spec: Dict) -> Dict[str, List[str]]:
             parameters = bf.get("parameters", [])
             for param in parameters:
                 param_type = param["type"]
+                # If within a list or a dict, get the inner type
+                if "List" in param_type:
+                    param_type = param_type.split("[")[1].split("]")[0]
+                if "Dict" in param_type:
+                    param_type = param_type.split("[")[1].split(",")[0]
                 if param_type in all_entities:
                     imports_for_entity.add(
                         f"from .{inflection.underscore(param_type)} import {param_type}"

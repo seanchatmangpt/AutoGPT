@@ -1,0 +1,69 @@
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - It should also suggest changes to improve code readability and maintainability.
+  - ''
+  - ''
+  - ''
+  - ''
+- - ''
+  - ''
+  - ''
+  - It should also provide detailed reports on any errors or failures encountered
+    during testing.
+  - ''
+  - ''
+  - It should provide detailed error messages and help in identifying and fixing bugs
+    in the code.
+  - ''
+  - ''
+  - ''
+- - ''
+  - 'Feature: Automated testing. Scenario: The system should have automated tests
+    to ensure code changes do not break existing functionality.Feature: Task'
+  - ''
+  - ''
+  - 'Feature: Integration with issue tracking systems. Scenario: The system should
+    be able to integrate with popular issue tracking systems such as'
+  - ''
+  - ''
+  - ''
+  - 'Feature: Real-time collaboration. Scenario: Multiple users should be able to
+    work on the same task simultaneously, with changes being'
+  - ''
+- - ''
+  - 'These metrics and reports could include code complexity, code coverage, and other
+    performance metrics.Feature: Integration with testing frameworks. Scenario:'
+  - ''
+  - These metrics and reports should provide insights into the performance of the
+    code, such as execution time, memory usage, and CPU utilization
+  - ''
+  - This should include metrics such as code complexity, lines of code, and function
+    execution time. The reports should be customizable and easily
+  - ''
+  - ''
+  - ''
+  - These reports should include code complexity, cyclomatic complexity, and performance
+    metrics such as execution time and memory usage.

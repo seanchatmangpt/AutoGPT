@@ -1,8 +1,7 @@
 from icontract import require, ensure
 from typing import List, Dict, Optional, Union, Tuple, Any
-
-
 from .candidate import Candidate
+from ..value_objects.skill_metric import SkillMetric
 
 
 class Interview:
@@ -16,10 +15,20 @@ class Interview:
         """
         self._id = identity
 
-    # Business Functions
-    def evaluate_candidate(self, candidate: Candidate, metrics: List[SkillMetric]):
+    @require(lambda candidate, metrics: candidate is not None and metrics
+             is not None)
+    @ensure(lambda result: result >= 0 and result <= 100)
+    def evaluate_candidate(candidate: Candidate, metrics: List[SkillMetric]
+                           ) -> int:
         """
-        Evaluates the candidate based on given metrics.
-        """
-        # All validation logic is in the icontract decorators
-        pass
+    Evaluates the candidate based on given metrics.
+    """
+        total_score = 0
+        for metric in metrics:
+            total_score += metric.rating
+        total_questions = 0
+        for question in candidate.questions:
+            total_questions += 1
+        average_score = total_score / total_questions
+        final_score = average_score * 100
+        return final_score

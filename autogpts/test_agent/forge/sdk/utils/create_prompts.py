@@ -114,8 +114,6 @@ async def create_domain_model_from_yaml(
 
 
 async def create_yaml(prompt, max_tokens=2500, model=None):
-    model = get_model(model)
-
     yaml_prompt = dedent(
         f"""
     Objective:
@@ -153,8 +151,6 @@ ready to be deployed to a production environment.
 async def create_python(
     prompt, max_tokens=2500, model=None, filepath=None, temperature=0.7
 ):
-    model = get_model(model)
-
     create_prompt = TypedTemplate(source=create_python_template, prompt=prompt)()
 
     return await __create(
@@ -175,7 +171,7 @@ __create_template = """
 
 
 async def __create(
-    prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0
+    prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0, stop=None
 ):
     model = get_model(model)
 
@@ -190,8 +186,8 @@ async def __create(
         max_tokens=max_tokens,
         temperature=temperature,
     )
-    loguru.logger.info(f"Prompt: {result}")
-    loguru.logger.info(f"Result: {result}")
+    # loguru.logger.info(f"Prompt: {result}")
+    # loguru.logger.info(f"Result: {result}")
 
     if filepath:
         await write(contents=result, filename=filepath)

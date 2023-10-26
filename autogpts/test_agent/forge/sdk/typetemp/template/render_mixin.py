@@ -32,7 +32,7 @@ class RenderMixin:
             rendered_to = os.path.join(to_template.render(**render_dict))
 
             # Create the directory if it doesn't exist
-            # os.makedirs(os.path.dirname(rendered_to), exist_ok=True)
+            os.makedirs(os.path.dirname(rendered_to), exist_ok=True)
 
             with open(rendered_to, "w") as file:
                 file.write(self.output)

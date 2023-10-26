@@ -85,5 +85,21 @@ business_functions:
 
 # Additional information can be included if necessary.
 additional_info:
-  - key: Important Note
-    value: In the Python Systems Architecture Interview Domain, Entities represent distinct objects with identity, while Value Objects are immutable and lack identity. Business functions are defined with Design by Contract (DbC) using the icontract library, specifying preconditions and postconditions for each function.
+  important_note: In the Python Systems Architecture Interview Domain, Entities represent distinct objects with identity, while Value Objects are immutable and lack identity. Business functions are defined with Design by Contract (DbC) using the icontract library, specifying preconditions and postconditions for each function.
+  site_description: "Welcome to our platform, the ultimate space for connecting tech talent and companies! Here, you'll
+  find a treasure trove of information and resources to make the interview process as smooth as possible. Whether
+  you're an aspiring developer, an experienced engineer, or a company looking to find the best talent, we've got you covered.
+
+First off, we offer an extensive database of curated interview questions, designed to match the level and focus of your
+tech position. These aren't just any questions; they're tailored to truly assess the skills of the interviewee, ensuring
+you get the right fit for your team.
+
+For candidates, we offer an innovative way to receive evaluations on various skills you might need in your role, like
+ Python coding or system architecture. The evaluations give you actionable insights into your strengths and areas for growth.
+
+For companies, our platform provides an intelligent framework that guides interviewers throughout the candidate
+evaluation process. With our system, you can be confident you're asking the right questions to identify top talent
+for your Python-based systems.
+
+And guess what? All this is super user-friendly, making the complex process of interviews and evaluations feel
+ like a breeze. Join us and streamline your tech hiring process today!"
