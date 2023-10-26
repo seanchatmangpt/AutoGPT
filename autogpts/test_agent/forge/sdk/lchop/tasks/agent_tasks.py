@@ -1,11 +1,11 @@
-import asyncio
+# import asyncio
 
-from langchain.agents import AgentType, initialize_agent, load_tools
-from langchain.agents.agent_toolkits import create_python_agent
-from langchain.chat_models import ChatOpenAI
-from langchain.tools import PythonREPLTool
-from loguru import logger
-from munch import Munch
+# from langchain.agents import AgentType, initialize_agent, load_tools
+# from langchain.agents.agent_toolkits import create_python_agent
+# from langchain.chat_models import ChatOpenAI
+# from langchain.tools import PythonREPLTool
+# from loguru import logger
+# from munch import Munch
 
 # async def load_agent(yaml_path, work_ctx):
 #     try:
@@ -49,25 +49,25 @@ from munch import Munch
 #         raise
 
 
-async def main():
-    agent_executor = create_python_agent(
-        llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613"),
-        tool=PythonREPLTool(),
-        verbose=True,
-        agent_type=AgentType.OPENAI_FUNCTIONS,
-        agent_executor_kwargs={"handle_parsing_errors": True},
-    )
+# async def main():
+#     agent_executor = create_python_agent(
+#         llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613"),
+#         tool=PythonREPLTool(),
+#         verbose=True,
+#         agent_type=AgentType.OPENAI_FUNCTIONS,
+#         agent_executor_kwargs={"handle_parsing_errors": True},
+#     )
+#
+#     result = await agent_executor.arun("")
+#     print(result)
+#     # result  = await agent_executor.arun("What is the 10th fibonacci number?")
+#
 
-    result = await agent_executor.arun("")
-    print(result)
-    # result  = await agent_executor.arun("What is the 10th fibonacci number?")
-
-
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # work_ctx = WorkContext(TaskContext(), TemplateContext(), BrowserContext())
     # result = generate_task_code_from_workflow(
     #     "your_workflow.yaml", "gen_email_tasks.py", work_ctx
     # )
     # print(result)
 
-    asyncio.run(main())
+    # asyncio.run(main())

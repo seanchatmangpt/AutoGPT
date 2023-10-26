@@ -5,9 +5,8 @@ from random import random
 
 import yaml
 
-from fgn.completion.complete import acreate
-from matrix_factory.afile import write, read
-from matrix_factory.chat_helpers import best_models
+from forge.sdk.utils.complete import acreate
+from forge.sdk.utils.file_tools import read, write
 
 
 async def generate_plan(given_input, steps):
@@ -53,7 +52,7 @@ steps:
         """
 
     return await acreate(
-        prompt=plan_prompt, model=best_models[0], stop=["```"], max_tokens=500
+        prompt=plan_prompt, stop=["```"], max_tokens=500
     )
 
 
@@ -77,7 +76,7 @@ async def generate_meta_workflow(generated_plan, steps):
     """
     print(meta_workflow_prompt)
     return await acreate(
-        prompt=meta_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500
+        prompt=meta_workflow_prompt, stop=["```"], max_tokens=2500
     )
 
 
@@ -107,7 +106,7 @@ async def generate_sub_workflow(step, sub_steps):
     """
     print(sub_workflow_prompt)
     return await acreate(
-        prompt=sub_workflow_prompt, model=best_models[0], stop=["```"], max_tokens=2500
+        prompt=sub_workflow_prompt, stop=["```"], max_tokens=2500
     )
 
 

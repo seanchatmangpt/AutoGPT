@@ -2,31 +2,30 @@ import yaml
 from loguru import logger
 from munch import Munch
 
-from lchop.context.agent_context import AgentContext
-from lchop.context.browser_context import BrowserContext
-from lchop.context.state_context import StateContext
-from lchop.context.step_context import StepContext
-from lchop.context.template_context import TemplateContext
+from forge.sdk.lchop.context.agent_context import AgentContext
+from forge.sdk.lchop.context.browser_context import BrowserContext
+from forge.sdk.lchop.context.state_context import StateContext
+from forge.sdk.lchop.context.task_context import TaskContext
+from forge.sdk.lchop.context.template_context import TemplateContext
 
 
 class WorkContext:
-    globals()
-
-    def __init__(
-        self,
-        step_ctx: StepContext,
-        template_ctx: TemplateContext,
-        browser_ctx: BrowserContext,
-        agent_ctx: AgentContext,
-        state_ctx: StateContext,
-    ):
-        self.step_ctx = step_ctx
-        self.template_ctx = template_ctx
-        self.browser_ctx = browser_ctx
-        self.agent_ctx = agent_ctx
-        self.state_ctx = state_ctx
-        self.global_params = Munch()
-        logger.info("WorkContext initialized.")
+    _instance = None  # Private class variable to hold the single instance
+    
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(WorkContext, cls).__new__(cls, *args, **kwargs)
+            cls.template_ctx = TemplateContext()
+            cls.browser_ctx = BrowserContext()
+            cls.agent_ctx = AgentContext()
+            cls.state_ctx = StateContext()
+            cls.task_ctx = TaskContext()
+            cls.global_params = Munch()
+            cls.results = Munch()
+            cls.results_list = []
+            cls.steps = Munch()
+            logger.info("WorkContext initialized.")
+        return cls._instance
 
 
 async def inject_steps(workflow_config, work_ctx):
@@ -79,7 +78,7 @@ async def exe_step(step_config, work_ctx):
 
     logger.info(f"Executing {func_name}: {func_desc}")
 
-    implementation = work_ctx.step_ctx.steps[func_name]
+    implementation = work_ctx.task_ctx.tasks[func_name]
     global_params = work_ctx.global_params
     params = step_config.get("params", {})
     params["work_ctx"] = work_ctx
@@ -89,8 +88,8 @@ async def exe_step(step_config, work_ctx):
 
     logger.info(f"Step {func_name} completed with result: {result}")
 
-    work_ctx.step_ctx.results[func_name] = result
-    work_ctx.step_ctx.results_list.append(result)
+    work_ctx.results[func_name] = result
+    work_ctx.results_list.append(result)
 
     return result
 
@@ -109,14 +108,13 @@ async def exe_workflow(workflow_config, work_ctx):
             )
             return False
 
-    logger.info(f"Results: {len(work_ctx.step_ctx.results.keys())}")
+    logger.info(f"Results: {len(work_ctx.results.keys())}")
     logger.info("Workflow execution completed.")
     return True
 
 
-async def load_workflow(work_ctx=None, filepath=None, yaml_string=None):
-    if not work_ctx:
-        work_ctx = default_work_context()
+async def load_workflow(filepath=None, yaml_string=None):
+    work_ctx = WorkContext()
     if not filepath and not yaml_string:
         raise ValueError("Either filepath or yaml_string must be specified.")
     if yaml_string:
@@ -134,9 +132,5 @@ async def load_workflow(work_ctx=None, filepath=None, yaml_string=None):
 
 def default_work_context():
     return WorkContext(
-        StepContext(),
-        TemplateContext(),
-        BrowserContext(),
-        AgentContext(),
-        StateContext(),
+
     )

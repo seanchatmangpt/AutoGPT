@@ -1,5 +1,5 @@
-from lchop.context.browser_context import with_delay
-from lchop.context.task_context import register_task
+from forge.sdk.lchop.context.browser_context import with_delay
+from forge.sdk.lchop.context.task_context import register_task
 
 
 @with_delay

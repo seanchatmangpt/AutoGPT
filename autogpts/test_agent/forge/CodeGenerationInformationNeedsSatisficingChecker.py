@@ -7,7 +7,10 @@ from forge.sdk.utils.create_prompts import create_python
 
 class CodeGenerationInformationNeedsSatisficingChecker:
     def check_satisficing(self, user_query, code_generation_results, notes):
-        mission = '''You are a Code Generation Information Needs Satisficing Checker. Your role is to specifically evaluate the sufficiency of the final code generated in fulfilling a user's original requirement. Your evaluation should consider the bugs, edge cases, accuracy, efficiency, readability, and completeness of the generated code. Unhandled edge cases are not bugs.'''
+        mission = '''You are a Code Generation Information Needs Satisficing Checker. 
+        Your role is to specifically evaluate the sufficiency of the final code generated in fulfilling a user's 
+        original requirement. Your evaluation should consider the bugs, edge cases, accuracy, efficiency, readability, 
+        and completeness of the generated code. Unhandled edge cases are not bugs.'''
 
         output_format = '''Your output will be in JSON format and will consist of two main fields: `feedback` and `satisficed`. `Feedback` will assess whether the generated code is buggy, accurate, efficient, readable, and complete. `Satisficed` will be a Boolean value that signifies whether the generated code meets these criteria (edge cases considered in criteria). List all bugs not edge cases.'''
 

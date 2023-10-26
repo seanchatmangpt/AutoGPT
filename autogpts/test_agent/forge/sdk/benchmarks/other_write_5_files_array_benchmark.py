@@ -1,1 +1,0 @@
-# other_write_5_files_array_benchmark.py

@@ -2,7 +2,8 @@ import os
 
 from loguru import logger
 from munch import Munch
-from typetemp.environment.typed_environment import TypedEnvironment
+
+from forge.sdk.typetemp.environment.typed_environment import TypedEnvironment
 
 
 class TemplateContext:

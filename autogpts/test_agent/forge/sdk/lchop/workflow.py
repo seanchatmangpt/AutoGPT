@@ -1,14 +1,4 @@
-import asyncio
-
-import yaml
-from loguru import logger
-from munch import Munch
-
-from lchop.context.agent_context import AgentContext
-from lchop.context.browser_context import BrowserContext
-from lchop.context.task_context import TaskContext
-from lchop.context.template_context import TemplateContext
-from lchop.context.work_context import WorkContext, load_workflow
+from forge.sdk.lchop.context.work_context import *
 
 
 def load_template_from_file(self, filename):
@@ -32,12 +22,3 @@ def render_template_to_file(self, template_str, filename, **kwargs):
         logger.error(f"Failed to render template to file {filename}: {str(e)}")
         raise
 
-
-if __name__ == "__main__":
-    work_ctx = WorkContext(
-        TaskContext(),
-        TemplateContext(),
-        BrowserContext(use_existing_browser=True, enable_request_interception=True),
-        AgentContext(),
-    )
-    load_workflow("workflows/linkedin_workflow.yaml", work_ctx)

@@ -1,9 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional, Union
 
-from typetemp.template.typed_prompt import (
-    TypedPrompt,
-)  # Importing TypedPrompt for extending functionality
+from forge.sdk.typetemp.template.typed_prompt import TypedPrompt
 
 
 @dataclass

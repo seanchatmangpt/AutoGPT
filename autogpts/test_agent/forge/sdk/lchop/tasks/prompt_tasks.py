@@ -1,9 +1,8 @@
 import asyncio
 from dataclasses import dataclass
 
-from typetemp.template.typed_prompt import TypedPrompt
-
-from lchop.context.task_context import register_task
+from forge.sdk.lchop.context.task_context import register_task
+from forge.sdk.typetemp.template.typed_prompt import TypedPrompt
 
 
 @dataclass

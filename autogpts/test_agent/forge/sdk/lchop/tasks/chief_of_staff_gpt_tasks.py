@@ -1,6 +1,6 @@
 from loguru import logger
 
-from lchop.context.task_context import register_task
+from forge.sdk.lchop.context.task_context import register_task
 
 
 @register_task

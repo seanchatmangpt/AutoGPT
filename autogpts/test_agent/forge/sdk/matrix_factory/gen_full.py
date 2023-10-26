@@ -3,8 +3,8 @@ import time
 import yaml
 from jinja2 import Environment, FileSystemLoader
 
-from fgn.completion.complete import acreate
-from matrix_factory.chat_helpers import best_models, instruct_models
+from forge.sdk.utils.complete import acreate
+from forge.sdk.utils.models import instruct_models
 
 # Define your jinja template
 template_str = """

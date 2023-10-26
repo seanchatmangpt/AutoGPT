@@ -1,1 +1,0 @@
-# info_retrieval_basic_retrieval_benchmark.py

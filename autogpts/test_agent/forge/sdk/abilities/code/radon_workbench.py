@@ -86,29 +86,23 @@ def fix_code(analysis: str):
 bad_add = dedent(
     """
     def add(a, b):
-        return a - b
+    asdljfaksdhfashkfdaskl;hfasdl;ihk
+return a - b
 
     def sub(a, b):
-        return a - b
+    saddaosjfads;klfjsd
+        return a - b12312390898327
         
     
     if __name__ == "__main__":
-        assert add(1, 2) == 3
+assert add(1, 2) == 3
         assert sub(1, 2) == -1
     """
 )
 
 bad_largest = dedent(
-    """def find_largest(nums):
-    largest = 0
-    for num in nums:
-        if num > largest:
-            largest = num
-    return largest
-
-# Test
-print(find_largest([4, 1, 8, 3]))  # Expected output: 8
-print(find_largest([-4, -1, -8, -3]))  # Expected output: -1"""
+    """df quiq_Sorttttt(nums: List[int]) -> int:
+    """
 )
 
 
@@ -137,7 +131,8 @@ def refactor_code(sample_code):
 
 if __name__ == "__main__":
     # result = "GPT-3.5-turbo Analysis: There appears to be a bug in the add function, where it is returning the wrong value (a - b instead of a + b). To fix this, we can simply change the return statement to return a + b."
-    result = refactor_code(bad_add)
+    result = refactor_code(bad_largest)
+    # result = refactor_code(bad_add)
     print("GPT-3.5-turbo Analysis:", result)
 
     module = PyModule(source=result)

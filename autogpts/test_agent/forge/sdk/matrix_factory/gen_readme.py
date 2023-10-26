@@ -7,16 +7,9 @@ from dataclasses import dataclass
 
 import pyperclip
 
-from fgn.completion.chat import achat
-from fgn.completion.complete import acreate
-from matrix_factory.chat_helpers import best_models
-from typetemp.template.typed_template import TypedTemplate
-from loguru import logger
-
-# PerfectPythonProductionCode.py
-
-from dataclasses import dataclass
-from typetemp.template.typed_template import TypedTemplate
+from forge.sdk.typetemp.template.typed_template import TypedTemplate
+from forge.sdk.utils.complete import acreate
+from forge.sdk.utils.models import best_models
 
 
 # Function to extract a dictionary from a given string
@@ -45,9 +38,9 @@ async def generate_template_with_model(model, template_class, prompt):
         result = await acreate(
             model=model, prompt=prompt, temperature=0.0, max_tokens=1000, stop=["}"]
         )
-        logger.info(
-            f"Model: {model} | Template: {template_class.__name__} | Result: {result}"
-        )
+        # logger.info(
+        #     f"Model: {model} | Template: {template_class.__name__} | Result: {result}"
+        # )
         kwargs = extract_dictionary(result)
         rendered_template = template_class(**kwargs)()
         return model, template_class, rendered_template
@@ -106,7 +99,7 @@ workflows, code, deployment, marketing, and sales text required for everything."
                 f.write(content)
 
     end = time.time()
-    logger.info(f"Total time taken: {end - start} seconds")
+    # logger.info(f"Total time taken: {end - start} seconds")
 
 
 # Function to construct a detailed prompt for models

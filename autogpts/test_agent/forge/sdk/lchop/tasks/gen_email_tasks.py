@@ -2,14 +2,14 @@ import asyncio
 import time
 from dataclasses import dataclass
 
-import matrix_factory.chat_helpers as chat_helpers
 
 from loguru import logger
 
-from fgn.completion.complete import acreate
-from lchop.context.task_context import register_task
-from matrix_factory.chat_helpers import extract_dictionary
-from typetemp.template.typed_template import TypedTemplate
+from forge.sdk.lchop.context.task_context import register_task
+from forge.sdk.typetemp.template.typed_template import TypedTemplate
+from forge.sdk.utils.complete import acreate
+from forge.sdk.utils.create_prompts import extract_dictionary
+from forge.sdk.utils.models import best_models
 
 
 @dataclass
@@ -93,7 +93,7 @@ async def Run_GPT_Models(work_ctx, **kwargs):
         else:
             return None, None
 
-    tasks = [run_model(model) for model in chat_helpers.best_models * 20]
+    tasks = [run_model(model) for model in best_models * 20]
     results = await asyncio.gather(*tasks)
 
     work_ctx.raw_results = results

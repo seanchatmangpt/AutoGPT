@@ -7,17 +7,26 @@ from forge.sdk.utils.models import get_model
 
 create_tailwind_landing_template = """
 
-Generate a sophisticated and polished Tailwind CSS page 
-Imagine you are participating in an expert web designer job interview challenge. Your task is to create a visually engaging web page that effectively represents the essence of the provided Python entity. This web page is intended for non-technical domain experts who are interested in understanding the entity's purpose and significance.
+I am participating in a challenge for a web designer position. My task is to create an interactive, visually captivating, and easy-to-understand web page about the "Python System" entity, intended for non-technical domain experts. The page should not only explain the entity's significance and applications but also engage users through storytelling and interactive elements.
 
-Design a web page with a layout and style that closely resembles the provided template but without including any code 
-or technical markup. Replace the template's placeholders with relevant, non-technical content related to the Python 
-entity. Your goal is to showcase the entity's importance and uniqueness to the non-technical audience in a visually 
-appealing and user-friendly way.
+Project Requirements:
 
-This challenge is an opportunity to demonstrate your web design skills and your ability to communicate complex concepts in a clear and visually appealing manner. The final web page should serve as a concise and informative representation of the Python entity, highlighting its value and significance for non-technical individuals.
+Theme and Visuals:
+
+The design must be modern, with a fresh and professional color scheme that aligns with Python's branding (blues, yellows, and whites).
+Use large, readable typography and include visually appealing separators between sections.
+Incorporate subtle animations or hover effects for interactivity.
+Content Structure:
 
 
+Call-to-action buttons prompting social media sharing or reading more about certain topics highlighted on the page.
+A feedback or comment section where users can leave their thoughts or ask questions.
+Responsive Design:
+
+The page should be fully responsive, ensuring a seamless experience on all devices, including tablets and smartphones.
+Accessibility:
+
+Ensure the design follows best practices for web accessibility, such as alt text for visual elements, keyboard navigation, and proper contrast ratios.
 ```input
 from icontract import require, ensure
 from typing import List, Dict, Optional, Union, Tuple, Any
@@ -70,9 +79,10 @@ class PythonSystem:
         return overall_score
 ```
 
-Styling: Ensure that the styling adheres to modern UI/UX principles. Pay attention to fonts, colors, spacing, and alignment to make the page visually appealing.
+The website employs a refined color scheme with shades of gray, specifically bg-gray-800 for the navigation and footer, and bg-gray-200 for background sections, contrasted with bg-white for content areas. Interactive and highlight elements use the consistent bg-gray-800, with a hover effect of hover:bg-gray-700, maintaining visual continuity and focus. Text is primarily rendered in text-white against darker backgrounds for readability, while interactive links subtly shift to hover:text-gray-500, indicating usability without being obtrusive.
+Big Emojis: If applicable, you can include emojis to enhance the page's visual appeal and provide context.
 
-Images & Emojis: If applicable, you can include images and emojis to enhance the page's visual appeal and provide context. 
+No images: The page does not use any images, as they are not necessary for the content. Instead, it uses emojis and icons to provide visual cues and enhance the page's appeal.
 
 ```html
 "<!DOCTYPE html>
@@ -132,7 +142,7 @@ async def main():
     with open("system.html", "w") as f:
         f.write(head+markup)
 
-    print("Landing page generated successfully.")
+    print("Entity page generated successfully.")
 
 
 if __name__ == '__main__':

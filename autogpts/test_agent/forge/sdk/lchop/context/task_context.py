@@ -11,8 +11,6 @@ def register_task(func):
 class TaskContext:
     _instance = None  # Private class variable to hold the single instance
     tasks = Munch()  # Class-level dictionary to hold task functions
-    results = Munch()  # Class-level dictionary to hold task results
-    results_list = []
 
     def __new__(cls):
         if cls._instance is None:

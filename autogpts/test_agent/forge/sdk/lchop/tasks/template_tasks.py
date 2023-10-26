@@ -2,9 +2,9 @@ from dataclasses import dataclass
 
 import yaml
 
-from typetemp.template.typed_template import TypedTemplate
 
-from lchop.context.task_context import register_task
+from forge.sdk.lchop.context.task_context import register_task
+from forge.sdk.typetemp.template.typed_template import TypedTemplate
 
 
 @dataclass

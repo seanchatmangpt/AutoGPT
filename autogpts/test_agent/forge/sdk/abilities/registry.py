@@ -6,6 +6,8 @@ from typing import Any, Callable, List
 
 import pydantic
 
+from forge.sdk.utils.file_tools import get_project_root
+
 
 class AbilityParameter(pydantic.BaseModel):
     """
@@ -184,10 +186,15 @@ class AbilityRegister:
             raise
 
 
-if __name__ == "__main__":
+import anyio
+
+async def main():
     import sys
 
-    sys.path.append("/Users/swifty/dev/forge/forge")
     register = AbilityRegister(agent=None)
     print(register.abilities_description())
-    print(register.run_ability("abc", "list_files", "/Users/swifty/dev/forge/forge"))
+    print(await register.run_ability("abc", "list_files", get_project_root()))
+
+
+if __name__ == '__main__':
+    anyio.run(main)
