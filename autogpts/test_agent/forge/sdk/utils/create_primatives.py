@@ -144,10 +144,6 @@ def extract_dict(input_str: str) -> dict:
     # Safely evaluate the input string to generate the dictionary, ensuring all keys and values are strings
     input_str = autopep8.fix_code(input_str)
     extracted_dict = ast.literal_eval(input_str)
-    # if not all(
-    #     isinstance(key, str) and isinstance(value, str) for key, value in extracted_dict.items()
-    # ):
-    #     raise ValueError("All keys and values in the dictionary must be strings.")
     return extracted_dict
 
 

@@ -1,0 +1,43 @@
+value_objects:
+  - name: "InvestmentOpportunity"
+    definition: "A revolutionary investment opportunity of the century."
+    properties:
+      - name: "name"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "investment_strategy"
+        type: "string"
+      - name: "technology"
+        type: "string"
+      - name: "expertise"
+        type: "string"
+      - name: "resources"
+        type: "string"
+
+entities:
+  - name: "VentureCapitalManagementGPT"
+    definition: "A team of visionaries, disruptors, and risk-takers with a passion for investments."
+    value_objects:
+      - "InvestmentOpportunity"
+
+business_functions:
+  - entity: "VentureCapitalManagementGPT"
+    name: "identify_and_invest"
+    parameters:
+      - parameter: "startup"
+        type: "string"
+      - parameter: "emerging_company"
+        type: "string"
+    definition: "Identify and invest in the most promising startups and emerging companies."
+    contract:
+      pre:
+        - condition: "icontract.ensure(startup != None and emerging_company != None)"
+      post:
+        - condition: "icontract.require(return_value != None)"
+
+additional_info:
+  - key: "Investment Strategy"
+    value: "Combines traditional venture capital model with blockchain technology for efficiency and transparency."
+  - key: "Expertise"
+    value: "Top-notch financial experts, tech gurus, and industry leaders with a proven track record of success."

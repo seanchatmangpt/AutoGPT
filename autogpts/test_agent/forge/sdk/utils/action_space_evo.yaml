@@ -1,0 +1,38 @@
+- name: "Action"
+    definition: "A specific action that an agent can take in response to a given situation."
+    properties:
+      - name: "name"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "preconditions"
+        type: "list of strings"
+      - name: "postconditions"
+        type: "list of strings"
+      - name: "cost"
+        type: "integer"
+      - name: "benefits"
+        type: "list of strings"
+
+entities:
+  - name: "Agent"
+    definition: "An intelligent agent that can take actions in response to a given situation."
+    value_objects:
+      - "Action"
+
+business_functions:
+  - entity: "Agent"
+    name: "make_decision"
+    parameters:
+      - parameter: "situation"
+        type: "string"
+    definition: "Makes a decision on which action to take based on the given situation."
+    contract:
+      pre:
+        - condition: "situation is not None"
+      post:
+        - condition: "action is not None"
+
+additional_info:
+  - key: "Structured Action Space"
+    value: "Organizing actions in a structured manner allows for more informed decisions and complex tasks to be carried out by CoALA agents."

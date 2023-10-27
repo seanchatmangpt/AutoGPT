@@ -152,7 +152,7 @@ async def read(filename, to_type=None):
 
 
 async def write(
-    contents=None, filename=None, mode="w+", extension="txt", time_stamp=False
+    contents=None, filename=None, mode="w+", extension="txt", time_stamp=False, path=""
 ):
     if extension == "yaml" or extension == "yml":
         contents = yaml.dump(
@@ -166,7 +166,7 @@ async def write(
             prompt=contents, extension=extension, time_stamp=time_stamp
         )
 
-    async with await anyio.open_file(filename, mode=mode) as f:
+    async with await anyio.open_file(path+filename, mode=mode) as f:
         await f.write(contents)
     return filename
 

@@ -1,0 +1,191 @@
+entities:
+  - name: language_agent
+    definition: An intelligent agent that utilizes the CoALA framework to enhance its capabilities and facilitate communication with humans.
+    value_objects:
+      - contextual_information
+      - external_resources
+      - internal_control_flows
+
+  - name: modular_memory
+    definition: A structured and organized memory system that allows language agents to store and access information efficiently.
+    value_objects:
+      - memory_modules
+      - stored_data
+      - retrieval_functions
+
+  - name: structured_action_space
+    definition: A set of actions that a language agent can take in response to a given input, organized in a structured manner.
+    value_objects:
+      - actions
+      - action_contexts
+      - decision_making_functions
+
+  - name: generalized_decision_making_process
+    definition: A systematic approach for language agents to make informed decisions based on the current context.
+    value_objects:
+      - input
+      - decision_rules
+      - outcome
+
+value_objects:
+  - name: contextual_information
+    definition: Information about the current context that a language agent uses to guide its actions.
+    properties:
+      - name: context
+        type: string
+      - name: relevance
+        type: float
+
+  - name: external_resources
+    definition: Resources outside of the language agent that can be utilized to enhance its capabilities.
+    properties:
+      - name: resource_type
+        type: string
+      - name: resource_url
+        type: string
+
+  - name: internal_control_flows
+    definition: The internal decision-making processes and control flows of a language agent.
+    properties:
+      - name: control_flow
+        type: string
+      - name: decision_rules
+        type: list
+
+  - name: memory_modules
+    definition: Individual components of the modular memory system.
+    properties:
+      - name: module_type
+        type: string
+      - name: stored_data
+        type: list
+
+  - name: stored_data
+    definition: Information that is stored in the modular memory system.
+    properties:
+      - name: data_type
+        type: string
+      - name: data_value
+        type: string
+
+  - name: retrieval_functions
+    definition: Functions used to retrieve data from the modular memory system.
+    properties:
+      - name: function_name
+        type: string
+      - name: parameters
+        type: list
+
+  - name: actions
+    definition: Possible actions that a language agent can take.
+    properties:
+      - name: action_name
+        type: string
+      - name: action_description
+        type: string
+
+  - name: action_contexts
+    definition: Context-specific information that is used to guide action selection.
+    properties:
+      - name: context
+        type: string
+      - name: relevance
+        type: float
+
+  - name: decision_making_functions
+    definition: Functions used to make decisions based on the current context and available options.
+    properties:
+      - name: function_name
+        type: string
+      - name: parameters
+        type: list
+
+  - name: input
+    definition: Information received by the language agent from external sources.
+    properties:
+      - name: input_type
+        type: string
+      - name: input_value
+        type: string
+
+  - name: decision_rules
+    definition: Rules used by the language agent to make decisions.
+    properties:
+      - name: rule_name
+        type: string
+      - name: conditions
+        type: list
+      - name: actions
+        type: list
+
+  - name: outcome
+    definition: The result of a decision made by the language agent.
+    properties:
+      - name: outcome_type
+        type: string
+      - name: outcome_value
+        type: string
+
+business_functions:
+  - entity: language_agent
+    name: process_input
+    parameters:
+      - parameter: input
+        type: input
+    definition: Processes the input received by the language agent and utilizes the modular memory and structured action space to determine the appropriate response.
+    contract:
+      pre:
+        - condition: "input is not None"
+        - condition: "input.type == 'text'"
+      post:
+        - condition: "outcome is not None"
+        - condition: "outcome.type == 'text'"
+    
+  - entity: language_agent
+    name: update_memory
+    parameters:
+      - parameter: memory_module
+        type: memory_modules
+      - parameter: stored_data
+        type: stored_data
+    definition: Updates the specified memory module with the given data.
+    contract:
+      pre:
+        - condition: "memory_module is not None"
+        - condition: "stored_data is not None"
+      post:
+        - condition: "memory_module.stored_data contains stored_data"
+    
+  - entity: language_agent
+    name: select_action
+    parameters:
+      - parameter: action_context
+        type: action_contexts
+    definition: Uses the decision-making functions to select an appropriate action based on the current context.
+    contract:
+      pre:
+        - condition: "action_context is not None"
+        - condition: "action_context.relevance > 0"
+      post:
+        - condition: "selected_action is not None"
+        - condition: "selected_action.type == 'action'"
+    
+  - entity: language_agent
+    name: execute_action
+    parameters:
+      - parameter: selected_action
+        type: actions
+    definition: Executes the selected action.
+    contract:
+      pre:
+        - condition: "selected_action is not None"
+        - condition: "selected_action.type == 'action'"
+      post:
+        - condition: "outcome is not None"
+        - condition: "outcome.type == 'text'"
+    
+additional_info:
+  - key: framework
+    value: CoALA is a framework designed to facilitate the development and organization of language agents.
+  - key: components
+    value: CoALA is centered around three key components: modular memory, a structured action space, and a generalized decision-making process.

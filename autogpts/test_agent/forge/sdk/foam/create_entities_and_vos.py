@@ -23,28 +23,28 @@ env = setup_jinja_environment(get_project_root() + "/foam/templates")
 from redbaron import RedBaron
 
 
-@auto_lru_cache
-def create(
-    prompt: str,
-    model="3i",
-    temperature=0,
-    max_tokens=250,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0,
-    stop=None,
-):
-    print("Creating...")
-    return llm_create(
-        prompt=prompt,
-        model=model,
-        temperature=temperature,
-        max_tokens=max_tokens,
-        top_p=top_p,
-        frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty,
-        stop=stop,
-    )
+# @auto_lru_cache
+# def create(
+#     prompt: str,
+#     model="3i",
+#     temperature=0,
+#     max_tokens=250,
+#     top_p=1,
+#     frequency_penalty=0,
+#     presence_penalty=0,
+#     stop=None,
+# ):
+#     print("Creating...")
+#     return llm_create(
+#         prompt=prompt,
+#         model=model,
+#         temperature=temperature,
+#         max_tokens=max_tokens,
+#         top_p=top_p,
+#         frequency_penalty=frequency_penalty,
+#         presence_penalty=presence_penalty,
+#         stop=stop,
+#     )
 
 
 def generate_example_code(module: PyModule, context: dict) -> str:

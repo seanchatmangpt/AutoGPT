@@ -63,16 +63,18 @@ def check_for_bugs_with_metrics(source_code: str, metrics: dict) -> str:
     return response
 
 
-def fix_code(analysis: str):
+def fix_code(code: str, error: str = "") -> str:
     """
     Use GPT-3.5-turbo to fix the code.
     """
     # Create the prompt for GPT-3.5-turbo
-    prompt = (
-        f"Fix the following Python code and provide docstrings detailing fix. Do not add any functions "
-        f"or classes\nYou are only fixing what you are given:\n\n"
-    )
-    prompt += f"Code:\n```\n{analysis}\n```\n\n```python\n# Here is your PerfectPythonProductionCode® AGI fixed code\n"
+    prompt = f"Fix the following Python code and provide docstrings detailing fix. Do not add any functions " \
+             f"or classes\nYou are only fixing what you are given:\n\n"
+
+    if error != "":
+        prompt += f"Error:\n```\n{error}\n```\n\n"
+
+    prompt += f"Code:\n```\n{code}\n```\n\n```python\n# Here is your PerfectPythonProductionCode® AGI fixed code\n"
 
     # Make the API call
     response = create(prompt=prompt, stop=["\n```"], max_tokens=2100)

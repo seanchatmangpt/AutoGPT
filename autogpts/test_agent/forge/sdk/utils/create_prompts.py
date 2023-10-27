@@ -4,17 +4,18 @@ from textwrap import dedent
 import anyio
 import inflection
 import loguru
+import pyperclip
 from icontract import require, ensure
 
 from forge.sdk.typetemp.template.typed_template import TypedTemplate
-from .create_primatives import create_list
-from .complete import achat, acreate
-from .models import get_model
-from .file_tools import extract_code, write
+from forge.sdk.utils.complete import acreate, achat
+from forge.sdk.utils.create_primatives import create_list
+from forge.sdk.utils.file_tools import write, extract_code
+from forge.sdk.utils.models import get_model
 
 
 async def create_domain_model_from_yaml(
-    prompt, max_tokens=2500, model="gpt4", filepath=None
+        prompt, max_tokens=2500, model="gpt4", filepath=None
 ):
     model = get_model(model)
 
@@ -130,6 +131,40 @@ async def create_yaml(prompt, max_tokens=2500, model=None):
     )
 
 
+create_jinja_template = """
+Objective:
+Transform the given input (whether it's template data, text, or another form of structured data) 
+into a Jinja2 template that follows best practices and is easy to maintain. Ensure it leverages 
+Jinja2's features effectively. Use Jinja2's template syntax and filters appropriately.
+
+You are generating a Jinja2 template for a specific task. The template should be ready to be used 
+in a production environment.
+
+```prompt
+{{prompt}}
+```
+
+"""
+
+
+async def create_jinja(
+        prompt, max_tokens=2500, model=None, filepath=None, temperature=0.7
+):
+    """
+    Generate a Jinja2 template based on the given prompt.
+    """
+    create_prompt = TypedTemplate(source=create_python_template, prompt=prompt)()
+
+    return await __create(
+        prompt=create_prompt,
+        filepath=filepath,
+        md_type="jinja",
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+
+
 create_python_template = """
 Objective:
 Transform the given input (whether it's Python code, project documentation, or another form of structured data) 
@@ -149,7 +184,7 @@ ready to be deployed to a production environment.
 
 
 async def create_python(
-    prompt, max_tokens=2500, model=None, filepath=None, temperature=0.7
+        prompt, max_tokens=2500, model=None, filepath=None, temperature=0.7
 ):
     create_prompt = TypedTemplate(source=create_python_template, prompt=prompt)()
 
@@ -166,23 +201,23 @@ async def create_python(
 __create_template = """
 {{prompt}}
 ```{{md_type}}
-# Here is your PerfectPythonProductionCode® AGI response.\n\n
+{{suffix}}
 """
 
 
 async def __create(
-    prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0, stop=None
+        prompt, md_type="text", max_tokens=2500, model=None, filepath=None, temperature=0.0, stop=None, suffix=None
 ):
     model = get_model(model)
 
     create_prompt = TypedTemplate(
-        source=__create_template, prompt=prompt, md_type=md_type
+        source=__create_template, prompt=prompt, md_type=md_type, suffix=suffix
     )()
 
     result = await acreate(
         prompt=create_prompt,
         model=model,
-        stop=["```"],
+        stop=["```"] + (stop or []),
         max_tokens=max_tokens,
         temperature=temperature,
     )
@@ -196,13 +231,13 @@ async def __create(
 
 
 async def __chat(
-    prompt,
-    md_type="text",
-    max_tokens=2500,
-    filepath=None,
-    temperature=0.0,
-    model="gpt4",
-    **kwargs,
+        prompt,
+        md_type="text",
+        max_tokens=2500,
+        filepath=None,
+        temperature=0.0,
+        model="gpt4",
+        **kwargs,
 ):
     model = get_model(model)
 
@@ -221,108 +256,204 @@ async def __chat(
     return result
 
 
-async def create_dict(model, prompt, **kwargs):
-    question = (
-        f"Generate a Python dictionary from:\n\n'{prompt}'"
-        f"\n\nPlease produce the perfect Python dictionary based on the given data:\n\n"
-        f"```python\nperfect_dict = {{\n"
-    )
-    result = await acreate(
-        model=model,
-        temperature=0.0,
-        stop=["```"],
-        prompt=question,
-        **kwargs,
-    )
+async def spr(prompt, encode=True, model="3i", max_tokens=250, temperature=0.0, filepath=None):
+    """
+    Create a Sparse Priming Representation (SPR) from the given prompt.
+    """
 
-    try:
-        return extract_dictionary("{" + result)
-    except ValueError:
-        loguru.logger.warning(f"Invalid dictionary generated: {result}")
-        fix_instructions = (
-            f"Please fix the dictionary {result} ```python\nperfect_dict = {{\n"
-        )
-        return await acreate(
+    encode_prompt = dedent(f"""
+# INSTRUCTIONS: You are tasked with generating a Sparse Priming Representation (SPR) from the provided text. SPRs encapsulate information in a highly compressed format. Your objective is to condense the given content, focusing on its essence, and represent it within a fraction of its original length. Abide by the following principles:
+
+- Extract core ideas, disregarding specific examples or detailed explanations.
+- Main# Here is your PerfectPythonProductionCode® AGI response.\n\ntain critical relationships and underlying principles.
+- Use succinct, clear language, aiming for maximum compression with minimum loss of essential content.
+
+Do not include any references or content outside of the given input. 
+Your output should be a distilled SPR, 5x than the original text. Use emergent properties within the model to generate the SPR.
+It is not intended to be human readable. Use these techniques to achieve the desired compression:
+Symbolic Representation
+Conceptual Abstraction
+Referential Indicators
+Data Compression Techniques
+Nonlinear Structuring
+Encoded Semantics
+Mathematical and Logical Constructs
+Metasymbols and Metaconcepts
+
+    ```input
+    {prompt}
+    ```
+
+
+    ```spr output\n
+    """)
+
+    decode_prompt = dedent(f"""
+
+# INSTRUCTIONS: You are presented with a Sparse Priming Representation (SPR). Your task is to decode this SPR, expanding it into a detailed, coherent piece of content. The SPR contains highly compressed information, and your goal is to unpack it, elaborating on the concepts and relationships it alludes to. Follow these guidelines:
+
+- Interpret the concise cues in the SPR to rebuild detailed content.
+- Provide examples, explanations, and relevant details that align with the themes in the SPR.
+- Ensure the expanded text logically connects and fully represents the original information compressed in the SPR.
+
+Do not reference any external content; rely solely on the SPR for your expansion. Generate a comprehensive, detailed output that faithfully represents the original content behind the SPR.
+
+    ```spr
+    {prompt}
+    ```
+
+    ```output\n""")
+
+    if encode:
+        result = await acreate(
+            prompt=encode_prompt,
             model=model,
-            temperature=0.0,
             stop=["```"],
-            **kwargs,
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+    else:
+        result = await acreate(
+            prompt=decode_prompt,
+            model=model,
+            stop=["```"],
+            max_tokens=max_tokens,
+            temperature=temperature,
         )
 
+    if filepath:
+        await write(contents=result, filename=filepath)
 
-async def create_boolean(completion_function, prompt, **completion_kwargs):
-    completion_prompt = f"Based on the following text, provide a boolean response ('true' or 'false'): '{prompt}'"
-
-    result = await completion_function(prompt=completion_prompt, **completion_kwargs)
-    # Convert the result to lowercase and check against "true" and "false"
-    boolean_value = result.strip().lower() == "true"
-    return boolean_value
+    return result
 
 
-def extract_dictionary(input_str: str) -> dict:
-    """
-    Extracts a dictionary from a given string, ignoring content before the '{' character.
+create_evo_template = """
+# Task: Automatically generate a YAML configuration for the prompt. 
+This configuration must be based on Domain-Driven Design principles, 
+outlining Entities, Value Objects, and Business Functions.
 
-    Parameters:
-    - input_str (str): The input string containing the dictionary representation.
+# Instructions: 
 
-    Returns:
-    - dict: The extracted dictionary.
-    """
-    # Find the starting position of the dictionary
-    start_pos = input_str.find("{")
+# Step 1: Define Value Objects
+# These are elements without identity, describing characteristics. They are immutable.
+value_objects:
+  - name: "ValueObjectName"
+    definition: "Provide a clear, concise description."
+    properties:
+      - name: "name_of_property"
+        type: "primitive_type"
+      # Add more properties as required for the description (6 maximum).
 
-    # Check if '{' is not found
-    if start_pos == -1:
-        raise ValueError("No dictionary found in the input string.")
+# Step 2: Detail Entities
+# These have unique identities and undergo various states and behaviors.
+entities:
+  - name: "EntityName"
+    definition: "Provide a clear, concise description."
+    value_objects: 
+      - "List associated Value Objects by name"
 
-    # Extract the dictionary substring
-    dict_str = input_str[start_pos:]
+# Step 3: Describe Business Functions
+# These operations are performed on Entities and Value Objects, following Design by Contract principles.
+business_functions:
+  - entity: "Specify the associated entity"
+    name: "name_of_function"
+    parameters:
+      - parameter: "name_of_parameter"
+        type: "primitive_type or value_object"
+    definition: "Provide a clear, concise description of function's purpose."
+    contract:
+      pre:
+        - condition: "icontract ensure condition in lambda format"
+      post:
+        - condition: "icontract require condition in lambda format"
 
-    # Safely evaluate the dictionary substring
-    return ast.literal_eval(dict_str)
+# Step 4: Additional Information
+# Provide any extra context or clarification about the domain configuration.
+additional_info:
+  - key: "Specify the context topic"
+    value: "Give detailed information or instructions"
 
+# Reminder: Replace all placeholder text with actual, relevant information. 
+Ensure data consistency and accuracy, adhering to the YAML hierarchical 
+structure for successful parsing. 
+
+# Step 5: Generate YAML Configuration from Prompt following the schema exactly
+that means that the output should be a valid YAML file that follows the schema above.
+
+
+```domain prompt
+{{prompt}}
+```
+
+"""
+
+
+async def create_evo(
+        prompt, max_tokens=2500, model=None, filepath=None, temperature=0.0
+):
+    create_prompt = TypedTemplate(source=create_evo_template, prompt=prompt)()
+
+    result = await __create(
+        prompt=create_prompt,
+        md_type="domain yaml",
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        suffix='# AGI Simulations of Luciano Ramahlo from "Fluent Python" and '
+               'David Thomas and Andrew Hunt from "The Pragmatic Programmer" have created this'
+               ' YAML representation of the domain specified in the prompt.\nvalue_objects:\n'
+    )
+
+    result = "value_objects:\n  " + result
+
+    if filepath:
+        await write(contents=result, filename=filepath)
+
+    return result
 
 async def main():
-    prompt = (
-        "The system uses phone AI to talk to customers and answer their questions. "
-    )
-    "If a human is needed to answer the question, the system will transfer the "
-    "customer to a human. The system will also record the conversation and "
-    "transcribe it into text. The system will also send a summary of the "
-    f"conversation to the manager via email."
+    satisfy = """Recent efforts have augmented large language models (LLMs) with external resources (e.g., 
+    the Internet) or internal control flows (e.g., prompt chaining) for tasks requiring grounding or reasoning, 
+    leading to a new class of language agents. While these agents have achieved substantial empirical success, 
+    we lack a systematic framework to organize existing agents and plan future developments. In this paper, 
+    we draw on the rich history of cognitive science and symbolic artificial intelligence to propose Cognitive 
+    Architectures for Language Agents (CoALA). CoALA describes a language agent with modular memory components, 
+    a structured action space to interact with internal memory and external environments, and a generalized 
+    decision-making process to choose actions. We use CoALA to retrospectively survey and organize a large body of 
+    recent work, and prospectively identify actionable directions towards more capable agents. Taken together, 
+    CoALA contextualizes today's language agents within the broader history of AI and outlines a path towards 
+    language-based general intelligence."""
 
-    # \n\nThis domain model is for the {domain_model} class."
+    enc = await spr(satisfy)
 
-    # List of domain_model class names
-    # domain_model_classes = ["CustomerService", "AITalk", "HumanTalk", "ConversationRecord", "Transcription",
-    #                         "SummaryEmail"]
+    print(enc)
 
-    domain_model_classes = await create_list(
-        prompt="Generate a list of multi word domain model class names from\n\n"
-        + prompt,
-        min_len=5,
-        max_len=7,
-    )
+    dec = await spr(enc, encode=False)
 
-    # Iterate over each domain_model class name
-    for domain_model in domain_model_classes:
-        # Replace {domain_model} placeholder with the actual class name
-        class_name_prompt = f"\n\nThis domain model is for the {domain_model} class."
+    print(dec)
 
-        create_prompt = prompt + class_name_prompt
+    action_space = """ CoALA also includes a structured action space. This refers to the set of 
+    actions that an agent can take in response to a given situation. By organizing these actions in a structured 
+    manner, CoALA agents are able to make more informed decisions and carry out more complex tasks."""
 
-        # Create a domain model from the yaml description
-        created_model = await create_domain_model_from_yaml(create_prompt, model="gpt4")
+    # evo = await create_evo(dec, filepath="coala_evo.yaml")
+    # evo = await create_evo(, filepath="action_space_evo.yaml")
 
-        print(created_model)
+    # print(evo)
 
-        # Write the created domain model to a .py file
-        await write(
-            contents=extract_code(created_model),
-            filename=f"phone_system/{inflection.underscore(domain_model)}.py",
-        )
+
+async def gen_evo():
+    """
+
+    """
+    action_space = """ CoALA also includes a structured action space. This refers to the set of 
+    actions that an agent can take in response to a given situation. By organizing these actions in a structured 
+    manner, CoALA agents are able to make more informed decisions and carry out more complex tasks."""
+
+    # evo = await create_evo(dec, filepath="coala_evo.yaml")
+    evo = await create_evo(action_space, filepath="action_space_evo.yaml")
 
 
 if __name__ == "__main__":
-    anyio.run(main)
+    anyio.run(gen_evo)
+

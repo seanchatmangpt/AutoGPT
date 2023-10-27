@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <title>Employee Performance AI Platform</title>
+          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"><title>Employee Performance AI Platform</title>
+  <style>
+    /* Custom styles for spacing and colors */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-bg {
+      background-color: #F5F5F5;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0084D8;
+      color: #FFFFFF;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0073C7;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #FFB800;
+      margin-top: 0;
+    }
+
+    .text-primary {
+      color: #FFB800;
+    }
+
+    .section-header {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card {
+      background-color: #FFFFFF;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .feature-desc {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-card {
+      background-color: #FFFFFF;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+
+    .testimonial-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-quote {
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-name, .testimonial-job {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .footer {
+      background-color: #E5E5E5;
+    }
+
+    .footer-links {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 30px;
+      color: #757575;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links:hover {
+      color: #0084D8;
+      cursor: pointer;
+    }
+
+    .footer-social {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 10px;
+      color: #757575;
+      font-size: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social:hover {
+      color: #0084D8;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation bar -->
+  <div class="container pb-4 border-b border-gray-300">
+    <nav class="flex justify-between items-center py-2">
+      <!-- Logo -->
+      <a href="#" class="font-bold text-2xl leading-none text-primary">Employee Performance AI</a>
+      <!-- Menu items -->
+      <ul class="flex items-center">
+        <li class="mx-4"><a href="#features" class="nav-link">Features</a></li>
+        <li class="mx-4"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        <li class="mx-4"><a href="#contact" class="nav-link">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Hero section -->
+  <div class="container flex justify-between items-center py-12">
+    <div class="w-1/2 pr-8">
+      <!-- Headline -->
+      <h1 class="text-4xl font-bold leading-tight mb-4">Revolutionize your employee performance management with AI</h1>
+      <!-- Description -->
+      <p class="text-xl mb-6">Say goodbye to subjective evaluations and hello to real-time insights into your employees' performance.</p>
+      <!-- CTA button -->
+      <a href="#" class="btn btn-primary">Start Your Free Trial</a>
+    </div>
+    <div class="w-1/2">
+      <!-- Image placeholder - can be replaced with an actual image or video -->
+      <div class="bg-gray-300 h-80 w-full rounded-lg"></div>
+    </div>
+  </div>
+
+  <!-- Features section -->
+  <div id="features" class="container">
+    <!-- Section header -->
+    <h2 class="section-header text-center">Key Features</h2>
+    <!-- Feature cards -->
+    <div class="flex justify-between">
+      <!-- Feature 1 -->
+      <div class="w-1/3 px-4">
+        <div class="feature-card">
+          <!-- Icon -->
+          <i class="fas fa-chart-line feature-icon text-primary"></i>
+          <!-- Title -->
+          <h3 class="feature-title">Real-Time Performance Analytics</h3>
+          <!-- Description -->
+          <p class="feature-desc">Track your employees' performance metrics in real-time to make informed decisions.</p>
+        </div>
+      </div>
+      <!-- Feature 2 -->
+      <div class="w-1/3 px-4">
+        <div class="feature-card">
+          <!-- Icon -->
+          <i class="fas fa-clock feature-icon text-primary"></i>
+          <!-- Title -->
+          <h3 class="feature-title">Continuous Feedback Loop</h3>
+          <!-- Description -->
+          <p class="feature-desc">Enable a continuous feedback loop between managers and employees for timely improvements.</p>
+        </div>
+      </div>
+      <!-- Feature 3 -->
+      <div class="w-1/3 px-4">
+        <div class="feature-card">
+          <!-- Icon -->
+          <i class="fas fa-user-check feature-icon text-primary"></i>
+          <!-- Title -->
+          <h3 class="feature-title">Individualized Development Plans</h3>
+          <!-- Description -->
+          <p class="feature-desc">Provide personalized development plans for top performers to reach their full potential.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials section -->
+  <div id="testimonials" class="container">
+    <!-- Section header -->
+    <h2 class="section-header text-center">What Our Customers Say</h2>
+    <!-- Testimonial cards -->
+    <div class="flex justify-between">
+      <!-- Testimonial 1 -->
+      <div class="w-1/3 px-4">
+        <div class="testimonial-card">
+          <!-- Image of customer -->
+          <img src="https://i.pravatar.cc/80" alt="Customer Image" class="testimonial-img">
+          <!-- Quote -->
+          <p class="testimonial-quote">"This AI platform has completely transformed our performance management process. It's accurate, efficient, and our employees love the continuous feedback loop."</p>
+          <!-- Name and job title -->
+          <p class="testimonial-name">John Smith</p>
+          <p class="testimonial-job">Human Resources Manager</p>
+        </div>
+      </div>
+      <!-- Testimonial 2 -->
+      <div class="w-1/3 px-4">
+        <div class="testimonial-card">
+          <!-- Image of customer -->
+          <img src="https://i.pravatar.cc/80" alt="Customer Image" class="testimonial-img">
+          <!-- Quote -->
+          <p class="testimonial-quote">"As a manager, I was always guessing about my team's performance. But with this AI platform, I have real-time data at my fingertips and can make data-driven decisions."</p>
+          <!-- Name and job title -->
+          <p class="testimonial-name">Jane Doe</p>
+          <p class="testimonial-job">Sales Manager</p>
+        </div>
+      </div>
+      <!-- Testimonial 3 -->
+      <div class="w-1/3 px-4">
+        <div class="testimonial-card">
+          <!-- Image of customer -->
+          <img src="https://i.pravatar.cc/80" alt="Customer Image" class="testimonial-img">
+          <!-- Quote -->
+          <p class="testimonial-quote">"I was hesitant about using AI for employee evaluations, but this platform has exceeded my expectations. It's accurate, fair, and saves us so much time and effort."</p>
+          <!-- Name and job title -->
+          <p class="testimonial-name">Tom Johnson</p>
+          <p class="testimonial-job">CEO</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact section -->
+  <div id="contact" class="container py-16">
+    <!-- Section header -->
+    <h2 class="section-header text-center">Contact Us</h2>
+    <!-- Contact form -->
+    <form class="flex flex-wrap justify-between">
+      <!-- Name input -->
+      <div class="w-full md:w-1/3 px-4 mb-4">
+        <label for="name" class="text-sm">Name</label>
+        <input type="text" id="name" class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-primary">
+      </div>
+      <!-- Email input -->
+      <div class="w-full md:w-1/3 px-4 mb-4">
+        <label for="email" class="text-sm">Email</label>
+        <input type="email" id="email" class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-primary">
+      </div>
+      <!-- Message input -->
+      <div class="w-full px-4 mb-4">
+        <label for="message" class="text-sm">Message</label>
+        <textarea id="message" rows="5" class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-primary"></textarea>
+      </div>
+      <!-- Submit button -->
+      <div class="w-full px-4">
+        <button type="submit" class="btn">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer container py-8">
+    <div class="flex justify-between items-center">
+      <!-- Company name -->
+      <span class="text-xl font-bold text-primary">Employee Performance AI</span>
+      <!-- Legal and social links -->
+      <div>
+        <a href="#" class="footer-links">Privacy Policy</a>
+        <a href="#" class="footer-links">Terms and Conditions</a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
